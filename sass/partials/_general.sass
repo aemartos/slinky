@@ -1,0 +1,76 @@
+
+
+//----------- GENERAL ------------
+
+
+*
+	+box-sizing(border-box)
+	outline: none
+	+no_select_text
+
+body
+	height: 100vh
+	width: 100%
+	color: white
+	background-color: $background
+	font-family: helvetica
+	padding: 0
+	margin: 0
+	//overflow: hidden
+
+a
+	text-decoration: none
+	color: $secondarycolor
+	//display: inline
+	+transition_default
+	&:hover
+		+hover_opacity
+
+ul
+	padding: 0
+	list-style-type: none
+
+
+#container
+	width: 95%
+	height: 100vh
+	background-color: $background
+	overflow: hidden
+	margin: 0 auto
+
+.show
+	display: block
+
+.hide
+	display: none !important
+
+
+//------------ RESPONSIVE VIDEOS ---------
+
+.responsive_video
+	position: relative
+	padding-bottom: 56.25%
+	height: 0
+	width: 100%
+	height: 100%
+	margin: 1em auto
+	iframe
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+
+//----------SCROLLBAR ADJUSTMENTS------------
+
+::-webkit-scrollbar
+	width: .45em
+	height: .45em
+
+::-webkit-scrollbar-track
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+
+::-webkit-scrollbar-thumb
+	background-color: $secondarycolor
+	outline: 1px solid slategrey
+	border-radius: 5em
