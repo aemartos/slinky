@@ -1,11 +1,86 @@
-svg
-  //border: 3px solid white
-  width: 2em
-  height: 2em
-  .form
-    fill-opacity: 0.5
-    stroke-width: .1
-    stroke-miterlimit: 8
-    &.user
-      fill: $maincolor
-      stroke: $maincolor
+.container
+  width: 95%
+  margin: 0 auto
+  h1
+    position: relative
+    span
+      &.underline
+        width: 3em
+        border-bottom: .11em solid $maincolor
+        position: absolute
+        top: .9em
+        left: .1em
+      &.ample
+        margin-left: 2.5em
+  .gameBoard
+    position: relative
+    svg
+      //stroke-miterlimit: 8
+      stroke-width: .15
+      //stroke-location: inside
+      &.form
+        position: absolute
+        fill-opacity: 0.5
+        &.user
+          //border: 3px solid $maincolor
+          fill: $maincolor
+          stroke: $maincolor
+          width: 2rem
+          height: 2rem
+          top: 2rem
+          left: 6rem
+        &.user_polygon
+          //border: 3px solid yellow
+          stroke: yellow
+          fill: yellow
+          width: 2rem
+          height: 2rem
+          top: 0
+          left: 0
+        &.goal
+          //border: 3px solid $secondarycolor
+          fill: $secondarycolor
+          stroke: $secondarycolor
+          width: 4rem
+          height: 4rem
+          top: 2rem
+          left: 2rem
+        &.bonus
+          fill: cyan
+          //stroke: cyan
+          width: 2rem
+          height: 2rem
+          top: 24rem
+          left: 24rem
+        &.badGuy
+          fill: brown
+          //stroke: brown
+          width: 2rem
+          height: 2rem
+          top: 32rem
+          left: 32rem
+        &.wall
+          //border: 3px solid $maincolor
+          fill: $maincolor
+          rect
+            //stroke: $maincolor
+          &.wall01
+            top: 6rem
+            left: 12rem
+            width: 4rem
+            height: 4rem
+          &.wall02
+            top: 12rem
+            left: 16rem
+            width: 4rem
+            height: 4rem
+          &.wall03
+            top: 24rem
+            left: 36rem
+            width: 2rem
+            height: 4rem
+          &.wall04
+            width: 2rem
+            height: 8rem
+            top: 36rem
+            left: 24rem

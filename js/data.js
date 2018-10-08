@@ -1,24 +1,58 @@
 const forms = {
-  'user': '<svg version="1.1" id="user" x="0px" y="0px" viewBox="0 0 1 1">\
-	          <rect x="0" y="0" class="form user" width="1" height="1"/>\
-          </svg>',
+  'user':       '<svg id="user" class="form user" viewBox="0 0 1 1">\
+	                <rect x="0" y="0" width="100%" height="100%"/>\
+                </svg>',
+  'user_path': '<svg id="user_path" class="form user_polygon" viewBox="0 0 1 1">\
+                  <polygon points="0,0 0.5,0 1,0 1,0.5 1,1 0.5,1 0,1 0,0.5"/>\
+                </svg>',
+  'bonus':      '<svg id="bonus" class="form bonus" viewBox="0 0 1 1">\
+                  <circle cx="50%" cy="50%" r="0.5"/>\
+                </svg>',
+  'badGuy':     '<svg id="badGuy" class="form badGuy" viewBox="0 0 1 1">\
+	                <polygon points="0,0 1,0 1,1"/>\
+                </svg>',
+  'goal':       '<svg id="goal" class="form goal" viewBox="0 0 2 2">\
+                  <rect x="0" y="0" width="100%" height="100%"/>\
+                </svg>',
   'walls': {
-    'wall01': '<svg></svg>',
-    'wall02': '<svg></svg>',
-    'wall03': '<svg></svg>',
-    'wall04': '<svg></svg>'
-  },
+    'wall01':   '<svg id="wall01" class="form wall wall01" viewBox="0 0 1 1">\
+                  <rect x="0" y="0" width="50%" height="50%"/>\
+                  <rect x="0.5" y="0" width="50%" height="50%"/>\
+                  <rect x="0" y="0.5" width="50%" height="50%"/>\
+                  <rect x="0.5" y="0.5" width="50%" height="50%"/>\
+                </svg>',
+    'wall02':   '<svg id="wall02" class="form wall wall02" viewBox="0 0 1 1">\
+                  <rect x="0" y="0" width="50%" height="50%"/>\
+                  <rect x="0.5" y="0" width="50%" height="50%"/>\
+                  <rect x="0.5" y="0.5" width="50%" height="50%"/>\
+                </svg>',
+    'wall03':   '<svg id="wall03" class="form wall wall03" viewBox="0 0 0.5 1">\
+                  <rect x="0" y="0" width="100%" height="50%"/>\
+                  <rect x="0" y="0.5" width="100%" height="50%"/>\
+                </svg>',
+    'wall04':   '<svg id="wall04" class="form wall wall04" viewBox="0 0 0.5 2">\
+                  <rect x="0" y="0" width="100%" height="25%"/>\
+                  <rect x="0" y="0.5" width="100%" height="25%"/>\
+                  <rect x="0" y="1" width="100%" height="25%"/>\
+                  <rect x="0" y="1.5" width="100%" height="25%"/>\
+                </svg>',
+  }
   //'walls': ['','','','']
-  'bonus': '<svg></svg>',
-  'badGuy': '<svg></svg>',
-  'goal': '<svg version="1.1" id="user" x="0px" y="0px" viewBox="0 0 2 2">\
-            <rect x="0" y="0" class="form user" width="2" height="2"/>\
-          </svg>'
 };
 
-const $container = $('.container');
-//console.log(forms.user);
-$container.append(forms.goal);
+const $gameBoard = $('.gameBoard');
+
+$gameBoard.append(forms.goal);
+$gameBoard.append(forms.user);
+$gameBoard.append(forms.user_path);
+$gameBoard.append(forms.walls.wall01);
+$gameBoard.append(forms.walls.wall02);
+$gameBoard.append(forms.walls.wall03);
+$gameBoard.append(forms.walls.wall04);
+$gameBoard.append(forms.bonus);
+$gameBoard.append(forms.badGuy);
+
+
 
 const styles = ['normal','ice','electric','wash','blackHole','teletransport'];
 // const styles = {
