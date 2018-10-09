@@ -1,8 +1,7 @@
 .container
-  width: 95%
-  height: 100vh
-  margin: 0 auto
-  padding: 1em 0
+  width: 100%
+  height: 100%
+  padding: 1em
   h1.gameName
     margin-top: 0
     position: relative
@@ -15,75 +14,61 @@
         left: .15em
       &.ample
         margin-left: 2.5em
-  .gameBoard
-    position: relative
-    svg
-      //stroke-miterlimit: 8
-      stroke-width: .15
-      //stroke-location: inside
-      &.form
-        position: absolute
-        fill-opacity: 0.5
-        &.user
-          //border: 3px solid $maincolor
-          fill: $maincolor
-          stroke: $maincolor
-          width: 2rem
-          height: 2rem
-          top: 2rem
-          left: 6rem
-        &.user_polygon
-          //border: 3px solid yellow
-          stroke: yellow
-          fill: yellow
-          width: 2rem
-          height: 2rem
-          top: 0
-          left: 0
-        &.goal
-          //border: 3px solid $secondarycolor
-          fill: $secondarycolor
-          stroke: $secondarycolor
-          width: 4rem
-          height: 4rem
-          top: 2rem
-          left: 2rem
-        &.bonus
-          fill: cyan
-          //stroke: cyan
-          width: 2rem
-          height: 2rem
-          top: 24rem
-          left: 24rem
-        &.badGuy
-          fill: brown
-          //stroke: brown
-          width: 2rem
-          height: 2rem
-          top: 32rem
-          left: 32rem
-        &.wall
-          //border: 3px solid $maincolor
-          fill: $maincolor
-          rect
-            //stroke: $maincolor
-          &.wall01
-            top: 6rem
-            left: 12rem
-            width: 4rem
-            height: 4rem
-          &.wall02
-            top: 12rem
-            left: 16rem
-            width: 4rem
-            height: 4rem
-          &.wall03
-            top: 24rem
-            left: 36rem
-            width: 2rem
-            height: 4rem
-          &.wall04
-            width: 2rem
-            height: 8rem
-            top: 36rem
-            left: 24rem
+  svg#gameBoard
+    border: 2px solid $darkbackg
+    //border: 2px solid greenyellow
+    //width: 100%
+    //height: 100%
+    .form
+      fill-opacity: 0.5
+      stroke-width: .2
+      &.user
+        fill: $maincolor
+        stroke: $maincolor
+      &.bonus
+        fill: cyan
+        stroke: cyan
+      &.badGuy
+        fill: brown
+        stroke: brown
+      &.goal
+        fill: $secondarycolor
+        stroke: $secondarycolor
+      &.wall
+        fill: rosybrown
+        stroke: rosybrown
+    .line
+      stroke-width: .1
+      stroke: cyan
+
+
+
+
+//----------- GUIDES -------------
+#grid
+  position: fixed
+  width: 100%
+  height: 99.5%
+  padding: 1em
+  .row
+    position: fixed
+    width: 100%
+    height: 100%
+    display: flex
+    flex-flow: column nowrap
+    align-items: space-around
+    justify-content: space-around
+    .guide
+      display: inline-block
+      border: 1px solid blue
+  .column
+    position: fixed
+    width: 100%
+    height: 100%
+    display: flex
+    flex-flow: row nowrap
+    align-items: space-around
+    justify-content: space-around
+    .guide
+      display: inline-block
+      border: 1px solid blue

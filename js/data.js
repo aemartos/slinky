@@ -1,58 +1,87 @@
 const forms = {
-  'user':       '<svg id="user" class="form user" viewBox="0 0 1 1">\
-	                <rect x="0" y="0" width="100%" height="100%"/>\
-                </svg>',
-  'user_path': '<svg id="user_path" class="form user_polygon" viewBox="0 0 1 1">\
-                  <polygon points="0,0 0.5,0 1,0 1,0.5 1,1 0.5,1 0,1 0,0.5"/>\
-                </svg>',
-  'bonus':      '<svg id="bonus" class="form bonus" viewBox="0 0 1 1">\
-                  <circle cx="50%" cy="50%" r="0.5"/>\
-                </svg>',
-  'badGuy':     '<svg id="badGuy" class="form badGuy" viewBox="0 0 1 1">\
-	                <polygon points="0,0 1,0 1,1"/>\
-                </svg>',
-  'goal':       '<svg id="goal" class="form goal" viewBox="0 0 2 2">\
-                  <rect x="0" y="0" width="100%" height="100%"/>\
-                </svg>',
+  'user':       '<rect x="12" y="12" id="user" class="form user" width="2%" height="4%"/>',
+  'user_path':  '<polygon points="0,0 0.5,0 1,0 1,0.5 1,1 0.5,1 0,1 0,0.5" id="user_path" class="form user_polygon"/>',
+  'bonus':      '<circle cx="21" cy="9" r="1" id="bonus" class="form bonus"/>',
+  'badGuy':     '<polygon points="0,0 1,0 1,1" id="badGuy" class="form badGuy"/>',
+  'goal':       '<rect x="97.9" y="47.9" width="2%" height="4%" id="goal" class="form goal"/>',
   'walls': {
-    'wall01':   '<svg id="wall01" class="form wall wall01" viewBox="0 0 1 1">\
-                  <rect x="0" y="0" width="50%" height="50%"/>\
-                  <rect x="0.5" y="0" width="50%" height="50%"/>\
-                  <rect x="0" y="0.5" width="50%" height="50%"/>\
-                  <rect x="0.5" y="0.5" width="50%" height="50%"/>\
-                </svg>',
-    'wall02':   '<svg id="wall02" class="form wall wall02" viewBox="0 0 1 1">\
-                  <rect x="0" y="0" width="50%" height="50%"/>\
-                  <rect x="0.5" y="0" width="50%" height="50%"/>\
-                  <rect x="0.5" y="0.5" width="50%" height="50%"/>\
-                </svg>',
-    'wall03':   '<svg id="wall03" class="form wall wall03" viewBox="0 0 0.5 1">\
-                  <rect x="0" y="0" width="100%" height="50%"/>\
-                  <rect x="0" y="0.5" width="100%" height="50%"/>\
-                </svg>',
-    'wall04':   '<svg id="wall04" class="form wall wall04" viewBox="0 0 0.5 2">\
-                  <rect x="0" y="0" width="100%" height="25%"/>\
-                  <rect x="0" y="0.5" width="100%" height="25%"/>\
-                  <rect x="0" y="1" width="100%" height="25%"/>\
-                  <rect x="0" y="1.5" width="100%" height="25%"/>\
-                </svg>',
+    'wall01':   '<rect x="2" y="2" width="2%" height="4%" id="wall01_01" class="form wall wall01 wall01_01"/>\
+                <rect x="4" y="2" width="2%" height="4%" id="wall01_02" class="form wall wall01 wall01_02"/>\
+                <rect x="2" y="4" width="2%" height="4%" id="wall01_03" class="form wall wall01 wall01_03"/>\
+                <rect x="4" y="4" width="2%" height="4%" id="wall01_04" class="form wall wall01 wall01_04"/>',
+    'wall02':   '<rect x="10" y="2" width="2%" height="4%" id="wall01_01" class="form wall wall01 wall01_01"/>\
+                <rect x="12" y="2" width="2%" height="4%" id="wall01_02" class="form wall wall01 wall01_02"/>\
+                <rect x="10" y="4" width="2%" height="4%" id="wall01_03" class="form wall wall01 wall01_03"/>',
+    'wall03':   '<rect x="22" y="32" width="2%" height="4%" id="wall03_01" class="form wall wall03 wall03_01"/>\
+                <rect x="22" y="34" width="2%" height="4%" id="wall03_02" class="form wall wall03 wall03_02"/>',
+    'wall04':   '<rect x="34" y="22" width="2%" height="4%" id="wall04_01" class="form wall wall04 wall04_01"/>\
+                <rect x="34" y="24" width="2%" height="4%" id="wall04_02" class="form wall wall04 wall04_02"/>\
+                <rect x="34" y="26" width="2%" height="4%" id="wall04_03" class="form wall wall04 wall04_03"/>\
+                <rect x="34" y="28" width="2%" height="4%" id="wall04_04" class="form wall wall04 wall04_04"/>',
   }
   //'walls': ['','','','']
 };
 
-const $gameBoard = $('.gameBoard');
+const $gameBoard = $('#gameBoard');
 
-$gameBoard.append(forms.goal);
 $gameBoard.append(forms.user);
-$gameBoard.append(forms.user_path);
+//$gameBoard.append(forms.user_path);
+$gameBoard.append(forms.bonus);
+// $gameBoard.append(forms.badGuy);
+$gameBoard.append(forms.goal);
 $gameBoard.append(forms.walls.wall01);
 $gameBoard.append(forms.walls.wall02);
 $gameBoard.append(forms.walls.wall03);
 $gameBoard.append(forms.walls.wall04);
-$gameBoard.append(forms.bonus);
-$gameBoard.append(forms.badGuy);
 
 
+//GRID------------------------- svg
+
+for (let i = 0; i <= 100; i = i+2 ) {
+  x1 = 'x1="' + i + '"';
+  x2 = 'x2="' + i + '"';
+  y1 = 'y1="0"';
+  y2 = 'y2="100"';
+  line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
+  $gameBoard.append(line);
+}
+
+for (let i = 0; i <= 100; i = i+2 ) {
+  x1 = 'x1="0"';
+  x2 = 'x2="100"';
+  y1 = 'y1="' + i + '"';
+  y2 = 'y2="' + i + '"';
+  line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
+  $gameBoard.append(line);
+}
+
+
+
+//GRID------------------------- divs
+
+// for (let i = 1; i < 100; i++) {
+//   if (i%2 === 1) {
+//     span = '<span class="guide guide_v" style="left:' + i + '%;"' + '></span>';
+//     $('#grid').append(span);
+//   }
+// }
+
+// for (let i = 1; i <= 50; i++) {
+//   span = '<span class="guide"></span>';
+//   $('.row').append(span);
+// }
+
+// for (let j = 1; j <= 50; j++) {
+//   span = '<span class="guide"></span>';
+//   $('.column').append(span);
+// }
+
+
+
+
+
+//REFRESH SVG IN DOM to paint the forms created from jQuery
+$gameBoard.html($gameBoard.html());
 
 const styles = ['normal','ice','electric','wash','blackHole','teletransport'];
 // const styles = {
