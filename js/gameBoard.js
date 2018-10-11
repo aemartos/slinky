@@ -32,7 +32,7 @@ const $gameBoard = $('#gameBoard');
 
 // $gameBoard.append(forms.user);
 // $gameBoard.append(forms.user_path);
-// $gameBoard.append(forms.bonus);
+$gameBoard.append(forms.bonus);
 // $gameBoard.append(forms.badGuy);
 // $gameBoard.append(forms.goal);
 // $gameBoard.append(forms.walls.wall01);
@@ -41,94 +41,16 @@ const $gameBoard = $('#gameBoard');
 // $gameBoard.append(forms.walls.wall04);
 
 
+// GameBoard
 
-
-function Form(health, strength) {
-  this.health = health;
-  this.strength = strength;
-  this.path = '';
-  this.style = '';
-  this.power = '';
-  this.x = undefined;
-  this.y = undefined;
+function GameBoard() {
+  this.grid = [];
+  //Form.call(this, health, strength);
 }
 
-Form.prototype.random = function (num) {
-  var random = (Math.floor(Math.random() * num / 2)) * 2;
-  return random;
+GameBoard.prototype = Object.create(Form.prototype);
+GameBoard.prototype.constructor = GameBoard;
+
+GameBoard.prototype.createGrid = function () {
+  this.grid = Array(rows).fill().map(() => Array(cols).fill(0));
 }
-
-
-
-// User
-
-function User(name, health, strength) {
-  this.name = name;
-  Form.call(this, health, strength);
-  this.xLog = [];
-  this.yLog = [];
-}
-
-User.prototype = Object.create(Form.prototype);
-User.prototype.constructor = User;
-
-
-User.prototype.position = function () {
-  this.x = this.random(100);
-  this.y = this.random(50);
-}
-
-User.prototype.initUser = function () {
-  this.position();
-  this.drawUserBody();
-}
-
-User.prototype.drawUserBody = function () {
-  var x = 'x="' + this.x + '"';
-  var y = 'y="' + this.y + '"';
-  var svg = '<rect id="user" class="form user head"' + x + y + 'width="2%" height="4%"/>';
-  $gameBoard.append(svg);
-  $gameBoard.html($gameBoard.html());
-}
-
-// User.prototype.checkBoundries = function () {
-//   if(this.x === 4 || this.x === 98 || this.y === 4 || this.y === 48) {
-//     return true;
-//   }
-// }
-
-User.prototype.checkBoundries = function () {
-  if( (this.x === 2 && direction === LEFT) || (this.x === 96 && direction === RIGHT) || (this.y === 2 && direction === UP) || (this.y === 46 && direction === DOWN) ) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-User.prototype.move = function (x,y) {
-  this.x = parseInt($('#user.head').attr('x')) + x;
-  this.y = parseInt($('#user.head').attr('y')) + y;
-  $('#user.head').removeClass('head');
-  this.drawUserBody();
-}
-
-User.prototype.moveUp = function () {
-  this.move(0,-2);
-}
-
-User.prototype.moveDown = function () {
-  this.move(0,2);
-}
-
-User.prototype.moveLeft = function () {
-  this.move(-2,0);
-}
-
-User.prototype.moveRight = function () {
-  this.move(2,0);
-}
-
-
-
-
-//});

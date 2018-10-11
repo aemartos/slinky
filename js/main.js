@@ -1,13 +1,19 @@
 // GLOBAL VARIABLES ----------------------------
-var startedGame, timer, direction = undefined;
+var startedGame, timer, direction, board = undefined;
 const UP = 'UP';
 const DOWN = 'DOWN';
 const LEFT = 'LEFT';
 const RIGHT = 'RIGHT';
-const RHYTHM = 100;
 var PAUSE = false;
 var LIMIT = false;
+const SLINKY = 's';
+const OBSTACLE = 'o';
+const BONUS = 'b';
+const BADGUY = 'bg'
 
+const RHYTHM = 100;
+const rows = 25;
+const cols = 50;
 
 
 $(document).ready(function() {
@@ -21,7 +27,7 @@ $('#guides').change(function() {
       x1 = 'x1="' + i + '"';
       x2 = 'x2="' + i + '"';
       y1 = 'y1="0"';
-      y2 = 'y2="100"';
+      y2 = 'y2="50"';
       line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
       $gameBoard.append(line);
     }
@@ -72,7 +78,7 @@ function initListeners(user) {
   });
 
   timer = setInterval(()=>{
-    if(!PAUSE && !user.checkBoundries()){
+    if(!PAUSE && !user.checkBoundaries()){
     switch (direction) {
       case UP:
         user.moveUp();
@@ -96,9 +102,14 @@ function initListeners(user) {
 
 function startGame() {
 
-  let user = new User();
+  board = new GameBoard();
+  board.createGrid();
+  //console.log(board);
+
+  let user = new User('scully', 3, 2);
   user.initUser();
   initListeners(user);
+  console.log(user);
 
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   //$gameBoard.html($gameBoard.html());
