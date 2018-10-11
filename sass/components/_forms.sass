@@ -25,6 +25,10 @@
       &.user
         fill: $maincolor
         stroke: $maincolor
+        fill-opacity: 1
+      &.user_path
+        fill: red
+        stroke: red
       &.bonus
         fill: cyan
         stroke: cyan
@@ -45,30 +49,8 @@
 
 
 //----------- GUIDES -------------
-#grid
-  position: fixed
-  width: 100%
-  height: 99.5%
-  padding: 1em
-  .row
-    position: fixed
-    width: 100%
-    height: 100%
-    display: flex
-    flex-flow: column nowrap
-    align-items: space-around
-    justify-content: space-around
-    .guide
-      display: inline-block
-      border: 1px solid blue
-  .column
-    position: fixed
-    width: 100%
-    height: 100%
-    display: flex
-    flex-flow: row nowrap
-    align-items: space-around
-    justify-content: space-around
-    .guide
-      display: inline-block
-      border: 1px solid blue
+
+#guides
+  position: absolute
+  bottom: 0.1rem
+  right: 0
