@@ -1,4 +1,4 @@
-
+//$(document).ready(function() {
 
 const forms = {
   'user':       '<rect x="12" y="12" id="user" class="form user" width="2%" height="4%"/>',
@@ -54,12 +54,13 @@ function Form(health, strength) {
 }
 
 Form.prototype.random = function (num) {
-  var random = Math.floor(Math.random() * num);
-  if (random%2 === 0) {
-    return random;
-  } else {
-    return this.random(num);
-  }
+  var random = (Math.floor(Math.random() * num / 2)) * 2;
+  return random;
+  // if (random%2 === 0) {
+  //   return random;
+  // } else {
+  //   return this.random(num);
+  // }
 }
 
 
@@ -80,21 +81,66 @@ User.prototype.position = function () {
   this.y = this.random(50);
 }
 
-User.prototype.createUser = function () {
+User.prototype.initUser = function () {
   this.position();
-  var x = 'x="' + this.x + '"';
-  var y = 'y="' + this.y + '"';
-  var svg = '<rect id="user" class="form user"' + x + y + 'width="2%" height="4%"/>';
-  $gameBoard.append(svg);
+  this.drawUserBody();
 }
 
-var user = new User();
-user.createUser();
+User.prototype.drawUserBody = function () {
+  var x = 'x="' + this.x + '"';
+  var y = 'y="' + this.y + '"';
+  var svg = '<rect id="user" class="form user head"' + x + y + 'width="2%" height="4%"/>';
+  $gameBoard.append(svg);
+  $gameBoard.html($gameBoard.html());
+}
 
-console.log(user);
+User.prototype.move = function (x,y) {
+  this.x = parseInt($('#user.head').attr('x')) + x;
+  this.y = parseInt($('#user.head').attr('y')) + y;
+  $('#user.head').removeClass('head');
+  this.drawUserBody();
+}
+
+User.prototype.moveUp = function (x,y) {
+  // this.x = $('#user.head').attr('x');
+  // this.y = parseInt($('#user.head').attr('y')) - 2;
+  // $('#user.head').removeClass('head');
+  // this.drawUserBody();
+  this.move(0,-2);
+}
+
+User.prototype.moveDown = function (x,y) {
+  // this.x = $('#user.head').attr('x');
+  // this.y = parseInt($('#user.head').attr('y')) + 2;
+  // $('#user.head').removeClass('head');
+  // this.drawUserBody();
+  this.move(0,2);
+}
+
+User.prototype.moveLeft = function (x,y) {
+  // this.x = parseInt($('#user.head').attr('x')) - 2;
+  // this.y = $('#user.head').attr('y');
+  // $('#user.head').removeClass('head');
+  // this.drawUserBody();
+  this.move(-2,0);
+}
+
+User.prototype.moveRight = function (x,y) {
+  // this.x = parseInt($('#user.head').attr('x')) + 2;
+  // this.y = $('#user.head').attr('y');
+  // $('#user.head').removeClass('head');
+  // this.drawUserBody();
+  this.move(2,0);
+}
 
 
 
-//REFRESH SVG IN DOM to paint the forms created from jQuery
-$gameBoard.html($gameBoard.html());
-//console.log(document.querySelector('#user').getAttribute('x'));
+
+
+
+
+
+
+
+
+//});

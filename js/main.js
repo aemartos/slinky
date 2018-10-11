@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 
 // GRID ONCLICK --------------------------------
 
@@ -26,15 +28,83 @@ $('#guides').change(function() {
 });
 
 
+// GLOBAL VARIABLES ----------------------------
+let startedGame, timer, direction = undefined;
+const UP = 'UP';
+const DOWN = 'DOWN';
+const LEFT = 'LEFT';
+const RIGHT = 'RIGHT';
+const RHYTHM = 100;
+var PAUSE = false;
+
+// MOVEMENT ----------------------------------
+
+
+
+function initListeners(user) {
+
+  $(document).keydown((e)=> {
+    startedGame = true;
+  
+    switch (e.keyCode) {
+      case 38:
+        direction = UP;
+        break;
+      case 40:
+        direction = DOWN;
+        break;
+      case 37:
+        direction = LEFT;
+        break;
+      case 39:
+        direction = RIGHT;
+        break;
+      case 32:
+        user.shoot();
+        break;
+      case 80:
+        PAUSE = !PAUSE;
+      //ESC === 27
+      //P === 80
+    }
+  });
+
+  timer = setInterval(()=>{
+    if(!PAUSE){
+    switch (direction) {
+      case UP:
+        user.moveUp();
+        break;
+      case DOWN:
+        user.moveDown();
+        break;
+      case LEFT:
+        user.moveLeft();
+        break;
+      case RIGHT:
+        user.moveRight();
+        break;
+      }
+    }}, RHYTHM);
+}
+
+
 // START GAME ----------------------------------
 
 function startGame() {
 
+  let user = new User();
+  user.initUser();
+  initListeners(user);
 
-
-  var user = new User();
-  user.createUser();
-  console.log(user);
   //REFRESH SVG IN DOM to paint the forms created from jQuery
-  $gameBoard.html($gameBoard.html());
+  //$gameBoard.html($gameBoard.html());
 };
+
+startGame();
+// $("#startButton").click(function() {
+//   startGame();
+// });
+
+
+});
