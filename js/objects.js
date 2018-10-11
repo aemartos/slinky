@@ -56,11 +56,6 @@ function Form(health, strength) {
 Form.prototype.random = function (num) {
   var random = (Math.floor(Math.random() * num / 2)) * 2;
   return random;
-  // if (random%2 === 0) {
-  //   return random;
-  // } else {
-  //   return this.random(num);
-  // }
 }
 
 
@@ -70,6 +65,8 @@ Form.prototype.random = function (num) {
 function User(name, health, strength) {
   this.name = name;
   Form.call(this, health, strength);
+  this.xLog = [];
+  this.yLog = [];
 }
 
 User.prototype = Object.create(Form.prototype);
@@ -94,6 +91,20 @@ User.prototype.drawUserBody = function () {
   $gameBoard.html($gameBoard.html());
 }
 
+// User.prototype.checkBoundries = function () {
+//   if(this.x === 4 || this.x === 98 || this.y === 4 || this.y === 48) {
+//     return true;
+//   }
+// }
+
+User.prototype.checkBoundries = function () {
+  if( (this.x === 2 && direction === LEFT) || (this.x === 96 && direction === RIGHT) || (this.y === 2 && direction === UP) || (this.y === 46 && direction === DOWN) ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 User.prototype.move = function (x,y) {
   this.x = parseInt($('#user.head').attr('x')) + x;
   this.y = parseInt($('#user.head').attr('y')) + y;
@@ -101,44 +112,21 @@ User.prototype.move = function (x,y) {
   this.drawUserBody();
 }
 
-User.prototype.moveUp = function (x,y) {
-  // this.x = $('#user.head').attr('x');
-  // this.y = parseInt($('#user.head').attr('y')) - 2;
-  // $('#user.head').removeClass('head');
-  // this.drawUserBody();
+User.prototype.moveUp = function () {
   this.move(0,-2);
 }
 
-User.prototype.moveDown = function (x,y) {
-  // this.x = $('#user.head').attr('x');
-  // this.y = parseInt($('#user.head').attr('y')) + 2;
-  // $('#user.head').removeClass('head');
-  // this.drawUserBody();
+User.prototype.moveDown = function () {
   this.move(0,2);
 }
 
-User.prototype.moveLeft = function (x,y) {
-  // this.x = parseInt($('#user.head').attr('x')) - 2;
-  // this.y = $('#user.head').attr('y');
-  // $('#user.head').removeClass('head');
-  // this.drawUserBody();
+User.prototype.moveLeft = function () {
   this.move(-2,0);
 }
 
-User.prototype.moveRight = function (x,y) {
-  // this.x = parseInt($('#user.head').attr('x')) + 2;
-  // this.y = $('#user.head').attr('y');
-  // $('#user.head').removeClass('head');
-  // this.drawUserBody();
+User.prototype.moveRight = function () {
   this.move(2,0);
 }
-
-
-
-
-
-
-
 
 
 

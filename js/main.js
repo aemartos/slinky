@@ -1,3 +1,15 @@
+// GLOBAL VARIABLES ----------------------------
+var startedGame, timer, direction = undefined;
+const UP = 'UP';
+const DOWN = 'DOWN';
+const LEFT = 'LEFT';
+const RIGHT = 'RIGHT';
+const RHYTHM = 100;
+var PAUSE = false;
+var LIMIT = false;
+
+
+
 $(document).ready(function() {
 
 
@@ -28,24 +40,14 @@ $('#guides').change(function() {
 });
 
 
-// GLOBAL VARIABLES ----------------------------
-let startedGame, timer, direction = undefined;
-const UP = 'UP';
-const DOWN = 'DOWN';
-const LEFT = 'LEFT';
-const RIGHT = 'RIGHT';
-const RHYTHM = 100;
-var PAUSE = false;
+
 
 // MOVEMENT ----------------------------------
-
-
 
 function initListeners(user) {
 
   $(document).keydown((e)=> {
     startedGame = true;
-  
     switch (e.keyCode) {
       case 38:
         direction = UP;
@@ -70,7 +72,7 @@ function initListeners(user) {
   });
 
   timer = setInterval(()=>{
-    if(!PAUSE){
+    if(!PAUSE && !user.checkBoundries()){
     switch (direction) {
       case UP:
         user.moveUp();
@@ -85,7 +87,8 @@ function initListeners(user) {
         user.moveRight();
         break;
       }
-    }}, RHYTHM);
+    }
+  }, RHYTHM);
 }
 
 
