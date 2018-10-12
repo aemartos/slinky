@@ -1,5 +1,5 @@
 .container
-  background-color: $darkbackg
+  background-color: $darkbg
   width: 100%
   height: 100%
   padding: 1em
@@ -26,8 +26,21 @@
       stroke-width: .2
       &.user
         fill: $maincolor
-        stroke: $maincolor
+        //stroke: $maincolor
+        stroke: $darkbg
         fill-opacity: 1
+        &.top
+          stroke-dasharray: 0, 2, 6
+        &.bottom
+          stroke-dasharray: 4, 2
+        &.left
+          stroke-dasharray: 6, 2
+        &.right
+          stroke-dasharray: 2, 2, 4
+        &.sides_tb
+          stroke-dasharray: 2
+        &.sides_lr
+          stroke-dasharray: 0, 2, 0
       &.user_path
         fill: red
         stroke: red
@@ -40,6 +53,7 @@
       &.goal
         fill: $secondarycolor
         stroke: $secondarycolor
+        //animation: colorChange 1s infinite
       &.wall
         fill: rosybrown
         stroke: rosybrown

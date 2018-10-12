@@ -23,10 +23,23 @@ User.prototype.initUser = function () {
 User.prototype.drawUserBody = function () {
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
-  this.path = '<rect id="user" class="form user head back"' + x + y + 'width="2" height="2"/>';
+  this.path = '<rect id="user" class="form user head back ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   $gameBoard.append(this.path);
   board.grid[this.y/2][this.x/2] = SLINKY;
   $gameBoard.html($gameBoard.html());
+}
+
+User.prototype.addStroke = function () {
+  switch(direction) {
+    case UP:
+    case DOWN:
+      return 'sides_lr';
+      break;
+    case LEFT:
+    case RIGHT:
+      return 'sides_tb';
+      break;
+  }
 }
 
 User.prototype.checkBoundaries = function () {
