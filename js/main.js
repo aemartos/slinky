@@ -81,16 +81,16 @@ function initListeners(user) {
     if(!PAUSE && !user.checkBoundaries()){
     switch (direction) {
       case UP:
-        user.moveUp();
+        user.growUp();
         break;
       case DOWN:
-        user.moveDown();
+        user.growDown();
         break;
       case LEFT:
-        user.moveLeft();
+        user.growLeft();
         break;
       case RIGHT:
-        user.moveRight();
+        user.growRight();
         break;
       }
     }
@@ -109,7 +109,7 @@ function startGame() {
   let user = new User('scully', 3, 2);
   user.initUser();
   initListeners(user);
-  console.log(user);
+  //console.log(user);
 
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   //$gameBoard.html($gameBoard.html());

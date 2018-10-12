@@ -54,7 +54,8 @@ User.prototype.checkBoundaries = function () {
   }
 
   let nextPos = board.grid[this.y/2 + dy][this.x/2 + dx];
-  console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
+  //console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
+  //console.log(board.grid);
   if(isBoundary || (nextPos !== 0 && nextPos !== BONUS)) {
     return true;
   } else {
@@ -62,27 +63,27 @@ User.prototype.checkBoundaries = function () {
   }
 }
 
-User.prototype.move = function (x,y) {
+User.prototype.grow = function (x,y) {
   this.x = parseInt($('#user.head').attr('x')) + x;
   this.y = parseInt($('#user.head').attr('y')) + y;
   $('#user.head').addClass('bone').removeClass('head');
   this.drawUserBody();
 }
 
-User.prototype.moveUp = function () {
-  this.move(0,-2);
+User.prototype.growUp = function () {
+  this.grow(0,-2);
 }
 
-User.prototype.moveDown = function () {
-  this.move(0,2);
+User.prototype.growDown = function () {
+  this.grow(0,2);
 }
 
-User.prototype.moveLeft = function () {
-  this.move(-2,0);
+User.prototype.growLeft = function () {
+  this.grow(-2,0);
 }
 
-User.prototype.moveRight = function () {
-  this.move(2,0);
+User.prototype.growRight = function () {
+  this.grow(2,0);
 }
 
 User.prototype.shrink = function () {

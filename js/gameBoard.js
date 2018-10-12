@@ -5,7 +5,7 @@ const forms = {
   // 'user_path':  '<polygon points="30,8 32,8 32,6 34,6 34,8 34,10 32,10 30,10" id="user_path" class="form user_path"/>',
   'bonus':      '<circle cx="21" cy="9" r="1" id="bonus" class="form bonus"/>',
   'badGuy':     '<polygon points="44,44 46,44 46,46" id="badGuy" class="form badGuy"/>',
-  'goal':       '<rect x="97.9" y="47.9" width="2%" height="4%" id="goal" class="form goal"/>',
+  'goal':       '<rect x="95.9" y="45.9" width="4" height="4" id="goal" class="form goal"/>',
   'walls': {
     'wall01':   '<rect x="2" y="2" width="2%" height="4%" id="wall01_01" class="form wall wall01 wall01_01"/>\
                 <rect x="4" y="2" width="2%" height="4%" id="wall01_02" class="form wall wall01 wall01_02"/>\
@@ -32,9 +32,9 @@ const $gameBoard = $('#gameBoard');
 
 // $gameBoard.append(forms.user);
 // $gameBoard.append(forms.user_path);
-$gameBoard.append(forms.bonus);
+// $gameBoard.append(forms.bonus);
 // $gameBoard.append(forms.badGuy);
-// $gameBoard.append(forms.goal);
+$gameBoard.append(forms.goal);
 // $gameBoard.append(forms.walls.wall01);
 // $gameBoard.append(forms.walls.wall02);
 // $gameBoard.append(forms.walls.wall03);
