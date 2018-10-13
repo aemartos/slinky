@@ -6,3 +6,61 @@
     fill: #000
   100%
     fill: #ff0000
+
+
+@keyframes shrink_r
+  from, 20%, 40%, 60%, 80%, to
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+  0%
+    width: .08em
+  20%
+    width: .2em
+  40%
+    width: .1em
+  60%
+    width: .15em
+  80%
+    width: .12em
+  to
+    width: .125em
+
+@keyframes shrink_l
+  from, 20%, 40%, 60%, 80%, to
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+  0%
+    width: .08em
+    transform: translateX(0.045em)
+  20%
+    width: .2em
+    transform: translateX(-0.075em)
+  40%
+    width: .1em
+    transform: translateX(0.25em)
+  60%
+    width: .15em
+    transform: translateX(0.20em)
+  80%
+    width: .12em
+    transform: translateX(0.23em)
+  to
+    width: .125em
+    transform: translateX(0)
+
+@keyframes shrink_d
+  from, 20%, 40%, 60%, 80%, to
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
+  0%
+    height: .08em
+  20%
+    height: .2em
+  40%
+    height: .1em
+  60%
+    height: .15em
+  80%
+    height: .12em
+  to
+    height: .125em

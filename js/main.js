@@ -112,7 +112,6 @@ function initListeners(user) {
           break;
       }
     }
-    //user.directionsLog.push(user.direction);
   }, RHYTHM);
 }
 

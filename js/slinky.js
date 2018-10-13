@@ -86,6 +86,22 @@ User.prototype.checkBoundaries = function () {
   }
 }
 
+User.prototype.updatePosition = function () {
+  this.x = parseInt($('#user.back').attr('x'));
+  this.y = parseInt($('#user.back').attr('y'));
+}
+
+User.prototype.cleanGridPositions = function () {
+  for(var i = 0; i < board.grid.length; i++) {
+    for(var j = 0; j < board.grid.length; j++) {
+      if (board.grid[i][j] === SLINKY) {
+        board.grid[i][j] = 0;
+      }
+    }
+  }
+  board.grid[this.y/2][this.x/2] = SLINKY;
+}
+
 User.prototype.prevDirection = function () {
   let last = this.directionsLog.length - 2;
   this.oldDirection = this.directionsLog[last];
@@ -118,13 +134,23 @@ User.prototype.growRight = function () {
 User.prototype.shrink = function () {
   this.bones = $('#user.bone');
   if(this.bones.length > 0) {
-
     this.bones.last().remove();
-
-    board.grid.map((e)=> {
-      if(e === SLINKY) {
-        return 0;
-      }
-    });
   }
+  this.updatePosition();
+  if(this.bones.length === 1 && this.oldDirection === RIGHT) {
+    $('#user.back').addClass('shrink_r');
+    setTimeout(()=>{$('#user.back').removeClass('shrink_r')}, 500);
+  }
+  if(this.bones.length === 1 && this.oldDirection === LEFT) {
+    $('#user.back').addClass('shrink_l');
+    setTimeout(()=>{$('#user.back').removeClass('shrink_l')}, 500);
+  }
+  if(this.bones.length === 1 && this.oldDirection === DOWN) {
+    $('#user.back').addClass('shrink_d');
+    setTimeout(()=>{$('#user.back').removeClass('shrink_d')}, 500);
+  }
+  $('#user.back').addClass('head');
+  this.cleanGridPositions();
+  //console.log(board.grid);
+  //console.log(this.x, this.y);
 }
