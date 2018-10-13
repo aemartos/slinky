@@ -115,23 +115,16 @@ User.prototype.growRight = function () {
   this.grow(2,0);
 }
 
-User.prototype.checkChild = function () {
-  this.bones = $('#user.bone');
-  var intervalId = setInterval(()=>{
-    if(this.bones.length > 0) {
-      this.shrink();
-    } else {
-      clearInterval(intervalId);
-    };
-  }, 100);
-}
-
-
 User.prototype.shrink = function () {
-  this.bones.last().remove();
-  board.grid.map((e)=> {
-    if(e === SLINKY) {
-      return 0;
-    }
-  });
+  this.bones = $('#user.bone');
+  if(this.bones.length > 0) {
+
+    this.bones.last().remove();
+
+    board.grid.map((e)=> {
+      if(e === SLINKY) {
+        return 0;
+      }
+    });
+  }
 }

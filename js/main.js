@@ -84,28 +84,28 @@ function initListeners(user) {
       switch (user.direction) {
         case UP:
           if (user.oldDirection === DOWN) {
-            user.checkChild();
+            user.shrink();
           } else {
             user.growUp();
           }
           break;
         case DOWN:
           if (user.oldDirection === UP) {
-            user.checkChild();
+            user.shrink();
           } else {
             user.growDown();
           }
           break;
         case LEFT:
           if (user.oldDirection === RIGHT) {
-            user.checkChild();
+            user.shrink();
           } else {
             user.growLeft();
           }
           break;
         case RIGHT:
           if (user.oldDirection === LEFT) {
-            user.checkChild();
+            user.shrink();
           } else {
             user.growRight();
           }
