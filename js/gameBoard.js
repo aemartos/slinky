@@ -34,7 +34,7 @@ const $gameBoard = $('#gameBoard');
 // $gameBoard.append(forms.user_path);
 // $gameBoard.append(forms.bonus);
 // $gameBoard.append(forms.badGuy);
-$gameBoard.append(forms.goal);
+// $gameBoard.append(forms.goal);
 // $gameBoard.append(forms.walls.wall01);
 // $gameBoard.append(forms.walls.wall02);
 // $gameBoard.append(forms.walls.wall03);

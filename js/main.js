@@ -1,5 +1,5 @@
 // GLOBAL VARIABLES ----------------------------
-var startedGame, timer, direction, board = undefined;
+var startedGame, timer, board = undefined;
 const UP = 'UP';
 const DOWN = 'DOWN';
 const LEFT = 'LEFT';
@@ -50,22 +50,22 @@ $('#guides').change(function() {
 
 // MOVEMENT ----------------------------------
 
-function initListeners(user) {
 
+function initListeners(user) {
   $(document).keydown((e)=> {
     startedGame = true;
     switch (e.keyCode) {
       case 38:
-        direction = UP;
+        user.direction = UP;
         break;
       case 40:
-        direction = DOWN;
+        user.direction = DOWN;
         break;
       case 37:
-        direction = LEFT;
+        user.direction = LEFT;
         break;
       case 39:
-        direction = RIGHT;
+        user.direction = RIGHT;
         break;
       case 32:
         user.shoot();
@@ -75,25 +75,44 @@ function initListeners(user) {
       //ESC === 27
       //P === 80
     }
+    user.directionsLog.push(user.direction);
+    user.prevDirection();
   });
 
   timer = setInterval(()=>{
     if(!PAUSE && !user.checkBoundaries()){
-    switch (direction) {
-      case UP:
-        user.growUp();
-        break;
-      case DOWN:
-        user.growDown();
-        break;
-      case LEFT:
-        user.growLeft();
-        break;
-      case RIGHT:
-        user.growRight();
-        break;
+      switch (user.direction) {
+        case UP:
+          if (user.oldDirection === DOWN) {
+            user.checkChild();
+          } else {
+            user.growUp();
+          }
+          break;
+        case DOWN:
+          if (user.oldDirection === UP) {
+            user.checkChild();
+          } else {
+            user.growDown();
+          }
+          break;
+        case LEFT:
+          if (user.oldDirection === RIGHT) {
+            user.checkChild();
+          } else {
+            user.growLeft();
+          }
+          break;
+        case RIGHT:
+          if (user.oldDirection === LEFT) {
+            user.checkChild();
+          } else {
+            user.growRight();
+          }
+          break;
       }
     }
+    //user.directionsLog.push(user.direction);
   }, RHYTHM);
 }
 

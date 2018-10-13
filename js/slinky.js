@@ -3,6 +3,10 @@
 
 function User(name, health, strength) {
   this.name = name;
+  this.direction = '';
+  this.oldDirection = '';
+  this.directionsLog = [];
+  this.bones = [];
   Form.call(this, health, strength);
 }
 
@@ -17,20 +21,26 @@ User.prototype.position = function () {
 
 User.prototype.initUser = function () {
   this.position();
-  this.drawUserBody();
+  this.drawUserBody('back');
 }
 
-User.prototype.drawUserBody = function () {
+User.prototype.drawUserBody = function (clas) {
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
-  this.path = '<rect id="user" class="form user head back ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
+  //this.path = '<rect id="user" class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
+  this.path = '<rect id="user" class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
   $gameBoard.append(this.path);
   board.grid[this.y/2][this.x/2] = SLINKY;
   $gameBoard.html($gameBoard.html());
+
+  // let bones = $('#user.bone');
+  // bones.each(function(i, elem) {
+  //   $(elem).attr('num', i);
+  // });
 }
 
 User.prototype.addStroke = function () {
-  switch(direction) {
+  switch(this.direction) {
     case UP:
     case DOWN:
       return 'sides_lr';
@@ -43,11 +53,11 @@ User.prototype.addStroke = function () {
 }
 
 User.prototype.checkBoundaries = function () {
-  let dx= 0;
+  let dx = 0;
   let dy = 0;
   let isBoundary = false;
 
-  switch(direction) {
+  switch(this.direction) {
     case UP:
       isBoundary = this.y === 0;
       dy = isBoundary ? 0 : -1;
@@ -69,18 +79,24 @@ User.prototype.checkBoundaries = function () {
   let nextPos = board.grid[this.y/2 + dy][this.x/2 + dx];
   //console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
   //console.log(board.grid);
-  if(isBoundary || (nextPos !== 0 && nextPos !== BONUS)) {
+  if(isBoundary || (nextPos !== 0 && nextPos !== BONUS && nextPos !== SLINKY)) {
     return true;
   } else {
     return false;
   }
 }
 
+User.prototype.prevDirection = function () {
+  let last = this.directionsLog.length - 2;
+  this.oldDirection = this.directionsLog[last];
+  console.log(this.oldDirection, this.direction);
+}
+
 User.prototype.grow = function (x,y) {
   this.x = parseInt($('#user.head').attr('x')) + x;
   this.y = parseInt($('#user.head').attr('y')) + y;
-  $('#user.head').addClass('bone').removeClass('head');
-  this.drawUserBody();
+  $('#user.head').removeClass('head');
+  this.drawUserBody('bone');
 }
 
 User.prototype.growUp = function () {
@@ -99,6 +115,23 @@ User.prototype.growRight = function () {
   this.grow(2,0);
 }
 
-User.prototype.shrink = function () {
+User.prototype.checkChild = function () {
+  this.bones = $('#user.bone');
+  var intervalId = setInterval(()=>{
+    if(this.bones.length > 0) {
+      this.shrink();
+    } else {
+      clearInterval(intervalId);
+    };
+  }, 100);
+}
 
+
+User.prototype.shrink = function () {
+  this.bones.last().remove();
+  board.grid.map((e)=> {
+    if(e === SLINKY) {
+      return 0;
+    }
+  });
 }
