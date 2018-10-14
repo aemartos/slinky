@@ -4,17 +4,37 @@ const UP = 'UP';
 const DOWN = 'DOWN';
 const LEFT = 'LEFT';
 const RIGHT = 'RIGHT';
+const BOUNDARY = 'BOUNDARY';
+const SHRINK = 'SHRINK';
+const SHOOT = 'SHOOT';
+const PAUSE_BUTTON = 'PAUSE_BUTTON';
+
 var PAUSE = false;
 var LIMIT = false;
 const SLINKY = 's';
-const OBSTACLE = 'o';
+
+
+const WALL = 'w';
 const BONUS = 'b';
 const BADGUY = 'bg'
 
 const RHYTHM = 100;
 const rows = 25;
 const cols = 50;
-
+function oppositeDir(dir){
+  switch(dir){
+    case RIGHT:
+      return LEFT;
+    case LEFT:
+      return RIGHT;
+    case UP:
+      return DOWN;
+    case DOWN:
+      return UP;
+    default:
+      return undefined;
+  }
+}
 
 $(document).ready(function() {
 
@@ -45,6 +65,27 @@ $('#guides').change(function() {
   }
 });
 
+function codeToDirection(key){
+  switch(key){
+    case 38:
+      return UP;
+    case 40:
+      return DOWN;
+    case 37:
+      return LEFT;
+        return;
+    case 39:
+      return RIGHT;
+    case 32:
+        return SHOOT;
+    case 80:
+        return PAUSE_BUTTON;
+    //ESC === 27
+    //P === 80
+    default:
+      return undefined;
+  }
+}
 
 
 
@@ -54,68 +95,63 @@ $('#guides').change(function() {
 function initListeners(user) {
   $(document).keydown((e)=> {
     startedGame = true;
-    switch (e.keyCode) {
-      case 38:
-        user.direction = UP;
-        break;
-      case 40:
-        user.direction = DOWN;
-        break;
-      case 37:
-        user.direction = LEFT;
-        break;
-      case 39:
-        user.direction = RIGHT;
-        break;
-      case 32:
-        user.shoot();
-        break;
-      case 80:
-        PAUSE = !PAUSE;
-      //ESC === 27
-      //P === 80
+    direction = codeToDirection(e.keyCode);
+    // console.error(user.shrinking, direction, user.direction, user.oldDirection)
+    if (!direction /*|| (user.shrinking && direction === user.oldDirection && user.oldDirection === user.direction &&  user.bones.length > 0)*/)  {
+      return;
+    } else if (direction === "SHOOT") {
+      user.shoot();
+    } else if (direction === "PAUSE") {
+      PAUSE = !PAUSE;
+    } else {
+      if (user.shrinking !== direction) {
+        // console.error(2)
+
+      user.direction = direction;
+      user.directionsLog.push(user.direction);
+      user.prevDirection();
+      }
+      
     }
-    user.directionsLog.push(user.direction);
-    user.prevDirection();
   });
 
   timer = setInterval(()=>{
-    if(!PAUSE && !user.checkBoundaries()){
+    if(!PAUSE){
+
       switch (user.direction) {
         case UP:
-          if (user.oldDirection === DOWN) {
+          if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
-            user.shrinkAnimation('shrink_d');
-          } else {
+          } else if(!user.checkBoundaries()) {
             user.grow(0,-2); //growUp
           }
           break;
         case DOWN:
-          if (user.oldDirection === UP) {
+          if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
-            user.shrinkAnimation('shrink_u');
-          } else {
+          } else if(!user.checkBoundaries()) {
             user.grow(0,2); //growDown
           }
           break;
         case LEFT:
-          if (user.oldDirection === RIGHT) {
+          if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
-            user.shrinkAnimation('shrink_r');
-          } else {
+          } else if(!user.checkBoundaries()) {
             user.grow(-2,0); //growLeft
           }
           break;
         case RIGHT:
-          if (user.oldDirection === LEFT) {
+          if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
-            user.shrinkAnimation('shrink_l');
-          } else {
+          } else if(!user.checkBoundaries()) {
             user.grow(2,0); //growRight
           }
           break;
       }
+      // console.log(user.oldDirection, user.direction);
     }
+
+
   }, RHYTHM);
 }
 

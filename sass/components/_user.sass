@@ -3,9 +3,13 @@
     .form
       &.user
         fill: $maincolor
-        stroke: $maincolor
-        //stroke: $darkbg
+        stroke: $background
+        stroke-width: .01
         fill-opacity: 1
+        &.fill
+          fill: $maincolor
+          stroke: red
+          stroke-width: .1
         &.back
           &.shrink_r
             +prefix(animation-duration, 500ms)
@@ -31,3 +35,11 @@
           stroke-dasharray: 2
         &.sides_lr
           stroke-dasharray: 0, 2, 0
+        &.corner_tr
+          stroke-dasharray: 4
+        &.corner_tl
+          stroke-dasharray: 2, 4
+        &.corner_br
+          stroke-dasharray: 0, 4, 4
+        &.corner_bl
+          stroke-dasharray: 0, 2, 4, 0
