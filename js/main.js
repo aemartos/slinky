@@ -85,29 +85,33 @@ function initListeners(user) {
         case UP:
           if (user.oldDirection === DOWN) {
             user.shrink();
+            user.shrinkAnimation('shrink_d');
           } else {
-            user.growUp();
+            user.grow(0,-2); //growUp
           }
           break;
         case DOWN:
           if (user.oldDirection === UP) {
             user.shrink();
+            user.shrinkAnimation('shrink_u');
           } else {
-            user.growDown();
+            user.grow(0,2); //growDown
           }
           break;
         case LEFT:
           if (user.oldDirection === RIGHT) {
             user.shrink();
+            user.shrinkAnimation('shrink_r');
           } else {
-            user.growLeft();
+            user.grow(-2,0); //growLeft
           }
           break;
         case RIGHT:
           if (user.oldDirection === LEFT) {
             user.shrink();
+            user.shrinkAnimation('shrink_l');
           } else {
-            user.growRight();
+            user.grow(2,0); //growRight
           }
           break;
       }
@@ -127,7 +131,6 @@ function startGame() {
   let user = new User('scully', 3, 2);
   user.initUser();
   initListeners(user);
-  //console.log(user);
 
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   //$gameBoard.html($gameBoard.html());

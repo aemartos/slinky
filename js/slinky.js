@@ -112,23 +112,10 @@ User.prototype.grow = function (x,y) {
   this.x = parseInt($('#user.head').attr('x')) + x;
   this.y = parseInt($('#user.head').attr('y')) + y;
   $('#user.head').removeClass('head');
+  $('#user.back').removeClass(function (index, css) {
+    return (css.match (/(^|\s)shrink_\S+/g) || []).join(' ');
+  });
   this.drawUserBody('bone');
-}
-
-User.prototype.growUp = function () {
-  this.grow(0,-2);
-}
-
-User.prototype.growDown = function () {
-  this.grow(0,2);
-}
-
-User.prototype.growLeft = function () {
-  this.grow(-2,0);
-}
-
-User.prototype.growRight = function () {
-  this.grow(2,0);
 }
 
 User.prototype.shrink = function () {
@@ -137,20 +124,15 @@ User.prototype.shrink = function () {
     this.bones.last().remove();
   }
   this.updatePosition();
-  if(this.bones.length === 1 && this.oldDirection === RIGHT) {
-    $('#user.back').addClass('shrink_r');
-    setTimeout(()=>{$('#user.back').removeClass('shrink_r')}, 500);
-  }
-  if(this.bones.length === 1 && this.oldDirection === LEFT) {
-    $('#user.back').addClass('shrink_l');
-    setTimeout(()=>{$('#user.back').removeClass('shrink_l')}, 500);
-  }
-  if(this.bones.length === 1 && this.oldDirection === DOWN) {
-    $('#user.back').addClass('shrink_d');
-    setTimeout(()=>{$('#user.back').removeClass('shrink_d')}, 500);
-  }
   $('#user.back').addClass('head');
   this.cleanGridPositions();
   //console.log(board.grid);
   //console.log(this.x, this.y);
+}
+
+User.prototype.shrinkAnimation = function (clas) {
+  if (this.bones.length === 1) {
+    $('#user.back').addClass(clas);
+    setTimeout(()=>{$('#user.back').removeClass(clas)}, 500);
+  }
 }

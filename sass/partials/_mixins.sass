@@ -61,6 +61,20 @@ $media15: 320px
 	+transition_default
 
 
+//----------- PREFIXES ------------------
+
+// =prefix($property, $value, $prefixes: ())
+// 	@each $prefix in $prefixes
+// 	#{'-' + $prefix + '-' + $property}: $value
+// 	#{$property}: $value
+//+prefix(transform, rotate(45deg), webkit ms)
+
+=prefix($property, $val)
+	-webkit-#{$property}: $val
+	-moz-#{$property}: $val
+	-ms-#{$property}: $val
+	#{$property}: $val
+
 
 //----------- GENERAL MIXINS ------------
 
