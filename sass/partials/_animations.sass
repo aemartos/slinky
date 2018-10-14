@@ -1,11 +1,40 @@
 
-@keyframes colorChange
+@keyframes goal
+  from, 20%, 40%, 60%, 80%, to
+    +prefix(animation-timing-function, cubic-bezier(0.215, 0.61, 0.355, 1))
   0%
-    fill: #ff0000
-  50%
-    fill: #000
+    fill: magenta
+  33%
+    fill: yellow
+  66%
+    fill: cyan
+  to
+    fill: magenta
+
+@keyframes changeColor
+  from, 20%, 40%, 60%, 80%, to
+    +prefix(animation-timing-function, cubic-bezier(0.215, 0.61, 0.355, 1))
+  0%
+    fill: yellow
+  20%
+    fill: green
+  40%
+    fill: cyan
+  40%
+    fill: blue
+  60%
+    fill: magenta
+  80%
+    fill: red
+  to
+    fill: yellow
+
+@keyframes hue
+  0%
+    +prefix(filter, hue-rotate(0deg))
   100%
-    fill: #ff0000
+    +prefix(filter, hue-rotate(360deg))
+
 
 
 // SLINKY REBOUND----------------------------------

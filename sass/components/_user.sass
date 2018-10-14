@@ -1,0 +1,33 @@
+.container
+  svg#gameBoard
+    .form
+      &.user
+        fill: $maincolor
+        stroke: $maincolor
+        //stroke: $darkbg
+        fill-opacity: 1
+        &.back
+          &.shrink_r
+            +prefix(animation-duration, 500ms)
+            +prefix(animation-name, shrink_r)
+          &.shrink_l
+            +prefix(animation-duration, 500ms)
+            +prefix(animation-name, shrink_l)
+          &.shrink_d
+            +prefix(animation-duration, 500ms)
+            +prefix(animation-name, shrink_d)
+          &.shrink_u
+            +prefix(animation-duration, 500ms)
+            +prefix(animation-name, shrink_u)
+        &.top
+          stroke-dasharray: 0, 2, 6
+        &.bottom
+          stroke-dasharray: 4, 2
+        &.left
+          stroke-dasharray: 6, 2
+        &.right
+          stroke-dasharray: 2, 2, 4
+        &.sides_tb
+          stroke-dasharray: 2
+        &.sides_lr
+          stroke-dasharray: 0, 2, 0

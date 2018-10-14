@@ -1,0 +1,15 @@
+.container
+  svg#gameBoard
+    .form
+      &.goal
+        fill: yellow
+        fill-opacity: 0.8
+        animation: goal 100ms infinite
+      &.wall
+        //stroke-width: .1
+        fill: $maincolor
+        stroke: $maincolor
+        &.normal
+          fill: rosybrown
+          stroke: rosybrown
+        &.ice
