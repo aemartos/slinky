@@ -1,20 +1,5 @@
 
 
-function oppositeDir(dir){
-  switch(dir){
-    case RIGHT:
-      return LEFT;
-    case LEFT:
-      return RIGHT;
-    case UP:
-      return DOWN;
-    case DOWN:
-      return UP;
-    default:
-      return undefined;
-  }
-}
-
 $(document).ready(function() {
 
 
@@ -28,7 +13,7 @@ $('#guides').change(function() {
       y1 = 'y1="0"';
       y2 = 'y2="76"';
       line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
-      $gameBoard.append(line);
+      board.area.append(line);
     }
     for (let i = 0; i <= 76; i = i+2 ) {
       x1 = 'x1="0"';
@@ -36,9 +21,9 @@ $('#guides').change(function() {
       y1 = 'y1="' + i + '"';
       y2 = 'y2="' + i + '"';
       line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
-      $gameBoard.append(line);
+      board.area.append(line);
     }
-    $gameBoard.html($gameBoard.html());
+    board.area.html(board.area.html());
   } else {
     $('.line').remove();
   }
@@ -47,6 +32,21 @@ $('#guides').change(function() {
 
 
 // MOVEMENT ----------------------------------
+
+let oppositeDir = (dir) => {
+  switch(dir){
+    case RIGHT:
+      return LEFT;
+    case LEFT:
+      return RIGHT;
+    case UP:
+      return DOWN;
+    case DOWN:
+      return UP;
+    default:
+      return undefined;
+  }
+}
 
 function codeToDirection(key){
   switch(key){
@@ -124,8 +124,6 @@ function initListeners(user) {
           break;
       }
     }
-
-
   }, RHYTHM);
 }
 
@@ -136,14 +134,14 @@ function startGame() {
 
   board = new GameBoard();
   board.createGrid();
+  board.drawThings();
   //console.log(board);
 
   let user = new User('scully', 3, 2);
   user.initUser();
   initListeners(user);
 
-  //REFRESH SVG IN DOM to paint the forms created from jQuery
-  //$gameBoard.html($gameBoard.html());
+  board.area.html(board.area.html());
 };
 
 startGame();

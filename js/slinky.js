@@ -33,14 +33,11 @@ User.prototype.drawUserBody = function (clas) {
   //this.path = '<rect id="user" class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   //this.path = '<rect id="user" class="form user fill head ' + clas + '"' + x + y + 'width="2" height="2"/>\
               //<rect id="user" class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
-  $gameBoard.append(this.path);
+              board.area.append(this.path);
   board.grid[this.y/2][this.x/2] = SLINKY;
-  $gameBoard.html($gameBoard.html());
 
-  // let bones = $('#user.bone');
-  // bones.each(function(i, elem) {
-  //   $(elem).attr('num', i);
-  // });
+  //REFRESH SVG IN DOM to paint the forms created from jQuery
+  board.area.html(board.area.html());
 }
 
 User.prototype.addStroke = function () {
@@ -84,14 +81,7 @@ User.prototype.checkBoundaries = function () {
 
   if (isBoundary) {
     if (!this.shrinking) {
-      let head = $('#user.head');
-      let back = $('#user.back');
-      back.addClass('head bone').removeClass('back');
-      head.addClass('back').removeClass('head bone');
-      this.oldDirection = this.direction;
-      this.direction = oppositeDir(this.direction);
-      this.shrinking = this.direction;
-      this.shrinkingFromWall = true;
+      //this.shrinkFromWall();
       return BOUNDARY;
     } else {
       return SHRINK;
@@ -118,8 +108,16 @@ User.prototype.updatePosition = function () {
   this.y = parseInt($('#user.head').attr('y'));
 }
 
+User.prototype.prevDirection = function () {
+  if(this.direction !== this.oldDirection) {
+    let last = this.directionsLog.length - 2;
+    this.oldDirection = this.directionsLog[last];
+  }
+}
+
 User.prototype.cleanGridPosition = function (x,y) {
   board.grid[y/2][x/2] = 0;
+  //console.log(board.grid);
 }
 
 User.prototype.cleanGridPositions = function () {
@@ -131,13 +129,6 @@ User.prototype.cleanGridPositions = function () {
     }
   }
   board.grid[this.y/2][this.x/2] = SLINKY;
-}
-
-User.prototype.prevDirection = function () {
-  if(this.direction !== this.oldDirection) {
-    let last = this.directionsLog.length - 2;
-    this.oldDirection = this.directionsLog[last];
-  }
 }
 
 User.prototype.grow = function (x,y) {
@@ -188,8 +179,19 @@ User.prototype.shrink = function () {
   this.shrinkAnimation('shrink_' + sd);
 }
 
+User.prototype.shrinkFromWall = function () {
+  let head = $('#user.head');
+  let back = $('#user.back');
+  back.addClass('head bone').removeClass('back');
+  head.addClass('back').removeClass('head bone');
+  this.oldDirection = this.direction;
+  this.direction = oppositeDir(this.direction);
+  this.shrinking = this.direction;
+  this.shrinkingFromWall = true;
+}
+
 User.prototype.shrinkAnimation = function (clas) {
-  if (this.bones.length === 1) {
+  if (this.bones.length === 0) {
     $('#user.back').addClass(clas);
     setTimeout(()=>{$('#user.back').removeClass(clas)}, 500);
   }
