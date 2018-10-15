@@ -20,7 +20,8 @@ const forms = {
                 <rect x="34" y="24" width="2%" height="4%" id="wall04_02" class="form wall wall04 wall04_02"/>\
                 <rect x="34" y="26" width="2%" height="4%" id="wall04_03" class="form wall wall04 wall04_03"/>\
                 <rect x="34" y="28" width="2%" height="4%" id="wall04_04" class="form wall wall04 wall04_04"/>',
-  }
+  },
+  'background': '<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>'
   //'walls': ['','','','']
 };
 const styles = ['normal','ice','electric','wash','blackHole','teletransport'];
@@ -39,6 +40,7 @@ const $gameBoard = $('#gameBoard');
 // $gameBoard.append(forms.walls.wall02);
 // $gameBoard.append(forms.walls.wall03);
 // $gameBoard.append(forms.walls.wall04);
+//$gameBoard.append(forms.background);
 
 
 // GameBoard

@@ -1,26 +1,5 @@
-// GLOBAL VARIABLES ----------------------------
-var startedGame, timer, board = undefined;
-const UP = 'UP';
-const DOWN = 'DOWN';
-const LEFT = 'LEFT';
-const RIGHT = 'RIGHT';
-const BOUNDARY = 'BOUNDARY';
-const SHRINK = 'SHRINK';
-const SHOOT = 'SHOOT';
-const PAUSE_BUTTON = 'PAUSE_BUTTON';
-
-var PAUSE = false;
-var LIMIT = false;
-const SLINKY = 's';
 
 
-const WALL = 'w';
-const BONUS = 'b';
-const BADGUY = 'bg'
-
-const RHYTHM = 100;
-const rows = 25;
-const cols = 50;
 function oppositeDir(dir){
   switch(dir){
     case RIGHT:
@@ -43,17 +22,17 @@ $(document).ready(function() {
 
 $('#guides').change(function() {
   if(this.checked) {
-    for (let i = 0; i <= 100; i = i+2 ) {
+    for (let i = 0; i <= 152; i = i+2 ) {
       x1 = 'x1="' + i + '"';
       x2 = 'x2="' + i + '"';
       y1 = 'y1="0"';
-      y2 = 'y2="50"';
+      y2 = 'y2="76"';
       line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
       $gameBoard.append(line);
     }
-    for (let i = 0; i <= 50; i = i+2 ) {
+    for (let i = 0; i <= 76; i = i+2 ) {
       x1 = 'x1="0"';
-      x2 = 'x2="100"';
+      x2 = 'x2="152"';
       y1 = 'y1="' + i + '"';
       y2 = 'y2="' + i + '"';
       line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
@@ -64,6 +43,10 @@ $('#guides').change(function() {
     $('.line').remove();
   }
 });
+
+
+
+// MOVEMENT ----------------------------------
 
 function codeToDirection(key){
   switch(key){
@@ -88,36 +71,28 @@ function codeToDirection(key){
 }
 
 
-
-// MOVEMENT ----------------------------------
-
-
 function initListeners(user) {
   $(document).keydown((e)=> {
     startedGame = true;
     direction = codeToDirection(e.keyCode);
-    // console.error(user.shrinking, direction, user.direction, user.oldDirection)
+    // console.error(user.shrinking, direction, user.direction, user.oldDirection);
     if (!direction /*|| (user.shrinking && direction === user.oldDirection && user.oldDirection === user.direction &&  user.bones.length > 0)*/)  {
       return;
-    } else if (direction === "SHOOT") {
+    } else if (direction === SHOOT) {
       user.shoot();
-    } else if (direction === "PAUSE") {
+    } else if (direction === PAUSE_BUTTON) {
       PAUSE = !PAUSE;
     } else {
       if (user.shrinking !== direction) {
-        // console.error(2)
-
-      user.direction = direction;
-      user.directionsLog.push(user.direction);
-      user.prevDirection();
+        user.direction = direction;
+        user.directionsLog.push(user.direction);
+        user.prevDirection();
       }
-      
     }
   });
 
   timer = setInterval(()=>{
     if(!PAUSE){
-
       switch (user.direction) {
         case UP:
           if (user.oldDirection === oppositeDir(user.direction)) {
@@ -148,7 +123,6 @@ function initListeners(user) {
           }
           break;
       }
-      // console.log(user.oldDirection, user.direction);
     }
 
 

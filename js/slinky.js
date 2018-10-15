@@ -65,7 +65,7 @@ User.prototype.checkBoundaries = function () {
       dy = isBoundary ? 0 : -1;
       break;
     case DOWN:
-      isBoundary = this.y === 48;
+      isBoundary = this.y === 74;
       dy = isBoundary ? 0 : 1;
       break;
     case LEFT:
@@ -73,7 +73,7 @@ User.prototype.checkBoundaries = function () {
       dx = isBoundary ? 0 : -1;
       break;
     case RIGHT:
-      isBoundary = this.x === 98;
+      isBoundary = this.x === 150;
       dx = isBoundary ? 0 : 1;
       break;
   }
@@ -88,12 +88,11 @@ User.prototype.checkBoundaries = function () {
       let back = $('#user.back');
       back.addClass('head bone').removeClass('back');
       head.addClass('back').removeClass('head bone');
-
       this.oldDirection = this.direction;
       this.direction = oppositeDir(this.direction);
       this.shrinking = this.direction;
       this.shrinkingFromWall = true;
-    return BOUNDARY;
+      return BOUNDARY;
     } else {
       return SHRINK;
     }
@@ -112,13 +111,6 @@ User.prototype.checkBoundaries = function () {
     }
   }
   return nextPos;
-  // if(isBoundary || (nextPos !== 0 && nextPos !== BONUS && nextPos !== SLINKY)) {
-  //   return true;
-  // } else if (nextPos === SLINKY && !this.shrinking) {
-  //   return true;
-  // } else {
-  //   return false;
-  // }
 }
 
 User.prototype.updatePosition = function () {
@@ -162,7 +154,7 @@ User.prototype.grow = function (x,y) {
 }
 
 User.prototype.shrink = function () {
- this.shrinking = true;
+  //this.shrinking = true;
   this.bones = $('#user.bone');
   if(this.bones.length > 0) {
     let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
@@ -191,8 +183,9 @@ User.prototype.shrink = function () {
     last.addClass('head');
   }
   this.updatePosition();
-  const sd = this.shrinking.toString()[0].toLowerCase() || 'r' ;
-  this.shrinkAnimation('shrink_'+sd);
+
+  const sd = this.shrinking.toString()[0].toLowerCase();
+  this.shrinkAnimation('shrink_' + sd);
 }
 
 User.prototype.shrinkAnimation = function (clas) {
