@@ -13,3 +13,12 @@
           fill: rosybrown
           stroke: rosybrown
         &.ice
+          fill: red
+          +prefix(animation, opacity 10000ms infinite)
+          +prefix(animation-delay, 2000ms)
+          rect
+            fill: rgba(0,206,209,0.5)
+            //hex --> #00ced169
+            fill-opacity: 0.5
+            stroke: #00ced1
+            +prefix(animation, fade 3000ms infinite)

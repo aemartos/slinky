@@ -23,7 +23,36 @@
           <svg><rect x="2" y="0" width="90%" height="90%" id="wall01_01" class="form wall wall01 wall01_01"/></svg>
         </div> -->
         <svg id="gameBoard" class="" viewBox="0 0 152 76">
+          <!-- Filters -->
+          <defs>
+            <filter id="glow" x="-40" y="-20" width="100" height="200">
+              <feGaussianBlur stdDeviation=".3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
           <rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>
+          <g class="form wall ice" style="filter: url(#glow);">
+            <rect x="2" y="2" width="2" height="2" id="wall01_01"/>
+            <rect x="4" y="2" width="2" height="2" id="wall01_02"/>
+            <rect x="2" y="4" width="2" height="2" id="wall01_03"/>
+            <rect x="4" y="4" width="2" height="2" id="wall01_04"/>
+          <g>
+          <!-- <g class="ice" style="filter: url(#glow);"><rect class="form wall wall01 wall01_01 ice2" x="2" y="2" width="2" height="2" id="wall01_01"/></g> -->
+          <!-- <rect class="form wall wall01 wall01_01 ice" x="2" y="2" width="2" height="2" id="wall01_01"/> -->
+
+          <!-- <filter id="feOffset" x="-40" y="-20" width="100" height="200">
+            <feOffset in="SourceGraphic" dx="60" dy="60" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation=".5" result="blur2" />
+            <feMerge>
+                <feMergeNode in="blur2" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <rect x="2" y="2" width="2" height="2" style="fill: green; filter: url(#feOffset);" />
+          <rect x="2" y="2" width="2" height="2" style="fill: green;" /> -->
         </svg>
       </div>
 

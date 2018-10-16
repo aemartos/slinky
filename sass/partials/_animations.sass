@@ -36,6 +36,21 @@
     +prefix(filter, hue-rotate(360deg))
 
 
+@keyframes fade
+  0%, 100%
+    opacity: 0.7
+    filter: url(#glow)
+  50%
+    opacity: 1
+    filter: url(#glow)
+
+@keyframes opacity
+  0%, 9%, 11%
+    opacity: 1
+  10%
+    opacity: .5
+
+
 
 // SLINKY REBOUND----------------------------------
 

@@ -3,13 +3,15 @@
     .form
       &.user
         fill: $maincolor
+        fill-opacity: 1
         stroke: $background
         stroke-width: .01
-        fill-opacity: 1
+        //stroke: $maincolor
+        //stroke-width: .05
         &.fill
           fill: $maincolor
           stroke: red
-          stroke-width: .1
+          stroke-width: 1
         &.shake
           +prefix(animation, shake 500ms)
         &.back
