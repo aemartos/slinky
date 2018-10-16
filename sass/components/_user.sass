@@ -10,6 +10,9 @@
           fill: $maincolor
           stroke: red
           stroke-width: .1
+        &.shake
+          +prefix(animation-duration, 500ms)
+          +prefix(animation-name, shake)
         &.back
           &.shrink_r
             +prefix(animation-duration, 500ms)

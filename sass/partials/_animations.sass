@@ -115,3 +115,16 @@
   to
     height: .125em
     +prefix(transform, translateY(0))
+
+
+@keyframes shake
+  from, 20%, 40%, 60%, 80%, to
+    +prefix(animation-timing-function, cubic-bezier(0.215, 0.61, 0.355, 1))
+  10%, 90%
+    transform: translateX(-0.01em)
+  20%, 80%
+    transform: translateX(0.015em)
+  30%, 50%, 70%
+    transform: translateX(-0.02em)
+  40%, 60%
+    transform: translateX(0.02em)

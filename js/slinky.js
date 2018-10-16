@@ -29,10 +29,10 @@ User.prototype.initUser = function () {
 User.prototype.drawUserBody = function (clas) {
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
-  this.path = '<rect id="user" class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
-  //this.path = '<rect id="user" class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
-  //this.path = '<rect id="user" class="form user fill head ' + clas + '"' + x + y + 'width="2" height="2"/>\
-              //<rect id="user" class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
+  this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
+  //this.path = '<rect class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
+  //this.path = '<rect class="form user fill head ' + clas + '"' + x + y + 'width="2" height="2"/>\
+              //<rect class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   board.area.append(this.path);
   board.grid[this.y/2][this.x/2] = SLINKY;
 
@@ -87,16 +87,14 @@ User.prototype.checkBoundaries = function () {
       return SHRINK;
     }
   }
-  this.bones = $('#user.bone');
+  let last = this.getLast();
   if (nextPos === SLINKY ) {
-    let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
-    // console.log(last)
     let lastX = parseInt(last.attr('x'));
     let lastY = parseInt(last.attr('y'));
-    // console.log(this.y + dy * 2,lastY,this.x + dx * 2,lastX);
     if (((this.y + dy * 2) === lastY) && ((this.x + dx * 2 ) === lastX)) {
       return SHRINK;
     } else {
+      this.shake();
       return SLINKY;
     }
   }
@@ -104,10 +102,8 @@ User.prototype.checkBoundaries = function () {
 }
 
 User.prototype.updatePosition = function () {
-  this.x = parseInt($('#user.head').attr('x'));
-  this.y = parseInt($('#user.head').attr('y'));
-  console.log(this.x, this.y);
-  console.log($('#user.head'));
+  this.x = parseInt($('.user.head').attr('x'));
+  this.y = parseInt($('.user.head').attr('y'));
 }
 
 User.prototype.prevDirection = function () {
@@ -135,26 +131,25 @@ User.prototype.cleanGridPositions = function () {
 
 User.prototype.grow = function (x,y) {
   this.shrinking = false;
-  this.x = parseInt($('#user.head').attr('x')) + x;
-  this.y = parseInt($('#user.head').attr('y')) + y;
-  $('#user.head').removeClass('head');
+  this.x = parseInt($('.user.head').attr('x')) + x;
+  this.y = parseInt($('.user.head').attr('y')) + y;
+  $('.user.head').removeClass('head');
 
   //DELETE SHRINK ANIMATION ----------------
-  $('#user.back').removeClass(function (index, css) {
+  $('.user.back').removeClass(function (index, css) {
     return (css.match (/(^|\s)shrink_\S+/g) || []).join(' ');
   });
   this.drawUserBody('bone');
 }
 
 User.prototype.getLast = function () {
-  this.bones = $('#user.bone');
+  this.bones = $('.user.bone');
   let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
   return last;
 }
 
 User.prototype.shrink = function () {
   let last = this.getLast();
-  console.log(last)
   if(this.bones.length > 0) {
     let lastX = parseInt(last.attr('x'));
     let lastY = parseInt(last.attr('y'));
@@ -165,7 +160,7 @@ User.prototype.shrink = function () {
     //Need to capture last again when we remove it
     last = this.getLast();
     if (this.bones.length === 1) {
-      $('#user.back').addClass('head');
+      $('.user.back').addClass('head');
     } else {
       last.addClass('head');
     }
@@ -179,6 +174,7 @@ User.prototype.shrink = function () {
       this.shrinking = false;
       this.oldDirection = this.direction;
       this.direction = oppositeDir(this.oldDirection);
+      this.changeSpeed(1);
     } else {
       this.shrinking = true;
     }
@@ -208,18 +204,30 @@ User.prototype.shrinkDir = function () {
 
 User.prototype.shrinkFromWall = function () {
   this.shrinkingFromWall = true;
-  let head = $('#user.head');
-  let back = $('#user.back');
+  let head = $('.user.head');
+  let back = $('.user.back');
   back.addClass('head bone').removeClass('back');
   head.addClass('back').removeClass('head bone');
   this.oldDirection = this.direction;
   this.direction = oppositeDir(this.oldDirection);
   this.shrinking = this.direction;
+  this.changeSpeed(4);
 }
 
 User.prototype.shrinkAnimation = function (clas) {
   if (this.bones.length === 0) {
-    $('#user.back').addClass(clas);
-    setTimeout(()=>{$('#user.back').removeClass(clas)}, 500);
+    $('.user.back').addClass(clas);
+    setTimeout(()=>{$('.user.back').removeClass(clas)}, 500);
   }
+}
+
+User.prototype.shake = function () {
+  $('.user').addClass('shake');
+  setTimeout(()=>{$('.user').removeClass('shake')}, 500);
+}
+
+User.prototype.changeSpeed = function (num) {
+  clearInterval(timer);
+  let t = (num && !isNaN(num)) ? num : 1;
+  timer = setInterval(()=>{timerFunction(this)}, RHYTHM/t);
 }

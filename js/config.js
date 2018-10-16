@@ -1,6 +1,6 @@
 
 // GLOBAL VARIABLES ----------------------------
-var startedGame, timer, board = undefined;
+var startedGame, timer, board, timerFunction, oppositeDir, codeToDirection = undefined;
 const UP = 'UP';
 const DOWN = 'DOWN';
 const LEFT = 'LEFT';
