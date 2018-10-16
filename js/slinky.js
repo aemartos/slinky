@@ -33,7 +33,7 @@ User.prototype.drawUserBody = function (clas) {
   //this.path = '<rect id="user" class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   //this.path = '<rect id="user" class="form user fill head ' + clas + '"' + x + y + 'width="2" height="2"/>\
               //<rect id="user" class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
-              board.area.append(this.path);
+  board.area.append(this.path);
   board.grid[this.y/2][this.x/2] = SLINKY;
 
   //REFRESH SVG IN DOM to paint the forms created from jQuery
@@ -81,7 +81,7 @@ User.prototype.checkBoundaries = function () {
 
   if (isBoundary) {
     if (!this.shrinking) {
-      //this.shrinkFromWall();
+      this.shrinkFromWall();
       return BOUNDARY;
     } else {
       return SHRINK;
@@ -106,6 +106,8 @@ User.prototype.checkBoundaries = function () {
 User.prototype.updatePosition = function () {
   this.x = parseInt($('#user.head').attr('x'));
   this.y = parseInt($('#user.head').attr('y'));
+  console.log(this.x, this.y);
+  console.log($('#user.head'));
 }
 
 User.prototype.prevDirection = function () {
@@ -144,50 +146,68 @@ User.prototype.grow = function (x,y) {
   this.drawUserBody('bone');
 }
 
-User.prototype.shrink = function () {
-  //this.shrinking = true;
+User.prototype.getLast = function () {
   this.bones = $('#user.bone');
-  if(this.bones.length > 0) {
-    let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
-    let nextLast = this.shrinkingFromWall ? last : last.prev();
+  let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
+  return last;
+}
 
-    let lastX = parseInt(nextLast.attr('x'));
-    let lastY = parseInt(nextLast.attr('y'));
-    if (this.x > lastX) {
-      this.shrinking = LEFT;
-    } else if (this.x < lastX) {
-      this.shrinking = RIGHT;
-    } else if (this.y > lastY) {
-      this.shrinking = UP;
-    } else if (this.y < lastY) {
-      this.shrinking = DOWN;
-    }
-    // console.log(this.shrinking, this.x, this.y, lastX, lastY)
-    this.cleanGridPosition(lastX,lastY);
+User.prototype.shrink = function () {
+  let last = this.getLast();
+  console.log(last)
+  if(this.bones.length > 0) {
+    let lastX = parseInt(last.attr('x'));
+    let lastY = parseInt(last.attr('y'));
+    this.shrinkDir();
+    this.cleanGridPosition(lastX, lastY);
     last.remove();
-  }
-  this.bones = $('#user.bone');
-  if (this.bones.length === 1) {
-    $('#user.back').addClass('head');
-  } else {
-    let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
-    last.addClass('head');
+
+    //Need to capture last again when we remove it
+    last = this.getLast();
+    if (this.bones.length === 1) {
+      $('#user.back').addClass('head');
+    } else {
+      last.addClass('head');
+    }
   }
   this.updatePosition();
-
   const sd = this.shrinking.toString()[0].toLowerCase();
   this.shrinkAnimation('shrink_' + sd);
+  if(this.bones.length === 0) {
+    this.shrinking = true;
+  }
+}
+
+User.prototype.shrinkDir = function () {
+  let last = this.getLast();
+  let nextLast = this.shrinkingFromWall ? last : last.prev();
+  let nextLastX = parseInt(nextLast.attr('x'));
+  let nextLastY = parseInt(nextLast.attr('y'));
+
+  if (this.x > nextLastX) {
+    this.shrinking = LEFT;
+  } else if (this.x < nextLastX) {
+    this.shrinking = RIGHT;
+  } else if (this.y > nextLastY) {
+    this.shrinking = UP;
+  } else if (this.y < nextLastY) {
+    this.shrinking = DOWN;
+  }
+
+  if (this.shrinkingFromWall) {
+    this.shrinking = oppositeDir(this.shrinking);
+  }
 }
 
 User.prototype.shrinkFromWall = function () {
+  this.shrinkingFromWall = true;
   let head = $('#user.head');
   let back = $('#user.back');
   back.addClass('head bone').removeClass('back');
   head.addClass('back').removeClass('head bone');
   this.oldDirection = this.direction;
-  this.direction = oppositeDir(this.direction);
+  this.direction = oppositeDir(this.oldDirection);
   this.shrinking = this.direction;
-  this.shrinkingFromWall = true;
 }
 
 User.prototype.shrinkAnimation = function (clas) {

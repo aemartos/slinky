@@ -1,4 +1,19 @@
 
+let oppositeDir = (dir) => {
+  switch(dir){
+    case RIGHT:
+      return LEFT;
+    case LEFT:
+      return RIGHT;
+    case UP:
+      return DOWN;
+    case DOWN:
+      return UP;
+    default:
+      return undefined;
+  }
+}
+
 
 $(document).ready(function() {
 
@@ -32,21 +47,6 @@ $('#guides').change(function() {
 
 
 // MOVEMENT ----------------------------------
-
-let oppositeDir = (dir) => {
-  switch(dir){
-    case RIGHT:
-      return LEFT;
-    case LEFT:
-      return RIGHT;
-    case UP:
-      return DOWN;
-    case DOWN:
-      return UP;
-    default:
-      return undefined;
-  }
-}
 
 function codeToDirection(key){
   switch(key){
@@ -134,7 +134,7 @@ function startGame() {
 
   board = new GameBoard();
   board.createGrid();
-  board.drawThings();
+  //board.drawThings();
   //console.log(board);
 
   let user = new User('scully', 3, 2);
