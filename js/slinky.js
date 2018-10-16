@@ -174,7 +174,14 @@ User.prototype.shrink = function () {
   const sd = this.shrinking.toString()[0].toLowerCase();
   this.shrinkAnimation('shrink_' + sd);
   if(this.bones.length === 0) {
-    this.shrinking = true;
+    if(this.shrinkingFromWall) {
+      this.shrinkingFromWall = false;
+      this.shrinking = false;
+      this.oldDirection = this.direction;
+      this.direction = oppositeDir(this.oldDirection);
+    } else {
+      this.shrinking = true;
+    }
   }
 }
 

@@ -75,8 +75,7 @@ function initListeners(user) {
   $(document).keydown((e)=> {
     startedGame = true;
     direction = codeToDirection(e.keyCode);
-    // console.error(user.shrinking, direction, user.direction, user.oldDirection);
-    if (!direction /*|| (user.shrinking && direction === user.oldDirection && user.oldDirection === user.direction &&  user.bones.length > 0)*/)  {
+    if (!direction || user.shrinkingFromWall)  {
       return;
     } else if (direction === SHOOT) {
       user.shoot();
