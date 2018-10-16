@@ -1,6 +1,5 @@
 
 // User
-
 function User(name, health, strength) {
   this.name = name;
   this.direction = '';
@@ -14,7 +13,6 @@ function User(name, health, strength) {
 
 User.prototype = Object.create(Form.prototype);
 User.prototype.constructor = User;
-
 
 User.prototype.position = function () {
   this.x = this.random(100);
@@ -115,7 +113,6 @@ User.prototype.prevDirection = function () {
 
 User.prototype.cleanGridPosition = function (x,y) {
   board.grid[y/2][x/2] = 0;
-  //console.log(board.grid);
 }
 
 User.prototype.cleanGridPositions = function () {

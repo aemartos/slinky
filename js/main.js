@@ -131,8 +131,7 @@ $(document).ready(function() {
 
     board = new GameBoard();
     board.createGrid();
-    //board.drawThings();
-    //console.log(board);
+    board.drawThings();
 
     let user = new User('scully', 3, 2);
     user.initUser();

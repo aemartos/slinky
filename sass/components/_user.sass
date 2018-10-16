@@ -11,21 +11,16 @@
           stroke: red
           stroke-width: .1
         &.shake
-          +prefix(animation-duration, 500ms)
-          +prefix(animation-name, shake)
+          +prefix(animation, shake 500ms)
         &.back
           &.shrink_r
-            +prefix(animation-duration, 500ms)
-            +prefix(animation-name, shrink_r)
+            +prefix(animation, shrink_r 500ms)
           &.shrink_l
-            +prefix(animation-duration, 500ms)
-            +prefix(animation-name, shrink_l)
+            +prefix(animation, shrink_l 500ms)
           &.shrink_d
-            +prefix(animation-duration, 500ms)
-            +prefix(animation-name, shrink_d)
+            +prefix(animation, shrink_d 500ms)
           &.shrink_u
-            +prefix(animation-duration, 500ms)
-            +prefix(animation-name, shrink_u)
+            +prefix(animation, shrink_u 500ms)
         &.top
           stroke-dasharray: 0, 2, 6
         &.bottom

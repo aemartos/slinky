@@ -16,7 +16,7 @@ GameBoard.prototype.createGrid = function () {
 
 GameBoard.prototype.drawThings = function () {
   const forms = {
-    'user':       '<rect x="12" y="12" id="user" class="form user" width="2%" height="4%"/>',
+    //'user':       '<rect x="12" y="12" id="user" class="form user" width="2%" height="4%"/>',
     // 'user_path':  '<polygon points="30,8 32,8 32,6 34,6 34,8 34,10 32,10 30,10" id="user_path" class="form user_path"/>',
     'bonus':      '<circle cx="21" cy="9" r="1" id="bonus" class="form bonus"/>',
     'badGuy':     '<polygon points="44,44 46,44 46,46" id="badGuy" class="form badGuy"/>',
@@ -36,7 +36,7 @@ GameBoard.prototype.drawThings = function () {
                   <rect x="34" y="26" width="2" height="2" id="wall04_03" class="form wall wall04 wall04_03"/>\
                   <rect x="34" y="28" width="2" height="2" id="wall04_04" class="form wall wall04 wall04_04"/>',
     },
-    'background': '<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>'
+    //'background': '<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>'
     //'walls': ['','','','']
   };
   const styles = ['normal','ice','electric','wash','blackHole','teletransport'];

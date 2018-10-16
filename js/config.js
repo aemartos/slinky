@@ -11,9 +11,7 @@ const SHOOT = 'SHOOT';
 const PAUSE_BUTTON = 'PAUSE_BUTTON';
 
 var PAUSE = false;
-var LIMIT = false;
 const SLINKY = 's';
-
 const WALL = 'w';
 const BONUS = 'b';
 const BADGUY = 'bg'
