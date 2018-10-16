@@ -14,7 +14,6 @@ var PAUSE = false;
 var LIMIT = false;
 const SLINKY = 's';
 
-
 const WALL = 'w';
 const BONUS = 'b';
 const BADGUY = 'bg'

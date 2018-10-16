@@ -211,7 +211,7 @@ User.prototype.shrinkFromWall = function () {
   this.oldDirection = this.direction;
   this.direction = oppositeDir(this.oldDirection);
   this.shrinking = this.direction;
-  this.changeSpeed(4);
+  this.changeSpeed(5);
 }
 
 User.prototype.shrinkAnimation = function (clas) {
