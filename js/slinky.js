@@ -27,8 +27,8 @@ User.prototype.initUser = function () {
 User.prototype.drawUserBody = function (clas) {
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
-  this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
-  //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
+  //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
+  this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
   //this.path = '<rect class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   //this.path = '<rect class="form user fill head ' + clas + '"' + x + y + 'width="2" height="2"/>\
               //<rect class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
@@ -61,7 +61,7 @@ User.prototype.checkBoundaries = function () {
       dy = isBoundary ? 0 : -1;
       break;
     case DOWN:
-      isBoundary = this.y === rows - size;
+      isBoundary = this.y === rows - 2;
       dy = isBoundary ? 0 : 1;
       break;
     case LEFT:
@@ -69,7 +69,7 @@ User.prototype.checkBoundaries = function () {
       dx = isBoundary ? 0 : -1;
       break;
     case RIGHT:
-      isBoundary = this.x === cols - size;
+      isBoundary = this.x === cols - 2;
       dx = isBoundary ? 0 : 1;
       break;
   }

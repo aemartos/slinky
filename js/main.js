@@ -74,28 +74,32 @@ $(document).ready(function() {
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(0,-size); //growUp
+            user.grow(0,-2);
+            //user.grow(0,-size); //growUp
           }
           break;
         case DOWN:
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(0,size); //growDown
+            user.grow(0,2);
+            //user.grow(0,size); //growDown
           }
           break;
         case LEFT:
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(-size,0); //growLeft
+            user.grow(-2,0); //growLeft
+            //user.grow(-size,0);
           }
           break;
         case RIGHT:
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(size,0); //growRight
+            user.grow(2,0); //growRight
+            //user.grow(size,0);
           }
           break;
       }
