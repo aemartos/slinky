@@ -5,17 +5,17 @@ $(document).ready(function() {
 
   $('#guides').change(function() {
     if(this.checked) {
-      for (let i = 0; i <= 152; i = i+2 ) {
+      for (let i = 0; i <= cols; i = i+2 ) {
         x1 = 'x1="' + i + '"';
         x2 = 'x2="' + i + '"';
         y1 = 'y1="0"';
-        y2 = 'y2="76"';
+        y2 = 'y2="' + rows + '"';
         line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
         board.area.append(line);
       }
-      for (let i = 0; i <= 76; i = i+2 ) {
+      for (let i = 0; i <= rows; i = i+2 ) {
         x1 = 'x1="0"';
-        x2 = 'x2="152"';
+        x2 = 'x2="' + cols + '"';
         y1 = 'y1="' + i + '"';
         y2 = 'y2="' + i + '"';
         line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';

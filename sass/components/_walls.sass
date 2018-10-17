@@ -4,21 +4,35 @@
       &.goal
         fill: yellow
         fill-opacity: 0.8
-        +prefix(animation, goal 100ms infinite)
+        +prefix(animation, goal 10ms infinite)
       &.wall
-        //stroke-width: .1
+        stroke-width: .25
         fill: $maincolor
         stroke: $maincolor
         &.normal
-          fill: rosybrown
-          stroke: rosybrown
-        &.ice
-          fill: red
-          +prefix(animation, opacity 10000ms infinite)
-          +prefix(animation-delay, 2000ms)
+          //fill: rosybrown
+          //stroke: rosybrown
           rect
-            fill: rgba(0,206,209,0.5)
-            //hex --> #00ced169
-            fill-opacity: 0.5
-            stroke: #00ced1
-            +prefix(animation, fade 3000ms infinite)
+            fill: url(#silver-noise)
+            stroke: $metal
+        &.ice
+          fill: $ice
+          fill-opacity: 0.5
+          stroke: $iceStroke
+          +prefix(animation, fade 3000ms infinite)
+          rect:first-child
+            +prefix(animation, opacity 10000ms infinite)
+            +prefix(animation-delay, 2000ms)
+          rect:nth-child(2)
+            +prefix(animation, opacity 12000ms infinite)
+        &.wash
+          fill: $wash
+          fill-opacity: 0.5
+          stroke: $washStroke
+          +prefix(animation, fade 3000ms infinite)
+          rect:first-child
+            +prefix(animation, opacity 8000ms infinite)
+            +prefix(animation-delay, 1000ms)
+          rect:nth-child(3)
+            +prefix(animation, opacity 5000ms infinite)
+            +prefix(animation-delay, 8000ms)

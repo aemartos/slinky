@@ -17,5 +17,5 @@ const BONUS = 'b';
 const BADGUY = 'bg'
 
 const RHYTHM = 100;
-const rows = 38;
-const cols = 76;
+const cols = 152;
+const rows = cols/2;

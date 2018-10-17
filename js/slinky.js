@@ -60,7 +60,7 @@ User.prototype.checkBoundaries = function () {
       dy = isBoundary ? 0 : -1;
       break;
     case DOWN:
-      isBoundary = this.y === 74;
+      isBoundary = this.y === rows - 2;
       dy = isBoundary ? 0 : 1;
       break;
     case LEFT:
@@ -68,7 +68,7 @@ User.prototype.checkBoundaries = function () {
       dx = isBoundary ? 0 : -1;
       break;
     case RIGHT:
-      isBoundary = this.x === 150;
+      isBoundary = this.x === cols - 2;
       dx = isBoundary ? 0 : 1;
       break;
   }
