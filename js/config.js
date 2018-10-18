@@ -14,7 +14,8 @@ var PAUSE = false;
 const SLINKY = 's';
 const WALL = 'w';
 const BONUS = 'b';
-const BADGUY = 'bg'
+const BADGUY = 'bg';
+const GOAL = 'g'
 
 const RHYTHM = 100;
 const size = 1;

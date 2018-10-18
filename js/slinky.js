@@ -25,6 +25,10 @@ User.prototype.initUser = function () {
 }
 
 User.prototype.drawUserBody = function (clas) {
+  let goalX = $('#goal').attr('x');
+  let goalY = $('#goal').attr('y');
+
+  //console.log(goalX, goalY);
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
   this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
@@ -118,7 +122,7 @@ User.prototype.cleanGridPosition = function (x,y) {
 
 User.prototype.cleanGridPositions = function () {
   for(var i = 0; i < board.grid.length; i++) {
-    for(var j = 0; j < board.grid.length; j++) {
+    for(var j = 0; j < board.grid[0].length; j++) {
       if (board.grid[i][j] === SLINKY) {
         board.grid[i][j] = 0;
       }
