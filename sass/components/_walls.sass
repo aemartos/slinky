@@ -13,13 +13,14 @@
         &.normal
           //fill: rosybrown
           //stroke: rosybrown
+          +prefix(animation, glow 3000ms infinite)
           rect
             fill: url(#silver-noise)
             stroke: $metal
         &.ice
           fill: $ice
           stroke: $iceStroke
-          +prefix(animation, fade 3000ms infinite)
+          +prefix(animation, glow 3000ms infinite)
           rect:first-child
             +prefix(animation, opacity 10000ms infinite)
             +prefix(animation-delay, 2000ms)
@@ -28,7 +29,7 @@
         &.wash
           fill: $wash
           stroke: $washStroke
-          +prefix(animation, fade 3000ms infinite)
+          +prefix(animation, glow 3000ms infinite)
           rect:first-child
             +prefix(animation, opacity 8000ms infinite)
             +prefix(animation-delay, 1000ms)
@@ -36,9 +37,12 @@
             +prefix(animation, opacity 5000ms infinite)
             +prefix(animation-delay, 8000ms)
         &.electric
-          fill: blue
-          stroke: blue
+          fill: $electric
+          //stroke-width: .1
+          stroke-dasharray: .08
+          +prefix(animation, glow 3000ms infinite)
           rect
+            +prefix(animation, stroke 100ms infinite)
         &.blackhole
           rect
         &.teletransport

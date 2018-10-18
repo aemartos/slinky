@@ -131,13 +131,12 @@ $(document).ready(function() {
 
     board = new GameBoard();
     board.createGrid();
-    board.drawThings();
+    board.initScene();
 
     let user = new User('scully', 3, 2);
     user.initUser();
     initListeners(user);
 
-    board.area.html(board.area.html());
   };
 
   startGame();

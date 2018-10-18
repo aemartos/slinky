@@ -21,3 +21,7 @@ const size = 1;
 const enemy_size = 8;
 const cols = 76;
 const rows = cols/2;
+
+const walls_limit = 15;
+const bonus_limit = 5;
+const badGuys_limit = 5;

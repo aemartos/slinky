@@ -5,6 +5,7 @@ function GameBoard() {
   this.area = $('#gameBoard');
   this.grid = [];
   this.users = [];
+  this.zonesXY = [];
   //Form.call(this, health, strength);
 }
 
@@ -14,16 +15,41 @@ GameBoard.prototype.constructor = GameBoard;
 GameBoard.prototype.createGrid = function () {
   const viewbox = '0 0 ' + cols + ' ' + rows;
   this.area.attr('viewBox', viewbox);
-  this.grid = Array(rows).fill().map(() => Array(cols).fill(0));
+  this.grid = Array(cols).fill().map(() => Array(rows).fill(0));
+
 }
 
-GameBoard.prototype.drawThings = function () {
+GameBoard.prototype.getZone = function(x,y) {
+  return Math.floor(x/8) + "__" + Math.floor(y/8);
+}
+
+GameBoard.prototype.getFreePosition = function(){
+  let x = this.random(cols);
+  let y = this.random(rows);
+  let zone = this.getZone(x,y);
+  console.log(x,y);
+  console.log(this.grid[x][y]);
+  if(this.grid[x][y]===0 && this.zonesXY.indexOf(zone) === -1){
+    let pos = {x,y,zone};
+    return pos;
+  } else {
+    return this.getFreePosition();
+  }
+}
+
+GameBoard.prototype.randomStyle = function (arr) {
+  var rNum = Math.floor(Math.random() * arr.length);
+  return arr[rNum];
+}
+
+GameBoard.prototype.initScene = function () {
+  this.drawBonus();
+
+
   const forms = {
-    //'user':       '<rect x="12" y="12" id="user" class="form user" width="2%" height="4%"/>',
-    // 'user_path':  '<polygon points="30,8 32,8 32,6 34,6 34,8 34,10 32,10 30,10" id="user_path" class="form user_path"/>',
-    'bonus':      '<circle cx="21" cy="9" r="1" id="bonus" class="form bonus"/>',
-    'badGuy':     '<polygon points="44,44 46,44 46,46" id="badGuy" class="form badGuy"/>',
-    'goal':       '<rect x="75" y="37" width="1" height="1" id="goal" class="form goal"/>',
+    'bonus':    '<circle cx="21.5" cy="9.5" r=".5" id="bonus" class="form bonus"/>',
+    'badGuy':   '<polygon points="44,24 45,24 45,25" id="badGuy" class="form badGuy"/>',
+    'goal':     '<rect x="74" y="36" width="2" height="2" id="goal" class="form goal"/>',
     'walls': {
       'ice':   '<g class="form wall ice" style="filter: url(#glow);"><rect x="1" y="1" width="1" height="1" id="wall01_01"/>\
                   <rect x="2" y="1" width="1" height="1" id="wall01_02"/>\
@@ -34,24 +60,46 @@ GameBoard.prototype.drawThings = function () {
                   <rect x="14" y="3" width="1" height="1" id="wall01_03"/></g>',
       'normal':   '<g class="form wall normal"><rect x="22" y="32" width="1" height="1" id="wall03_01"/>\
                   <rect x="22" y="33" width="1" height="1" id="wall03_02"/></g>',
-      'electric': '<g class="form wall electric"><rect x="34" y="22" width="1" height="1" id="wall04_01"/>\
+      'electric': '<g class="form wall electric" style="filter: url(#glow);"><rect x="34" y="22" width="1" height="1" id="wall04_01"/>\
                   <rect x="34" y="23" width="1" height="1" id="wall04_02"/>\
                   <rect x="34" y="24" width="1" height="1" id="wall04_03"/>\
                   <rect x="34" y="25" width="1" height="1" id="wall04_04"/></g>',
-    },
-    //'background': '<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>'
-    //'walls': ['','','','']
+    }
   };
   const styles = ['normal','ice','electric','wash','blackHole','teletransport'];
   const powers = ['reverse','speedy','disable','shooting','superDamage','antidote', 'random'];
-  console.log(this.area);
   //this.area.append(forms.user);
   //this.area.append(forms.user_path);
   //this.area.append(forms.bonus);
   //this.area.append(forms.badGuy);
-  this.area.append(forms.goal);
-  this.area.append(forms.walls.ice);
-  this.area.append(forms.walls.wash);
-  this.area.append(forms.walls.normal);
-  this.area.append(forms.walls.electric);
+  //this.area.append(forms.goal);
+  //this.area.append(forms.walls.ice);
+  //this.area.append(forms.walls.wash);
+  //this.area.append(forms.walls.normal);
+  //this.area.append(forms.walls.electric);
+
+  //REFRESH SVG IN DOM to paint the forms created from jQuery
+  board.area.html(board.area.html());
+}
+
+GameBoard.prototype.drawBonus = function () {
+  const bonus_powers = ['reverse','speedy','disable','blur','bigger','invincible'];
+  for (let i = 0; i <= bonus_limit; i++) {
+    let pos = this.getFreePosition();
+    let style = this.randomStyle(bonus_powers);
+    console.log(pos, style);
+    let x = ' cx="' + pos.x + '.5"';
+    let y = ' cy="' + pos.y + '.5"';
+    let bonus = '<circle class="form bonus ' + style + '"' + x + y + ' r=".5"/>';
+    console.log(bonus);
+    this.area.append(bonus);
+    this.grid[pos.x][pos.y] = BONUS;
+    this.zonesXY.push(pos.zone)
+  }
+}
+
+GameBoard.prototype.drawGoal = function () {
+  let x = this.random(cols);
+  let y = this.random(rows);
+  //let goal = <rect x="74" y="36" width="2" height="2" id="goal" class="form goal"/>
 }
