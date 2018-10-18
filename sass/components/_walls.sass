@@ -6,7 +6,8 @@
         fill-opacity: 0.8
         +prefix(animation, goal 10ms infinite)
       &.wall
-        stroke-width: .25
+        stroke-width: .15
+        fill-opacity: 0.5
         fill: $maincolor
         stroke: $maincolor
         &.normal
@@ -17,7 +18,6 @@
             stroke: $metal
         &.ice
           fill: $ice
-          fill-opacity: 0.5
           stroke: $iceStroke
           +prefix(animation, fade 3000ms infinite)
           rect:first-child
@@ -27,7 +27,6 @@
             +prefix(animation, opacity 12000ms infinite)
         &.wash
           fill: $wash
-          fill-opacity: 0.5
           stroke: $washStroke
           +prefix(animation, fade 3000ms infinite)
           rect:first-child
@@ -36,3 +35,11 @@
           rect:nth-child(3)
             +prefix(animation, opacity 5000ms infinite)
             +prefix(animation-delay, 8000ms)
+        &.electric
+          fill: blue
+          stroke: blue
+          rect
+        &.blackhole
+          rect
+        &.teletransport
+          rect

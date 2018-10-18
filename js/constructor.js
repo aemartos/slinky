@@ -10,6 +10,6 @@ function Form(health, strength) {
 }
 
 Form.prototype.random = function (num) {
-  var random = (Math.floor(Math.random() * num / 2)) * 2;
+  var random = (Math.floor(Math.random() * num));
   return random;
 }

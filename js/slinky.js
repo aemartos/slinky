@@ -15,8 +15,8 @@ User.prototype = Object.create(Form.prototype);
 User.prototype.constructor = User;
 
 User.prototype.position = function () {
-  this.x = this.random(100);
-  this.y = this.random(50);
+  this.x = this.random(cols);
+  this.y = this.random(rows);
 }
 
 User.prototype.initUser = function () {
@@ -27,13 +27,13 @@ User.prototype.initUser = function () {
 User.prototype.drawUserBody = function (clas) {
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
-  //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
-  this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
+  this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
+  //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
   //this.path = '<rect class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   //this.path = '<rect class="form user fill head ' + clas + '"' + x + y + 'width="2" height="2"/>\
               //<rect class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   board.area.append(this.path);
-  board.grid[this.y/2][this.x/2] = SLINKY;
+  board.grid[this.y][this.x] = SLINKY;
 
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   board.area.html(board.area.html());
@@ -61,7 +61,7 @@ User.prototype.checkBoundaries = function () {
       dy = isBoundary ? 0 : -1;
       break;
     case DOWN:
-      isBoundary = this.y === rows - 2;
+      isBoundary = this.y === rows - size;
       dy = isBoundary ? 0 : 1;
       break;
     case LEFT:
@@ -69,12 +69,12 @@ User.prototype.checkBoundaries = function () {
       dx = isBoundary ? 0 : -1;
       break;
     case RIGHT:
-      isBoundary = this.x === cols - 2;
+      isBoundary = this.x === cols - size;
       dx = isBoundary ? 0 : 1;
       break;
   }
 
-  let nextPos = board.grid[this.y/2 + dy][this.x/2 + dx];
+  let nextPos = board.grid[this.y + dy][this.x + dx];
   //console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
   //console.log(board.grid);
 
@@ -90,7 +90,7 @@ User.prototype.checkBoundaries = function () {
   if (nextPos === SLINKY ) {
     let lastX = parseInt(last.attr('x'));
     let lastY = parseInt(last.attr('y'));
-    if (((this.y + dy * 2) === lastY) && ((this.x + dx * 2) === lastX)) {
+    if (((this.y + dy) === lastY) && ((this.x + dx) === lastX)) {
       return SHRINK;
     } else {
       this.shake();
@@ -113,7 +113,7 @@ User.prototype.prevDirection = function () {
 }
 
 User.prototype.cleanGridPosition = function (x,y) {
-  board.grid[y/2][x/2] = 0;
+  board.grid[y][x] = 0;
 }
 
 User.prototype.cleanGridPositions = function () {
@@ -124,7 +124,7 @@ User.prototype.cleanGridPositions = function () {
       }
     }
   }
-  board.grid[this.y/2][this.x/2] = SLINKY;
+  board.grid[this.y][this.x] = SLINKY;
 }
 
 User.prototype.grow = function (x,y) {

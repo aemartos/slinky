@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   $('#guides').change(function() {
     if(this.checked) {
-      for (let i = 0; i <= cols; i = i+2 ) {
+      for (let i = 0; i <= cols; i++) {
         x1 = 'x1="' + i + '"';
         x2 = 'x2="' + i + '"';
         y1 = 'y1="0"';
@@ -13,7 +13,7 @@ $(document).ready(function() {
         line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
         board.area.append(line);
       }
-      for (let i = 0; i <= rows; i = i+2 ) {
+      for (let i = 0; i <= rows; i++) {
         x1 = 'x1="0"';
         x2 = 'x2="' + cols + '"';
         y1 = 'y1="' + i + '"';
@@ -74,32 +74,28 @@ $(document).ready(function() {
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(0,-2);
-            //user.grow(0,-size); //growUp
+            user.grow(0,-size); //growUp
           }
           break;
         case DOWN:
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(0,2);
-            //user.grow(0,size); //growDown
+            user.grow(0,size); //growDown
           }
           break;
         case LEFT:
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(-2,0); //growLeft
-            //user.grow(-size,0);
+            user.grow(-size,0); //growLeft
           }
           break;
         case RIGHT:
           if (user.oldDirection === oppositeDir(user.direction)) {
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            user.grow(2,0); //growRight
-            //user.grow(size,0);
+            user.grow(size,0); //growRight
           }
           break;
       }
