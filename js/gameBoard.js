@@ -21,10 +21,12 @@ GameBoard.prototype.checkSpaces = function(x,y, margin) {
   if (x < 2 || x > cols - 5 || y < 2 || y > rows - 5) {
     return false;
   }
-  let LEFT_BOUND = Math.max(0, x - margin);
-  let RIGHT_BOUND = Math.min(cols-1, x + margin);
-  let TOP_BOUND = Math.max(0, y - margin);
-  let BOTTOM_BOUND = Math.min(rows-1, y + margin);
+  let marginX = typeof margin  === "number" ? margin : margin.x;
+  let marginY = typeof margin  === "number" ? margin : margin.y;
+  let LEFT_BOUND = Math.max(0, x - marginX);
+  let RIGHT_BOUND = Math.min(cols-1, x + marginX);
+  let TOP_BOUND = Math.max(0, y - marginY);
+  let BOTTOM_BOUND = Math.min(rows-1, y + marginY);
   for (let i = LEFT_BOUND; i <= RIGHT_BOUND; i++){
     for (let j = TOP_BOUND; j <= BOTTOM_BOUND; j++){
       if (this.grid[j][i] !== 0) {
@@ -38,7 +40,7 @@ GameBoard.prototype.checkSpaces = function(x,y, margin) {
 GameBoard.prototype.getFreePosition = function(margin, call = 7){
   var x = this.random(cols);
   var y = this.random(rows);
-  if (call <= 4) {
+  if (call <= 4 && typeof margin === "number") {
     margin = Math.floor(margin / 2);
   }
   if(call === 0 || this.checkSpaces(x,y,margin)){
@@ -60,7 +62,6 @@ GameBoard.prototype.randomWall = function (obj) {
 }
 
 GameBoard.prototype.initScene = function () {
-  this.drawGoal();
   this.drawWalls();
   this.drawBonuses();
   this.drawBadGuys();
@@ -93,9 +94,20 @@ GameBoard.prototype.drawBonuses = function () {
   }
 }
 
-GameBoard.prototype.drawBadGuys = function () {
+GameBoard.prototype.nextPosBadGuys = function () {
+  //random de las direcciones utilizando el switch de las direcciones
+  //TOP: y-1
+  //...
+  //...
+  //comprobar si la pos está libre en arraybi
+  // si está libre devuelvo {x,y}
+  // sino, me vuelvo a llamar a mi misma return this.nextPosBadGuys();
+}
+
+GameBoard.prototype.drawBadGuys = function (positionFunctionOptional) {
+  let positionFunction = positionFunctionOptional || this.getFreePosition.bind(this);
   for (let i = 0; i < badGuys_limit; i++) {
-    let pos = this.getFreePosition(4);
+    let pos = positionFunction(4);
     //transform="rotate(108 69 19)" selfRotation
     let x = pos.x + ',' + pos.y + ' ';
     let y = (pos.x + 1) + ',' + pos.y + ' ';

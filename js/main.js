@@ -113,6 +113,8 @@ $(document).ready(function() {
       } else {
         bonus_count--;
       }
+
+      //board.drawBadGuys(board.nextPosBadGuys);
     }
   }
 
@@ -145,11 +147,11 @@ $(document).ready(function() {
 
     board = new GameBoard();
     board.createGrid();
-    board.initScene();
-
+    board.drawGoal();
     let user = new User('scully', 3, 2);
     user.initUser();
     initListeners(user);
+    board.initScene();
 
   };
 

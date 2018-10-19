@@ -15,16 +15,13 @@ User.prototype = Object.create(Form.prototype);
 User.prototype.constructor = User;
 
 User.prototype.initUser = function () {
-  let pos = board.getFreePosition(4);
+  let pos = board.getFreePosition({x:40, y:25},100);
   this.x = pos.x;
   this.y = pos.y;
   this.drawUserBody('back');
 }
 
 User.prototype.drawUserBody = function (clas) {
-  let goalX = $('#goal').attr('x');
-  let goalY = $('#goal').attr('y');
-
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
   this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
@@ -73,31 +70,31 @@ User.prototype.checkBoundaries = function () {
       dx = isBoundary ? 0 : 1;
       break;
   }
-
+  
   let nextPos = board.grid[this.y + dy][this.x + dx];
   //console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
   //console.log(board.grid);
-
-  if (isBoundary) {
-    if (!this.shrinking) {
-      this.shrinkFromWall();
-      return BOUNDARY;
-    } else {
+  nextPos = isBoundary ? BOUNDARY : nextPos;
+  switch(nextPos) {
+    case WALL:
+    case BOUNDARY:
+      if (!this.shrinking) {
+        this.shrinkFromWall();
+        return BOUNDARY;
+      }
       return SHRINK;
-    }
-  }
-  let last = this.getLast();
-  if (nextPos === SLINKY ) {
-    let lastX = parseInt(last.attr('x'));
-    let lastY = parseInt(last.attr('y'));
-    if (((this.y + dy) === lastY) && ((this.x + dx) === lastX)) {
-      return SHRINK;
-    } else {
+    case SLINKY:
+      let last = this.getLast();
+      let lastX = parseInt(last.attr('x'));
+      let lastY = parseInt(last.attr('y'));
+      if (((this.y + dy) === lastY) && ((this.x + dx) === lastX)) {
+        return SHRINK;
+      }
       this.shake();
       return SLINKY;
-    }
+    default:
+      return nextPos;
   }
-  return nextPos;
 }
 
 User.prototype.updatePosition = function () {
