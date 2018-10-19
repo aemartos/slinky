@@ -14,13 +14,10 @@ function User(name, health, strength) {
 User.prototype = Object.create(Form.prototype);
 User.prototype.constructor = User;
 
-User.prototype.position = function () {
-  this.x = this.random(cols);
-  this.y = this.random(rows);
-}
-
 User.prototype.initUser = function () {
-  this.position();
+  let pos = board.getFreePosition(4);
+  this.x = pos.x;
+  this.y = pos.y;
   this.drawUserBody('back');
 }
 
@@ -28,7 +25,6 @@ User.prototype.drawUserBody = function (clas) {
   let goalX = $('#goal').attr('x');
   let goalY = $('#goal').attr('y');
 
-  //console.log(goalX, goalY);
   var x = 'x="' + this.x + '"';
   var y = 'y="' + this.y + '"';
   this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
