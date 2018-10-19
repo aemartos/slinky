@@ -25,8 +25,6 @@ GameBoard.prototype.checkSpaces = function(x,y, margin) {
   let RIGHT_BOUND = Math.min(cols-1, x + margin);
   let TOP_BOUND = Math.max(0, y - margin);
   let BOTTOM_BOUND = Math.min(rows-1, y + margin);
-  // console.error(x,y);
-  // console.log(LEFT_BOUND, RIGHT_BOUND, TOP_BOUND, BOTTOM_BOUND);
   for (let i = LEFT_BOUND; i <= RIGHT_BOUND; i++){
     for (let j = TOP_BOUND; j <= BOTTOM_BOUND; j++){
       if (this.grid[j][i] !== 0) {
@@ -40,17 +38,13 @@ GameBoard.prototype.checkSpaces = function(x,y, margin) {
 GameBoard.prototype.getFreePosition = function(margin, call = 7){
   var x = this.random(cols);
   var y = this.random(rows);
-  // console.warn(x,y);
   if (call <= 4) {
     margin = Math.floor(margin / 2);
   }
   if(call === 0 || this.checkSpaces(x,y,margin)){
-    // console.log(x,y);
-    //console.log(this.grid[y][x]);
     let pos = {x,y};
     return pos;
   } else {
-    // console.log(x,y, "forbidden");
     return this.getFreePosition(margin, --call);
   }
 }
