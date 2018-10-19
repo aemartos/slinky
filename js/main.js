@@ -99,6 +99,20 @@ $(document).ready(function() {
           }
           break;
       }
+      if(bonus_count === 0) {
+        $('circle.form.bonus').each((i,e)=>{
+          let $e = $(e);
+          let x = parseInt($e.attr('cx'));
+          let y = parseInt($e.attr('cy'));
+          board.grid[y][x] = 0;
+          $e.remove();
+        });
+        board.drawBonuses();
+        board.area.html(board.area.html());
+        bonus_count = 200;
+      } else {
+        bonus_count--;
+      }
     }
   }
 

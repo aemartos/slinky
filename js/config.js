@@ -23,6 +23,7 @@ const enemy_size = 8;
 const cols = 76;
 const rows = cols/2;
 
-const walls_limit = 15;
-const bonus_limit = 5;
+const walls_limit = 10;
+const bonus_limit = 2;
 const badGuys_limit = 5;
+var bonus_count = 200;
