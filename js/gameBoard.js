@@ -63,8 +63,8 @@ GameBoard.prototype.randomWall = function (obj) {
 
 GameBoard.prototype.initScene = function () {
   this.drawWalls();
-  this.drawBonuses();
-  this.drawBadGuys();
+  //this.drawBonuses();
+  //this.drawBadGuys();
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   this.area.html(this.area.html());
 }

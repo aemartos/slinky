@@ -26,7 +26,7 @@ User.prototype.drawUserBody = function (clas) {
   var y = 'y="' + this.y + '"';
   this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
   //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="2" height="2"/>';
-  //this.path = '<rect class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
+  //this.path = '<rect class="form user fill head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="1" height="1"/>';
   //this.path = '<rect class="form user fill head ' + clas + '"' + x + y + 'width="2" height="2"/>\
               //<rect class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   board.area.append(this.path);
@@ -70,12 +70,18 @@ User.prototype.checkBoundaries = function () {
       dx = isBoundary ? 0 : 1;
       break;
   }
-  
+
   let nextPos = board.grid[this.y + dy][this.x + dx];
   //console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
   //console.log(board.grid);
   nextPos = isBoundary ? BOUNDARY : nextPos;
   switch(nextPos) {
+    case GOAL:
+      this.shrinkFromWall();
+      setTimeout(()=>{openModal();}, 500);
+      //$('.user.back').attr('x') = parseInt($('#goal').attr('x')) + .5;
+      //$('.user.back').attr('y') = parseInt($('#goal').attr('y')) + .5;
+      //x = .5 / y = +.5
     case WALL:
     case BOUNDARY:
       if (!this.shrinking) {
@@ -222,7 +228,9 @@ User.prototype.shake = function () {
 }
 
 User.prototype.changeSpeed = function (num) {
-  clearInterval(timer);
+  // clearInterval(timer);
+  clearRequestInterval(timer);
   let t = (num && !isNaN(num)) ? num : 1;
-  timer = setInterval(()=>{timerFunction(this)}, RHYTHM/t);
+  // timer = setInterval(()=>{timerFunction(this)}, RHYTHM/t);
+  timer = requestInterval(()=>{timerFunction(this)}, RHYTHM/t);
 }

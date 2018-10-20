@@ -22,9 +22,29 @@
           <svg><rect x="2" y="0" width="90%" height="90%" id="wall01_01" class="form wall wall01 wall01_01"/></svg>
           <svg><rect x="2" y="0" width="90%" height="90%" id="wall01_01" class="form wall wall01 wall01_01"/></svg>
         </div> -->
+
+        <!-- MODALS -->
+        <!-- <button class="open-modal">Open modal</button> -->
+        <div class="modal-shade"></div>
+          <!-- WIN/LOSE -->
+          <div class="modal-container modal-win">
+            <div class="modal">
+              <h1>CONGRATS! YOU WIN!</h1>
+              <p>You are awesome. Would you like to play again?</p>
+              <div class="modal-actions">
+                <button class="modal-cancel">Cancel</button>
+                <button class="modal-replay">Replay!</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
         <svg id="gameBoard" class="" viewBox="0 0 152 76">
           <!-- Filters -->
-          <defs>
+          <!-- <defs>
             <!-- NEON FILTER -->
             <filter id="glow" x="-40" y="-20" width="100" height="200">
               <feGaussianBlur stdDeviation=".2" result="coloredBlur"/>
@@ -45,7 +65,7 @@
                 <image xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/160607/metal.png" x="0" y="0" width="1" height="1" />
                 <rect width="1" height="1" fill="url(#silver-horizontal)" style="mix-blend-mode: multiply;"/>
             </pattern>
-          </defs>
+          </defs> -->
           <rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>
         </svg>
       </div>
@@ -58,6 +78,7 @@
 
       <script src="js/config.js"></script>
       <script src="js/constructor.js"></script>
+      <script src="js/modals.js"></script>
       <script src="js/gameBoard.js"></script>
       <script src="js/slinky.js"></script>
       <script src="js/main.js"></script>
