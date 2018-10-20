@@ -1,8 +1,5 @@
 // PEN https://codepen.io/popmotion/pen/aEoqEG?editors=0010
 
-
-const { styler, timeline, listen, easing } = window.popmotion;
-
 const openModalButton = document.querySelector('.open-modal');
 const cancelModalButton = document.querySelector('.modal-cancel');
 const replayModalButton = document.querySelector('.modal-replay');

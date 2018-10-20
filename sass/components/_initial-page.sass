@@ -1,3 +1,33 @@
 
-*
-  //border: 2px solid red
+.initial_page
+  +column-flex
+  #slinky_logo
+    width: 50em
+    fill: white
+    path
+      //+prefix(animation, shake 500ms infinite)
+      &#letter_s
+      &#letter_l
+      &#letter_i_dot
+        // +prefix(animation, changeColor 1000ms infinite)
+      &#letter_i
+      &#letter_n
+      &#letter_k
+      &#letter_y
+  button
+    cursor: pointer
+    font-size: 1.2em
+    font-weight: bold
+    border: none
+    padding: .5em
+    min-width: 7em
+    border-radius: 5em
+    color: $background
+    background-color: white
+    border: .1em solid transparent
+    +transition_default
+    &:hover
+      color: white
+      border: .1em solid white
+      background-color: $darkbg
+      +hover_scale

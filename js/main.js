@@ -156,10 +156,12 @@
 
   };
 
-  startGame();
-  // $("#startButton").click(function() {
-  //   startGame();
-  // });
+  $("#startButton").click(function() {
+    console.log('hola');
+    $('.initial_page').css('display', 'none');
+    $('#gameBoard').css('display', 'block');
+    startGame();
+  });
 
 
 // });
