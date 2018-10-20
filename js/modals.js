@@ -51,6 +51,7 @@ const openModal = () => {
 }
 
 const cancelModal = () => {
+  clearRequestInterval(timer);
   timeline([
     {
       track: 'modal',

@@ -106,14 +106,14 @@
           board.grid[y][x] = 0;
           $e.remove();
         });
-        board.drawBonuses();
+        bonus.drawBonuses();
         board.area.html(board.area.html());
         bonus_count = 200;
       } else {
         bonus_count--;
       }
 
-      //board.drawBadGuys(board.nextPosBadGuys);
+      //badGuys.drawBadGuys(badGuys.nextPosBadGuys);
     }
   }
 
@@ -142,12 +142,13 @@
 
 
   // START GAME ----------------------------------
+  board = new GameBoard();
+  board.createGrid();
 
   function startGame() {
 
-    board = new GameBoard();
-    board.createGrid();
-    board.drawGoal();
+    let goal = new Goal();
+    goal.drawGoal();
     let user = new User('scully', 3, 2);
     user.initUser();
     initListeners(user);

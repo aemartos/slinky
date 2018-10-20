@@ -15,7 +15,7 @@ User.prototype = Object.create(Form.prototype);
 User.prototype.constructor = User;
 
 User.prototype.initUser = function () {
-  let pos = board.getFreePosition({x:40, y:25},100);
+  let pos = this.getFreePosition({x:40, y:25},100);
   this.x = pos.x;
   this.y = pos.y;
   this.drawUserBody('back');
@@ -79,6 +79,7 @@ User.prototype.checkBoundaries = function () {
     case GOAL:
       this.shrinkFromWall();
       setTimeout(()=>{openModal();}, 500);
+      setTimeout(()=>{clearRequestInterval(timer);}, 1000);
       //$('.user.back').attr('x', parseInt($('#goal').attr('x')) + .5);
       //$('.user.back').attr('y', parseInt($('#goal').attr('y')) + .5);
     case WALL:
