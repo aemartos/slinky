@@ -157,8 +157,9 @@
   };
 
   $("#startButton").click(function() {
-    console.log('hola');
     $('.initial_page').css('display', 'none');
+    $('.counter').css('display', 'flex');
+    $('#guides').css('display', 'block');
     $('#gameBoard').css('display', 'block');
     startGame();
   });
