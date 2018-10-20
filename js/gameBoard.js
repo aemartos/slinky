@@ -122,7 +122,7 @@ GameBoard.prototype.drawWalls = function () {
   const wall_type = ['normal','ice','electric','wash','blackHole','teletransport'];
   function walls(x, y, style, i) {
     return {
-      'wall01': {'path': '<g class="form wall ' + style + '" style="filter: url(#glow);" num="' + i + '">\
+      'wall01': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> num="' + i + '">\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + (x+1) + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
@@ -130,20 +130,20 @@ GameBoard.prototype.drawWalls = function () {
                 <g>',
                 'positions': [{x, y}, {x: x+1, y}, {x, y: y+1}, {x: x+1, y: y+1}],
                 },
-      'wall02': {'path': '<g class="form wall ' + style + '" style="filter: url(#glow); "num="' + i + '">\
+      'wall02': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> "num="' + i + '">\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + (x+1) + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
                 </g>',
                 'positions': [{x, y}, {x: x+1, y}, {x, y: y+1}],
                 },
-      'wall03': {'path': '<g class="form wall ' + style + '" style="filter: url(#glow);" num="' + i + '">\
+      'wall03': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> num="' + i + '">\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
                 </g>',
                 'positions': [{x, y}, {x, y: y+1}],
                 },
-      'wall04': {'path': '<g class="form wall ' + style + '" style="filter: url(#glow);" num="' + i + '">\
+      'wall04': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> num="' + i + '">\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+2) + '" width="1" height="1"/>\

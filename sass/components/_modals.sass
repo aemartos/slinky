@@ -1,0 +1,50 @@
+
+.modal-shade
+  display: none
+  opacity: 0
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0, rgba(0,0,0,0.8) 100%)
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  bottom: 0
+  will-change: opacity
+
+.modal-container
+  position: fixed
+  top: 0
+  right: 0
+  left: 0
+  bottom: 0
+  display: none
+  justify-content: center
+  align-items: center
+  color: black
+  .modal
+    opacity: 0
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3)
+    background: white
+    border-radius: 5px
+    padding: 30px 45px
+    width: 50%
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    h1
+      font-size: 32px
+      line-height: 28px
+      margin-bottom: 10px
+    .modal-actions
+      align-self: flex-end
+      button
+        cursor: pointer
+        color: white
+        background-color: blue
+        font-size: 24px
+        border: none
+        padding: 20px 25px
+        &.modal-cancel
+          background-color: white
+          color: pink
+        &.modal-replay
+          background-color: green
