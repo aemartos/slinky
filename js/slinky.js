@@ -79,9 +79,8 @@ User.prototype.checkBoundaries = function () {
     case GOAL:
       this.shrinkFromWall();
       setTimeout(()=>{openModal();}, 500);
-      //$('.user.back').attr('x') = parseInt($('#goal').attr('x')) + .5;
-      //$('.user.back').attr('y') = parseInt($('#goal').attr('y')) + .5;
-      //x = .5 / y = +.5
+      //$('.user.back').attr('x', parseInt($('#goal').attr('x')) + .5);
+      //$('.user.back').attr('y', parseInt($('#goal').attr('y')) + .5);
     case WALL:
     case BOUNDARY:
       if (!this.shrinking) {

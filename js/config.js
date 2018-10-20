@@ -27,3 +27,4 @@ const walls_limit = 20;
 const bonus_limit = 2;
 const badGuys_limit = 5;
 var bonus_count = 200;
+var badGuys_count = 200;

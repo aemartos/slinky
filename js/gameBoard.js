@@ -51,20 +51,20 @@ GameBoard.prototype.getFreePosition = function(margin, call = 7){
   }
 }
 
-GameBoard.prototype.randomStyle = function (arr) {
+GameBoard.prototype.randomArr = function (arr) {
   var rNum = Math.floor(Math.random() * arr.length);
   return arr[rNum];
 }
 
-GameBoard.prototype.randomWall = function (obj) {
+GameBoard.prototype.randomObj = function (obj) {
   var keys = Object.keys(obj);
   return obj[keys[keys.length * Math.random() << 0]];
 }
 
 GameBoard.prototype.initScene = function () {
   this.drawWalls();
-  //this.drawBonuses();
-  //this.drawBadGuys();
+  this.drawBonuses();
+  this.drawBadGuys();
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   this.area.html(this.area.html());
 }
@@ -85,7 +85,7 @@ GameBoard.prototype.drawBonuses = function () {
   const bonus_powers = ['reverse','speedy','disable','blur','bigger','invincible'];
   for (let i = 0; i < bonus_limit; i++) {
     let pos = this.getFreePosition(8);
-    let style = this.randomStyle(bonus_powers);
+    let style = this.randomArr(bonus_powers);
     let x = ' cx="' + pos.x + '.5"';
     let y = ' cy="' + pos.y + '.5"';
     let bonus = '<circle class="form bonus ' + style + '"' + x + y + ' r=".5"/>';
@@ -95,6 +95,14 @@ GameBoard.prototype.drawBonuses = function () {
 }
 
 GameBoard.prototype.nextPosBadGuys = function () {
+  const dir = [37, 38, 39, 40];
+  console.log(direction);
+  if (badGuys_count === 0) {
+    let direction = codeToDirection(this.randomArr(dir));
+  } else {
+    badGuys_count--;
+  }
+  this.getFreePosition();
   //random de las direcciones utilizando el switch de las direcciones
   //TOP: y-1
   //...
@@ -102,10 +110,11 @@ GameBoard.prototype.nextPosBadGuys = function () {
   //comprobar si la pos está libre en arraybi
   // si está libre devuelvo {x,y}
   // sino, me vuelvo a llamar a mi misma return this.nextPosBadGuys();
+  return true;
 }
 
 GameBoard.prototype.drawBadGuys = function (positionFunctionOptional) {
-  let positionFunction = positionFunctionOptional || this.getFreePosition.bind(this);
+  let positionFunction = positionFunctionOptional ? positionFunctionOptional.bind(this) : this.getFreePosition.bind(this);
   for (let i = 0; i < badGuys_limit; i++) {
     let pos = positionFunction(4);
     //transform="rotate(108 69 19)" selfRotation
@@ -157,8 +166,8 @@ GameBoard.prototype.drawWalls = function () {
     let pos = this.getFreePosition(10);
     let x = pos.x;
     let y = pos.y;
-    let style = this.randomStyle(wall_type);
-    let wall = this.randomWall(walls(x,y,style,i));
+    let style = this.randomArr(wall_type);
+    let wall = this.randomObj(walls(x,y,style,i));
     this.area.append(wall.path);
     wall.positions.map((e)=>{
       this.grid[e.y][e.x] = WALL;
