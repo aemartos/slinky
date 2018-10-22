@@ -4,29 +4,38 @@
   // GRID ONCLICK --------------------------------
 
   $('#guides').change(function() {
-    if(this.checked) {
-      for (let i = 0; i <= cols; i++) {
-        x1 = 'x1="' + i + '"';
-        x2 = 'x2="' + i + '"';
-        y1 = 'y1="0"';
-        y2 = 'y2="' + rows + '"';
-        line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
-        board.area.append(line);
-      }
-      for (let i = 0; i <= rows; i++) {
-        x1 = 'x1="0"';
-        x2 = 'x2="' + cols + '"';
-        y1 = 'y1="' + i + '"';
-        y2 = 'y2="' + i + '"';
-        line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
-        board.area.append(line);
-      }
-      board.area.html(board.area.html());
+    if($('#guides').prop("checked")) {
+      guidesOn();
     } else {
-      $('.line').remove();
+      guidesOff();
     }
   });
 
+  const guidesOn = () => {
+    $('#guides').prop("checked", true);
+    for (let i = 0; i <= cols; i++) {
+      x1 = 'x1="' + i + '"';
+      x2 = 'x2="' + i + '"';
+      y1 = 'y1="0"';
+      y2 = 'y2="' + rows + '"';
+      line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
+      board.area.append(line);
+    }
+    for (let i = 0; i <= rows; i++) {
+      x1 = 'x1="0"';
+      x2 = 'x2="' + cols + '"';
+      y1 = 'y1="' + i + '"';
+      y2 = 'y2="' + i + '"';
+      line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
+      board.area.append(line);
+    }
+    board.area.html(board.area.html());
+  }
+
+  const guidesOff = () => {
+    $('#guides').prop("checked", false);
+    $('.line').remove();
+  }
 
   // MOVEMENT ----------------------------------
 
@@ -134,8 +143,10 @@
         console.log('shooting is not implemented yet :D');
       } else if (direction === PAUSE_BUTTON) {
         if(PAUSE) {
+          guidesOff();
           cancelModal();
         } else {
+          guidesOn();
           openModal(modalPause);
         }
         PAUSE = !PAUSE;

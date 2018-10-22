@@ -1,8 +1,8 @@
 // PEN https://codepen.io/popmotion/pen/aEoqEG?editors=0010
 
-const openModalButton = document.querySelector('.open-modal');
-const cancelModalButton = document.querySelector('.modal-cancel');
-const replayModalButton = document.querySelector('.modal-replay');
+const openModalButton = $('.open-modal');
+const cancelModalButton = $('.modal-cancel');
+const replayModalButton = $('.modal-replay');
 
 const modalShade = styler(document.querySelector('.modal-shade'));
 
@@ -10,7 +10,7 @@ const modalWin = document.querySelector('.modalWin');
 const modalInfo = document.querySelector('.modalInfo');
 const modalPause = document.querySelector('.modalPause');
 const modal = styler(document.querySelector('.modal'));
-const modalContainer = styler(document.querySelector('.modal-container'));
+const modalContainer = $('.modal-container').map((i,e)=>{return styler(e)});
 
 let modalSections = [];
 let sectionLabels = [];
@@ -44,7 +44,7 @@ const showContainers = (modall) => {
 
 const hideContainers = () => {
   modalShade.set('display', 'none');
-  modalContainer.set('display', 'none');
+  modalContainer.map((i,e)=> {e.set('display', 'none')});
 };
 
 const openModal = (modall) => {
@@ -100,5 +100,11 @@ const replayModal = () => {
 }
 
 //listen(openModalButton, 'click').start(openModal);
-listen(cancelModalButton, 'click').start(cancelModal);
-listen(replayModalButton, 'click').start(replayModal);
+
+cancelModalButton.each((i,e)=> {
+  listen(e, 'click').start(cancelModal);
+});
+
+replayModalButton.each((i,e)=> {
+  listen(e, 'click').start(replayModal);
+});
