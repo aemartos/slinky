@@ -71,10 +71,13 @@ User.prototype.checkBoundaries = function () {
       break;
   }
 
-  let nextPos = board.grid[this.y + dy][this.x + dx];
+  let nextX = this.x + dx;
+  let nextY = this.y + dy;
+  let nextPos = board.grid[nextY][nextX];
   //console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
   //console.log(board.grid);
   nextPos = isBoundary ? BOUNDARY : nextPos;
+  let isWall = false;
   switch(nextPos) {
     case GOAL:
       this.shrinkFromWall();
@@ -82,13 +85,15 @@ User.prototype.checkBoundaries = function () {
       setTimeout(()=>{clearRequestInterval(timer);}, 2000);
       //$('.user.back').attr('x', parseInt($('#goal').attr('x')) + .5);
       //$('.user.back').attr('y', parseInt($('#goal').attr('y')) + .5);
-    case WALL:
+    case (WALL + 'ic'):
+    case (WALL + 'el'):
+    case (WALL + 'wa'):
+    case (WALL + 'bl'):
+    case (WALL + 'te'):
+    case (WALL + 'no'):
     case BOUNDARY:
-      if (!this.shrinking) {
-        this.shrinkFromWall();
-        return BOUNDARY;
-      }
-      return SHRINK;
+      isWall = true;
+      break;
     case SLINKY:
       let last = this.getLast();
       let lastX = parseInt(last.attr('x'));
@@ -98,8 +103,25 @@ User.prototype.checkBoundaries = function () {
       }
       this.shake();
       return SLINKY;
+    case (BONUS + 're'):
+    case (BONUS + 'sp'):
+    case (BONUS + 'di'):
+    case (BONUS + 'bl'):
+    case (BONUS + 'bi'):
+    case (BONUS + 'in'):
+      let bon = $('[cx="' + nextX + '.5"]');
+      Bonus.removeBonus(bon, (nextX), (nextY));
+      //return BOUNDARY;
+      return false;
     default:
       return nextPos;
+  }
+  if (isWall) {
+    if (!this.shrinking) {
+      this.shrinkFromWall();
+      return BOUNDARY;
+    }
+    return SHRINK;
   }
 }
 

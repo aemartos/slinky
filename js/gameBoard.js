@@ -5,9 +5,6 @@ function GameBoard() {
   this.area = $('#gameBoard');
   this.grid = [];
   this.users = [];
-  this.walls = [];
-  this.bonuses = [];
-  this.badGuys = [];
 }
 
 GameBoard.prototype.createGrid = function () {
@@ -26,7 +23,6 @@ GameBoard.prototype.initScene = function () {
   this.initWalls();
   this.initBadGuys();
   this.initBonuses();
-
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   this.area.html(this.area.html());
 }
@@ -34,7 +30,6 @@ GameBoard.prototype.initScene = function () {
 GameBoard.prototype.initWalls = function () {
   for (let i = 0; i < walls_limit; i++) {
     let wall = new Walls(3,1);
-    this.walls.push(wall);
     wall.drawWalls();
   }
 }
@@ -42,16 +37,13 @@ GameBoard.prototype.initWalls = function () {
 GameBoard.prototype.initBadGuys = function () {
   for (let i = 0; i < badGuys_limit; i++) {
     let badGuy = new BadGuys(3,1);
-    this.badGuys.push(badGuy);
     badGuy.drawBadGuy();
   }
 }
 
 GameBoard.prototype.initBonuses = function () {
-  this.bonuses = [];
   for (let i = 0; i < bonus_limit; i++) {
     let bonus = new Bonus();
-    this.bonuses.push(bonus);
     bonus.drawBonus();
   }
 }

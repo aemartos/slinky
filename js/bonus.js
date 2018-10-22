@@ -12,5 +12,11 @@ Bonus.prototype.drawBonus = function () {
   this.y = ' cy="' + pos.y + '.5"';
   this.path = '<circle class="form bonus ' + this.style + '"' + this.x + this.y + ' r=".5"/>';
   board.area.append(this.path);
-  board.grid[pos.y][pos.x] = BONUS;
+  //board.grid[pos.y][pos.x] = BONUS;
+  board.grid[pos.y][pos.x] = BONUS + this.style.slice(0,2);
+}
+
+Bonus.removeBonus = function (bon,x,y) {
+  bon.remove();
+  board.grid[y][x] = 0;
 }

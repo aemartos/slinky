@@ -28,14 +28,14 @@ const blendRedBlue = transform.blendColor('#FF1C68', '#198FE3');
 
 const animateLeft = tween({
   from: 0,
-  to: -50,
+  to: -30,
   ease: easing.easeInOut,
   flip: Infinity,
   duration: 1000
 });
 
 const animateRight = tween({
-  to: 0,
+  to: -15,
   ease: easing.easeInOut,
   flip: Infinity,
   duration: 1000

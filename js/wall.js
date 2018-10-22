@@ -49,6 +49,6 @@ Walls.prototype.drawWalls = function () {
   this.path = wall.path;
   board.area.append(this.path);
   wall.positions.map((e)=>{
-    board.grid[e.y][e.x] = WALL;
+    board.grid[e.y][e.x] = WALL + this.style.slice(0,2);
   });
 }
