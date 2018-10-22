@@ -78,13 +78,11 @@ User.prototype.checkBoundaries = function () {
   //console.log(board.grid);
   nextPos = isBoundary ? BOUNDARY : nextPos;
   let isWall = false;
+  this.userLose();
   switch(nextPos) {
     case GOAL:
       this.shrinkFromWall();
-      setTimeout(()=>{openModal(modalWin);}, 500);
-      setTimeout(()=>{clearRequestInterval(timer);}, 2000);
-      //$('.user.back').attr('x', parseInt($('#goal').attr('x')) + .5);
-      //$('.user.back').attr('y', parseInt($('#goal').attr('y')) + .5);
+      this.userWin();
     case (WALL + 'ic'):
     case (WALL + 'el'):
     case (WALL + 'wa'):
@@ -123,6 +121,21 @@ User.prototype.checkBoundaries = function () {
     }
     return SHRINK;
   }
+}
+
+User.prototype.userLose = function () {
+  if(this.strength === 0) {
+    setTimeout(()=>{openModal(modalLose);}, 500);
+    setTimeout(()=>{clearRequestInterval(timer);}, 2000);
+  }
+}
+
+User.prototype.userWin = function () {
+  //if(this.bones.length === 2) {
+    openModal(modalWin);
+  //}
+  //setTimeout(()=>{openModal(modalLose);}, 500);
+  setTimeout(()=>{clearRequestInterval(timer);}, 2000);
 }
 
 User.prototype.updatePosition = function () {

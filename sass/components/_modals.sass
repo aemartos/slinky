@@ -29,10 +29,27 @@
     align-items: flex-start
     background-color: $background
     color: white
+    p
+      &.t_center
+        width: 100%
+        text-align: center
+        margin-top: 1.5em !important
+      &.m_top
+        margin-top: 1em !important
     h1
       font-size: 32px
       line-height: 28px
       margin-bottom: 10px
+    .arrow
+      padding: .1em .4em .2em
+      margin: 0 .2em
+      border: .1em solid white
+      border-radius: .2em
+      font-family: monospace
+      font-weight: bold
+      font-size: 1.2em
+      &.arrow_a
+        padding: .2em
     .modal-actions
       +flex
       justify-content: space-between
@@ -47,12 +64,11 @@
         min-width: 7em
         border-radius: 5em
         color: white
+        font-weight: bold
         +transition_default
         &.modal-cancel
           background-color: $red
-        &.modal-replay
-          background-color: $green
-        &.modal-pause
+        &.modal-replay, &.modal-play
           background-color: $green
         &:hover
           +hover_scale_opacity
@@ -67,3 +83,44 @@
         align-self: center
         margin-top: 1em
         margin-bottom: 0
+  &.modalInfo, &.modalStart
+    .modal
+      .instr
+        +flex
+        justify-content: space-between
+        align-items: flex-start
+        .scene
+          width: 55%
+        .controls
+          width: 35%
+      .thanks
+        width: 100%
+        font-size: 2em
+        font-weight: bold
+        text-align: center
+        margin-bottom: .3em
+      p
+        margin-top: .5em
+      img
+        width: 45%
+      span.user_pic, span.goal
+        display: inline-block
+        vertical-align: middle
+        width: 1.2em
+        height: 1.2em
+        margin: 0 .2em
+        &.user_pic
+          background-color: white
+          &.u_grow
+            width: 30%
+        &.goal
+          width: 2em
+          height: 2em
+          +prefix(animation, goal2 10ms infinite)
+      .bGuy_inst, .bonus_inst
+        display: inline-block
+        width: 2em
+        height: 2em
+        margin: 0 .2em
+      .modal-actions
+        justify-content: center

@@ -15,6 +15,22 @@
     fill: magenta
     //stroke: magenta
 
+@keyframes goal2
+  from, 20%, 40%, 60%, 80%, to
+    +prefix(animation-timing-function, cubic-bezier(0.215, 0.61, 0.355, 1))
+  0%
+    background-color: magenta
+    //stroke: magenta
+  33%
+    background-color: yellow
+    //stroke: yellow
+  66%
+    background-color: cyan
+    //stroke: yellow
+  to
+    background-color: magenta
+    //stroke: magenta
+
 @keyframes changeColor
   from, 20%, 40%, 60%, 80%, to
     +prefix(animation-timing-function, cubic-bezier(0.215, 0.61, 0.355, 1))

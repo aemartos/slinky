@@ -55,7 +55,37 @@
         <!-- <button class="open-modal">Open modal</button> -->
         <div class="modal-shade"></div>
 
-          <!-- WIN/LOSE -->
+          <!-- START -->
+          <div class="modal-container modalStart">
+            <div class="modal">
+              <h1>START GAME</h1>
+              <div class="instr">
+                <div class="scene">
+                  <p>You are this little guy <span class="user_pic"></span> with the arrow keys, you have to move through the screen and you will gonna grow and shrink: <span class="user_pic u_grow"></span></p>
+                  <p>To win you have to reach the goal <span class="goal"></span></p>
+                  <p>You can rest in the walls around the board, but be careful, some of them could hurt you!</p>
+                  <img class="walls_inst" src="img/wallss.svg">
+                  <p class="m_top">There also are bad guys <img class="bGuy_inst" src="img/badGuy.svg"> that will hurt you and bonuses <img class="bonus_inst" src="img/bonus.svg"> that can make your life easier or harder!</p>
+                </div>
+                <div class="controls">
+                  <p>This are your controls:</p>
+                  <p><span class="arrow arrow_a">⇧</span> Grow up</p>
+                  <p><span class="arrow arrow_a">⇩</span> Grow down</p>
+                  <p><span class="arrow arrow_a">⇨</span> Grow right</p>
+                  <p><span class="arrow arrow_a">⇦</span> Grow left</p>
+                  <p><span class="arrow">P</span> Pause game</p>
+                  <p><span class="arrow">I</span> Show instructions</p>
+                </div>
+              </div>
+              <p class="thanks">Thanks for playing and have fun!</p>
+              <div class="modal-actions">
+                <button class="modal-play">play!</button>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- WIN -->
           <div class="modal-container modalWin">
             <div class="modal">
               <h1>CONGRATS! YOU WIN!</h1>
@@ -67,21 +97,48 @@
             </div>
           </div>
 
+          <!-- LOSE -->
+          <div class="modal-container modalLose">
+              <div class="modal">
+                <h1>SORRY BRO! YOU LOSE!</h1>
+                <p>you are still awesome. would you like to play again?</p>
+                <div class="modal-actions">
+                  <button class="modal-cancel">cancel</button>
+                  <button class="modal-replay">replay!</button>
+                </div>
+              </div>
+            </div>
+
+          <!-- INFO -->
           <div class="modal-container modalInfo">
             <div class="modal">
-              <h1>Instrucciones</h1>
-              <p>caca</p>
-              <div class="modal-actions">
-                <button class="modal-cancel">cancel</button>
-                <button class="modal-replay">replay!</button>
+              <h1>Instructions</h1>
+              <div class="instr">
+                <div class="scene">
+                  <p>You are this little guy <span class="user_pic"></span> with the arrow keys, you have to move through the screen and you will gonna grow and shrink: <span class="user_pic u_grow"></span></p>
+                  <p>To win you have to reach the goal <span class="goal"></span></p>
+                  <p>You can rest in the walls around the board, but be careful, some of them could hurt you!</p>
+                  <img class="walls_inst" src="img/wallss.svg">
+                  <p class="m_top">There also are bad guys <img class="bGuy_inst" src="img/badGuy.svg"> that will hurt you and bonuses <img class="bonus_inst" src="img/bonus.svg"> that can make your life easier or harder!</p>
+                </div>
+                <div class="controls">
+                  <p>This are your controls:</p>
+                  <p><span class="arrow arrow_a">⇧</span> Grow up</p>
+                  <p><span class="arrow arrow_a">⇩</span> Grow down</p>
+                  <p><span class="arrow arrow_a">⇨</span> Grow right</p>
+                  <p><span class="arrow arrow_a">⇦</span> Grow left</p>
+                  <p><span class="arrow">P</span> Pause game</p>
+                  <p><span class="arrow">I</span> Show instructions</p>
+                </div>
               </div>
+              <p class="t_center">Press <span class="arrow">I</span> to resume the game</p>
             </div>
           </div>
 
           <div class="modal-container modalPause">
             <div class="modal">
               <h1>THE GAME IS PAUSED!</h1>
-              <p>Press P to unpause</p>
+              <p>Press <span class="arrow">P</span> to resume the game</p>
               <!-- <div class="modal-actions">
                 <button class="modal-cancel">cancel</button>
                 <button class="modal-pause">play!</button>

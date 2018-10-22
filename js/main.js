@@ -68,15 +68,18 @@
         return SHOOT;
       case 80:
         return PAUSE_BUTTON;
+      case 73:
+        return INFO_BUTTON;
       //ESC === 27
       //P === 80
+      //I === 73
       default:
         return undefined;
     }
   }
 
   timerFunction = (user)=> {
-    if(!PAUSE){
+    if(!PAUSE && !INFO){
       switch (user.direction) {
         case UP:
           if (user.oldDirection === oppositeDir(user.direction)) {
@@ -111,7 +114,7 @@
   }
 
   timerFunctionScene = ()=> {
-    if (!PAUSE) {
+    if (!PAUSE && !INFO) {
       if(bonus_count === 0) {
         $('circle.form.bonus').each((i,e)=>{
           let $e = $(e);
@@ -141,7 +144,7 @@
       } else if (direction === SHOOT) {
         //user.shoot();
         console.log('shooting is not implemented yet :D');
-      } else if (direction === PAUSE_BUTTON) {
+      } else if (direction === PAUSE_BUTTON && !INFO) {
         if(PAUSE) {
           guidesOff();
           cancelModal();
@@ -150,6 +153,15 @@
           openModal(modalPause);
         }
         PAUSE = !PAUSE;
+      } else if (direction === INFO_BUTTON && !PAUSE) {
+        if(INFO) {
+          guidesOff();
+          cancelModal();
+        } else {
+          guidesOn();
+          openModal(modalInfo);
+        }
+        INFO = !INFO;
       } else {
         if (user.shrinking !== direction) {
           user.direction = direction;
@@ -173,7 +185,7 @@
 
     let goal = new Goal();
     goal.drawGoal();
-    let user = new User('scully', 3, 2);
+    user = new User('scully', 3, 2);
     user.initUser();
     initListeners(user);
     board.initScene();
@@ -188,6 +200,10 @@
   }
 
   $("#startButton").click(function() {
+    openModal(modalStart);
+  });
+
+  playModalButton.click(function() {
     initGame();
     startGame();
   });

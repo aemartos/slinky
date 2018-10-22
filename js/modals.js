@@ -1,11 +1,14 @@
 // PEN https://codepen.io/popmotion/pen/aEoqEG?editors=0010
 
 const openModalButton = $('.open-modal');
+const playModalButton = $('.modal-play');
 const cancelModalButton = $('.modal-cancel');
 const replayModalButton = $('.modal-replay');
 
 const modalShade = styler(document.querySelector('.modal-shade'));
 
+const modalStart = document.querySelector('.modalStart');
+const modalLose = document.querySelector('.modalLose');
 const modalWin = document.querySelector('.modalWin');
 const modalInfo = document.querySelector('.modalInfo');
 const modalPause = document.querySelector('.modalPause');
@@ -83,6 +86,10 @@ const replayModal = () => {
     initGame();
     startGame();
   //}, 500);
+  okModal();
+}
+
+const okModal = () => {
   timeline([
     {
       track: 'modal',
@@ -100,6 +107,10 @@ const replayModal = () => {
 }
 
 //listen(openModalButton, 'click').start(openModal);
+
+playModalButton.each((i,e)=> {
+  listen(e, 'click').start(okModal);
+});
 
 cancelModalButton.each((i,e)=> {
   listen(e, 'click').start(cancelModal);

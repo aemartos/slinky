@@ -1,6 +1,6 @@
 
 // GLOBAL VARIABLES ----------------------------
-var startedGame, timer, board, timerFunction, oppositeDir, codeToDirection = undefined;
+var user, startedGame, timer, board, timerFunction, oppositeDir, codeToDirection = undefined;
 const UP = 'UP';
 const DOWN = 'DOWN';
 const LEFT = 'LEFT';
@@ -9,8 +9,10 @@ const BOUNDARY = 'BOUNDARY';
 const SHRINK = 'SHRINK';
 const SHOOT = 'SHOOT';
 const PAUSE_BUTTON = 'PAUSE_BUTTON';
+const INFO_BUTTON = 'INFO_BUTTON';
 
 var PAUSE = false;
+var INFO = false;
 const SLINKY = 's';
 const WALL = 'w';
 const BONUS = 'b';
