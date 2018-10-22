@@ -5,6 +5,7 @@ function GameBoard() {
   this.area = $('#gameBoard');
   this.grid = [];
   this.users = [];
+  this.badGuys = [];
 }
 
 GameBoard.prototype.createGrid = function () {
@@ -36,7 +37,8 @@ GameBoard.prototype.initWalls = function () {
 
 GameBoard.prototype.initBadGuys = function () {
   for (let i = 0; i < badGuys_limit; i++) {
-    let badGuy = new BadGuys(3,1);
+    let badGuy = new BadGuys(3,1,i);
+    this.badGuys.push(badGuy);
     badGuy.drawBadGuy();
   }
 }

@@ -98,6 +98,11 @@
           }
           break;
       }
+    }
+  }
+
+  timerFunctionScene = ()=> {
+    if (!PAUSE) {
       if(bonus_count === 0) {
         $('circle.form.bonus').each((i,e)=>{
           let $e = $(e);
@@ -107,13 +112,14 @@
           $e.remove();
         });
         board.initBonuses();
-        board.area.html(board.area.html());
         bonus_count = 200;
       } else {
         bonus_count--;
       }
-
-      //badGuys.drawBadGuys(badGuys.nextPosBadGuys);
+      board.badGuys.forEach((badGuy,i) => {
+        badGuy.nextPosBadGuys();
+      });
+      board.area.html(board.area.html());
     }
   }
 
@@ -124,7 +130,8 @@
       if (!direction || user.shrinkingFromWall)  {
         return;
       } else if (direction === SHOOT) {
-        user.shoot();
+        //user.shoot();
+        console.log('shooting is not implemented yet :D');
       } else if (direction === PAUSE_BUTTON) {
         if(PAUSE) {
           cancelModal();
@@ -142,6 +149,7 @@
     });
     // timer = setInterval(()=>{timerFunction(user)}, RHYTHM);
     timer = requestInterval(()=>{timerFunction(user)}, RHYTHM);
+    timerScene = requestInterval(()=>{timerFunctionScene()}, RHYTHM);
   }
 
 

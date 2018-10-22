@@ -1,5 +1,7 @@
-function BadGuys(health, strength) {
+function BadGuys(health, strength, index) {
   this.z = undefined;
+  this.index = undefined;
+  this.rotate = this.random(360);
   Form.call(this, health, strength);
 }
 
@@ -7,32 +9,67 @@ BadGuys.prototype = Object.create(Form.prototype);
 BadGuys.prototype.constructor = BadGuys;
 
 BadGuys.prototype.nextPosBadGuys = function () {
+  board.grid[this.y][this.x] = 0;
+  $('#badGuy_' + this.index).remove();
+  this.drawBadGuy(this.generateNextPos);
+}
+
+
+BadGuys.prototype.generateNextPos = function (occupied = false) {
   const dir = [UP, DOWN, LEFT, RIGHT];
-  console.log(direction);
-  if (badGuys_count === 0) {
-    let direction = this.randomArr(dir);
+  let direction = this.direction;
+  if (badGuys_count === 0 || occupied) {
+    direction = this.randomArr(dir);
   } else {
     badGuys_count--;
   }
-  this.getFreePosition();
-  //random de las direcciones utilizando el switch de las direcciones
-  //TOP: y-1
-  //...
-  //...
-  //comprobar si la pos está libre en arraybi
-  // si está libre devuelvo {x,y}
-  // sino, me vuelvo a llamar a mi misma return this.nextPosBadGuys();
-  return true;
+  let x = this.x;
+  let y = this.y;
+  let nextPos = 0;
+  switch(direction) {
+    case UP:
+      try { nextPos = board.grid[y - 1][x];} catch(e) { return this.generateNextPos(true); }
+      if (nextPos === 0 || nextPos === SLINKY) {
+        y =  y - 1;
+        return {x, y};
+      }
+      return this.generateNextPos(true);
+    case DOWN:
+      try { nextPos = board.grid[y + 1][x];} catch(e) { return this.generateNextPos(true); }
+
+      if (nextPos === 0 || nextPos === SLINKY) {
+        y = y + 1;
+        return {x, y};
+      }
+      return this.generateNextPos(true);
+    case LEFT:
+      try { nextPos = board.grid[y][x - 1];} catch(e) { return this.generateNextPos(true); }
+      if (nextPos === 0 || nextPos === SLINKY) {
+        x = x - 1;
+        return {x, y};
+      }
+      return this.generateNextPos(true);
+    case RIGHT:
+      try { nextPos = board.grid[y][x + 1];} catch(e) { return this.generateNextPos(true); }
+      if (nextPos === 0 || nextPos === SLINKY) {
+        x = x + 1;
+        return {x, y};
+      }
+      return this.generateNextPos(true);
+  }
 }
 
 BadGuys.prototype.drawBadGuy = function (positionFunctionOptional) {
   let positionFunction = positionFunctionOptional ? positionFunctionOptional.bind(this) : this.getFreePosition.bind(this);
   let pos = positionFunction(2);
+  this.x = pos.x;
+  this.y = pos.y;
   //transform="rotate(108 69 19)" selfRotation
-  this.x = pos.x + ',' + pos.y + ' ';
-  this.y = (pos.x + 1) + ',' + pos.y + ' ';
-  this.z = (pos.x + 1) + ',' + (pos.y + 1);
-  this.path = '<g class="badguyy"><polygon class="form badGuy" points="' + this.x + this.y + this.z + '"' + ' id="badGuy"/></g>';
+  let x = pos.x + ',' + pos.y + ' ';
+  let y = (pos.x + 1) + ',' + pos.y + ' ';
+  let z = (pos.x + 1) + ',' + (pos.y + 1);
+  this.path = '<g class="badguyy"><polygon class="form badGuy" transform="rotate(' + this.rotate + ' ' + (pos.x + .5) + ' ' + (pos.y + .5) + ')" points="' + x + y + z + '"id="badGuy_' + this.index +'"/></g>';
   board.area.append(this.path);
-  board.grid[pos.y][pos.x] = BADGUY;
+  this.rotate += 5;
+  board.grid[this.y][this.x] = BADGUY;
 }

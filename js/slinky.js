@@ -109,7 +109,7 @@ User.prototype.checkBoundaries = function () {
     case (BONUS + 'bl'):
     case (BONUS + 'bi'):
     case (BONUS + 'in'):
-      let bon = $('[cx="' + nextX + '.5"]');
+      let bon = $('[cx="' + nextX + '.5"][cy="' + nextY + '.5"]');
       Bonus.removeBonus(bon, (nextX), (nextY));
       //return BOUNDARY;
       return false;
