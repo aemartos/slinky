@@ -156,11 +156,15 @@
 
   };
 
-  $("#startButton").click(function() {
+  const initGame = () => {
     $('.initial_page').css('display', 'none');
     $('.counter').css('display', 'flex');
     $('#guides').css('display', 'block');
     $('#gameBoard').css('display', 'block');
+  }
+
+  $("#startButton").click(function() {
+    initGame();
     startGame();
   });
 

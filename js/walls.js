@@ -42,7 +42,7 @@ Walls.prototype.drawWalls = function () {
     }
   }
   for (let i = 0; i < walls_limit; i++) {
-    let pos = this.getFreePosition(10);
+    let pos = this.getFreePosition(3);
     this.x = pos.x;
     this.y = pos.y;
     this.style = this.randomArr(wall_type);

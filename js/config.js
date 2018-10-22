@@ -20,7 +20,7 @@ const GOAL = 'g'
 const RHYTHM = 75;
 const size = 1;
 const enemy_size = 8;
-const cols = 76;
+const cols = 50; //76
 const rows = cols/2;
 
 const walls_limit = 20;

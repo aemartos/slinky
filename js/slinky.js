@@ -78,7 +78,7 @@ User.prototype.checkBoundaries = function () {
   switch(nextPos) {
     case GOAL:
       this.shrinkFromWall();
-      setTimeout(()=>{openModal();}, 500);
+      setTimeout(()=>{openModal(modalWin);}, 500);
       setTimeout(()=>{clearRequestInterval(timer);}, 2000);
       //$('.user.back').attr('x', parseInt($('#goal').attr('x')) + .5);
       //$('.user.back').attr('y', parseInt($('#goal').attr('y')) + .5);

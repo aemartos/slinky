@@ -5,10 +5,20 @@ const cancelModalButton = document.querySelector('.modal-cancel');
 const replayModalButton = document.querySelector('.modal-replay');
 
 const modalShade = styler(document.querySelector('.modal-shade'));
-const modalContainer = styler(document.querySelector('.modal-container'));
+
+const modalWin = document.querySelector('.modalWin');
+const modalInfo = document.querySelector('.modalInfo');
 const modal = styler(document.querySelector('.modal'));
-const modalSections = Array.from(document.querySelector('.modal').children).map(styler);
-const sectionLabels = modalSections.map((s, i) => 'section' + i);
+const modalContainer = styler(document.querySelector('.modal-container'));
+
+let modalSections = [];
+let sectionLabels = [];
+
+
+const selectChildren = (modall) => {
+  modalSections = Array.from(modall.children).map(styler);
+  sectionLabels = modalSections.map((s, i) => 'section' + i);
+};
 
 const tweenUp = (track, duration = 500, yFrom = 100) => ({
   track,
@@ -26,9 +36,9 @@ const setStylers = (v) => {
   });
 };
 
-const showContainers = () => {
+const showContainers = (modall) => {
   modalShade.set('display', 'block');
-  modalContainer.set('display', 'flex');
+  styler(modall).set('display', 'flex');
 };
 
 const hideContainers = () => {
@@ -36,8 +46,9 @@ const hideContainers = () => {
   modalContainer.set('display', 'none');
 };
 
-const openModal = () => {
-  showContainers();
+const openModal = (modall) => {
+  selectChildren(modall);
+  showContainers(modall);
   timeline([
     { track: 'shade', from: 0, to: 1, ease: easing.linear },
     '-100',
@@ -66,8 +77,12 @@ const cancelModal = () => {
 }
 
 const replayModal = () => {
-  startGame();
-  location.reload();
+  //setTimeout(()=>{
+    //location.reload();
+    board.cleanBoard();
+    initGame();
+    startGame();
+  //}, 500);
   timeline([
     {
       track: 'modal',

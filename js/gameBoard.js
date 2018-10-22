@@ -16,6 +16,12 @@ GameBoard.prototype.createGrid = function () {
   this.grid = Array(rows).fill().map(() => Array(cols).fill(0));
 }
 
+GameBoard.prototype.cleanBoard = function () {
+  clearRequestInterval(timer);
+  this.createGrid();
+  this.area.html('<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>');
+}
+
 GameBoard.prototype.initScene = function () {
   this.wall = new Walls(3,1);
   this.wall.drawWalls();
