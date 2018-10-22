@@ -8,6 +8,7 @@ const modalShade = styler(document.querySelector('.modal-shade'));
 
 const modalWin = document.querySelector('.modalWin');
 const modalInfo = document.querySelector('.modalInfo');
+const modalPause = document.querySelector('.modalPause');
 const modal = styler(document.querySelector('.modal'));
 const modalContainer = styler(document.querySelector('.modal-container'));
 
@@ -59,7 +60,6 @@ const openModal = (modall) => {
 }
 
 const cancelModal = () => {
-  clearRequestInterval(timer);
   timeline([
     {
       track: 'modal',

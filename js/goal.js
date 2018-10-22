@@ -5,7 +5,7 @@ Goal.prototype = Object.create(Form.prototype);
 Goal.prototype.constructor = Goal;
 
 Goal.prototype.drawGoal = function () {
-  let pos = this.getFreePosition(4);
+  let pos = this.getFreePosition(3);
   this.x = ' x="' + pos.x + '"';
   this.y = ' y="' + pos.y + '"';
   this.path = '<rect id="goal" class="form goal"' + this.x + this.y + 'width="2" height="2"/>';

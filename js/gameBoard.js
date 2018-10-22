@@ -5,9 +5,9 @@ function GameBoard() {
   this.area = $('#gameBoard');
   this.grid = [];
   this.users = [];
-  this.wall = undefined;
-  this.bonus = undefined;
-  this.badGuy = undefined;
+  this.walls = [];
+  this.bonuses = [];
+  this.badGuys = [];
 }
 
 GameBoard.prototype.createGrid = function () {
@@ -23,12 +23,35 @@ GameBoard.prototype.cleanBoard = function () {
 }
 
 GameBoard.prototype.initScene = function () {
-  this.wall = new Walls(3,1);
-  this.wall.drawWalls();
-  this.bonus = new Bonus();
-  this.bonus.drawBonuses();
-  this.badGuy = new BadGuys(3,1);
-  this.badGuy.drawBadGuys();
+  this.initWalls();
+  this.initBadGuys();
+  this.initBonuses();
+
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   this.area.html(this.area.html());
+}
+
+GameBoard.prototype.initWalls = function () {
+  for (let i = 0; i < walls_limit; i++) {
+    let wall = new Walls(3,1);
+    this.walls.push(wall);
+    wall.drawWalls();
+  }
+}
+
+GameBoard.prototype.initBadGuys = function () {
+  for (let i = 0; i < badGuys_limit; i++) {
+    let badGuy = new BadGuys(3,1);
+    this.badGuys.push(badGuy);
+    badGuy.drawBadGuy();
+  }
+}
+
+GameBoard.prototype.initBonuses = function () {
+  this.bonuses = [];
+  for (let i = 0; i < bonus_limit; i++) {
+    let bonus = new Bonus();
+    this.bonuses.push(bonus);
+    bonus.drawBonus();
+  }
 }

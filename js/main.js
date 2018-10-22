@@ -106,7 +106,7 @@
           board.grid[y][x] = 0;
           $e.remove();
         });
-        board.bonus.drawBonuses();
+        board.initBonuses();
         board.area.html(board.area.html());
         bonus_count = 200;
       } else {
@@ -126,6 +126,11 @@
       } else if (direction === SHOOT) {
         user.shoot();
       } else if (direction === PAUSE_BUTTON) {
+        if(PAUSE) {
+          cancelModal();
+        } else {
+          openModal(modalPause);
+        }
         PAUSE = !PAUSE;
       } else {
         if (user.shrinking !== direction) {

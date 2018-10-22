@@ -8,9 +8,9 @@ Walls.prototype.constructor = Walls;
 
 Walls.prototype.drawWalls = function () {
   const wall_type = ['normal','ice','electric','wash','blackHole','teletransport'];
-  function walls(x, y, style, i) {
+  function walls(x, y, style) {
     return {
-      'wall01': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> num="' + i + '">\
+      'wall01': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"-->>\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + (x+1) + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
@@ -18,20 +18,20 @@ Walls.prototype.drawWalls = function () {
                 <g>',
                 'positions': [{x, y}, {x: x+1, y}, {x, y: y+1}, {x: x+1, y: y+1}],
                 },
-      'wall02': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> "num="' + i + '">\
+      'wall02': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"-->>\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + (x+1) + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
                 </g>',
                 'positions': [{x, y}, {x: x+1, y}, {x, y: y+1}],
                 },
-      'wall03': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> num="' + i + '">\
+      'wall03': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"-->>\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
                 </g>',
                 'positions': [{x, y}, {x, y: y+1}],
                 },
-      'wall04': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"--> num="' + i + '">\
+      'wall04': {'path': '<g class="form wall ' + style + '" <!--filter="url(#glow)"-->>\
                 <rect x="' + x + '" y="' + y + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+1) + '" width="1" height="1"/>\
                 <rect x="' + x + '" y="' + (y+2) + '" width="1" height="1"/>\
@@ -41,17 +41,14 @@ Walls.prototype.drawWalls = function () {
                 }
     }
   }
-  for (let i = 0; i < walls_limit; i++) {
-    let pos = this.getFreePosition(3);
-    this.x = pos.x;
-    this.y = pos.y;
-    this.style = this.randomArr(wall_type);
-    let wall = this.randomObj(walls(this.x,this.y,this.style,i));
-    this.path = wall.path;
-    board.area.append(this.path);
-    wall.positions.map((e)=>{
-      board.grid[e.y][e.x] = WALL;
-    });
-  }
-
+  let pos = this.getFreePosition(3);
+  this.x = pos.x;
+  this.y = pos.y;
+  this.style = this.randomArr(wall_type);
+  let wall = this.randomObj(walls(this.x,this.y,this.style));
+  this.path = wall.path;
+  board.area.append(this.path);
+  wall.positions.map((e)=>{
+    board.grid[e.y][e.x] = WALL;
+  });
 }
