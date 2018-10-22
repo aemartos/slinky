@@ -5,6 +5,9 @@ function GameBoard() {
   this.area = $('#gameBoard');
   this.grid = [];
   this.users = [];
+  this.wall = undefined;
+  this.bonus = undefined;
+  this.badGuy = undefined;
 }
 
 GameBoard.prototype.createGrid = function () {
@@ -14,12 +17,12 @@ GameBoard.prototype.createGrid = function () {
 }
 
 GameBoard.prototype.initScene = function () {
-  let wall = new Walls(3,1);
-  wall.drawWalls();
-  let bonus = new Bonus();
-  bonus.drawBonuses();
-  let badGuy = new BadGuys(3,1);
-  badGuy.drawBadGuys();
+  this.wall = new Walls(3,1);
+  this.wall.drawWalls();
+  this.bonus = new Bonus();
+  this.bonus.drawBonuses();
+  this.badGuy = new BadGuys(3,1);
+  this.badGuy.drawBadGuys();
   //REFRESH SVG IN DOM to paint the forms created from jQuery
   this.area.html(this.area.html());
 }

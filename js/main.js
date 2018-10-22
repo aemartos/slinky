@@ -106,7 +106,7 @@
           board.grid[y][x] = 0;
           $e.remove();
         });
-        bonus.drawBonuses();
+        board.bonus.drawBonuses();
         board.area.html(board.area.html());
         bonus_count = 200;
       } else {

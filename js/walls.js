@@ -41,7 +41,7 @@ Walls.prototype.drawWalls = function () {
                 }
     }
   }
-  for (let i = 0; i <= walls_limit; i++) {
+  for (let i = 0; i < walls_limit; i++) {
     let pos = this.getFreePosition(10);
     this.x = pos.x;
     this.y = pos.y;
