@@ -126,6 +126,8 @@ User.prototype.checkBoundaries = function () {
 
 User.prototype.userLose = function () {
   if(this.health === 0) {
+    LOSE = true;
+    WIN = false;
     openModal(modalLose);
     clearRequestInterval(timer);
     clearRequestInterval(timerScene);
@@ -135,6 +137,8 @@ User.prototype.userLose = function () {
 User.prototype.userWin = function () {
   this.bones = $('.user.bone');
   if(this.win && this.bones.length < 1) {
+    WIN = true;
+    LOSE = false;
     clearRequestInterval(timer);
     clearRequestInterval(timerScene);
   }

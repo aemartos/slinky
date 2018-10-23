@@ -64,14 +64,16 @@ GameBoard.prototype.render = function(){
 }
 
 GameBoard.prototype.time = function(){
-  if (countdown_fps === FPS) {
-    countdown_fps = 0;
-    counter++;
-    let date = new Date(null);
-    date.setSeconds(counter);
-    let trimmedDate = date.toISOString().substr(14,5);
-    $('.time').text(trimmedDate);
-  } else {
-  countdown_fps++;
+  if(!PAUSE && !INFO && !WIN && !LOSE) {
+    if (countdown_fps === FPS) {
+      countdown_fps = 0;
+      counter++;
+      let date = new Date(null);
+      date.setSeconds(counter);
+      let trimmedDate = date.toISOString().substr(14,5);
+      $('.time').text(trimmedDate);
+    } else {
+    countdown_fps++;
+    }
   }
 }

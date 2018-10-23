@@ -13,6 +13,8 @@ const INFO_BUTTON = 'INFO_BUTTON';
 
 var PAUSE = false;
 var INFO = false;
+var WIN = false;
+var LOSE = false;
 const SLINKY = 's';
 const WALL = 'w';
 const BONUS = 'b';
