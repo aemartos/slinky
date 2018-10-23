@@ -81,6 +81,7 @@
   timerFunction = (user)=> {
     user.userLose();
     user.userWin();
+    user.userPoints();
     if(!PAUSE && !INFO){
       switch (user.direction) {
         case UP:
@@ -189,7 +190,7 @@
     user = new User('scully', 3, 2);
     user.initUser();
     initListeners(user);
-    board.initScene();
+    //board.initScene();
 
   };
 

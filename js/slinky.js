@@ -83,7 +83,6 @@ User.prototype.checkBoundaries = function () {
       openModal(modalWin);
       this.win = true;
       break;
-    case (WALL + 'ic'):
     case (WALL + 'el'):
     case (WALL + 'wa'):
     case (WALL + 'bl'):
@@ -93,6 +92,8 @@ User.prototype.checkBoundaries = function () {
     case BOUNDARY:
       isWall = true;
       break;
+    case (WALL + 'ic'):
+      return BOUNDARY;
     case SLINKY:
       let last = this.getLast();
       let lastX = parseInt(last.attr('x'));
@@ -110,6 +111,7 @@ User.prototype.checkBoundaries = function () {
     case (BONUS + 'in'):
       let bon = $('[cx="' + nextX + '.5"][cy="' + nextY + '.5"]');
       Bonus.removeBonus(bon, (nextX), (nextY));
+      board.winPoints();
       //return BOUNDARY;
       return false;
     default:
@@ -277,6 +279,12 @@ User.prototype.shrinkAnimation = function (clas) {
   if (this.bones.length === 0) {
     //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
     //board.area.append(this.path);
+    //$('.user.back').attr('width', '0.6');
+    //$('.user.back').attr('width', '1.2');
+    //$('.user.back').attr('width', '0.7');
+    //$('.user.back').attr('width', '1.1');
+    //$('.user.back').attr('width', '0.9');
+    //$('.user.back').attr('width', '1');
     $('.user.back').addClass(clas);
     setTimeout(()=>{$('.user.back').removeClass(clas)}, 500);
   }
@@ -291,4 +299,11 @@ User.prototype.changeSpeed = function (num) {
   clearRequestInterval(timer);
   let t = (num && !isNaN(num)) ? num : 1;
   timer = requestInterval(()=>{timerFunction(this)}, RHYTHM/t);
+}
+
+User.prototype.userPoints = function (num) {
+  if(this.points <= 0) {
+    this.points = 0;
+  }
+  $('.counter .points .number').text(this.points);
 }

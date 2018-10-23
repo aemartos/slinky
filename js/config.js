@@ -32,6 +32,6 @@ const rows = cols/2;
 
 const walls_limit = 10;
 const bonus_limit = 2;
-const badGuys_limit = 5;
+const badGuys_limit = 10;
 var bonus_count = 200;
 var badGuys_count = 150;

@@ -52,9 +52,24 @@ GameBoard.prototype.initBonuses = function () {
 }
 
 GameBoard.prototype.lifeLess = function(){
+  user.points = user.points - 1000;
   $('.life.fill').last().removeClass('fill');
   $('.loseLife').addClass('appear');
+  setTimeout(()=>{
+    $('.loseWinPoints').addClass('appear');
+    $('.loseWinPoints .winlose').text('Lost');
+    $('.loseWinPoints .points').text('1000');
+  }, 1500);
   setTimeout(()=>{$('.loseLife').removeClass('appear');}, 3000);
+  setTimeout(()=>{$('.loseWinPoints').removeClass('appear');}, 4000);
+}
+
+GameBoard.prototype.winPoints = function(){
+  user.points = user.points + 2000;
+  $('.loseWinPoints').addClass('appear');
+  $('.loseWinPoints .winlose').text('Won');
+  $('.loseWinPoints .points').text('2000');
+  setTimeout(()=>{$('.loseWinPoints').removeClass('appear');}, 4000);
 }
 
 GameBoard.prototype.render = function(){
@@ -66,6 +81,7 @@ GameBoard.prototype.render = function(){
 GameBoard.prototype.time = function(){
   if(!PAUSE && !INFO && !WIN && !LOSE) {
     if (countdown_fps === FPS) {
+      user.points = user.points - 20;
       countdown_fps = 0;
       counter++;
       let date = new Date(null);
