@@ -116,6 +116,10 @@ cancelModalButton.each((i,e)=> {
   listen(e, 'click').start(cancelModal);
 });
 
+cancelModalButton.click(function() {
+  setTimeout(()=>{location.reload();}, 300);
+});
+
 replayModalButton.each((i,e)=> {
   listen(e, 'click').start(replayModal);
 });

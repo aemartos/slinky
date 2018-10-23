@@ -29,7 +29,6 @@
       line = '<line class="line"' + x1 + y1 + x2 + y2 + '/>';
       board.area.append(line);
     }
-    board.area.html(board.area.html());
   }
 
   const guidesOff = () => {
@@ -71,6 +70,7 @@
       case 73:
         return INFO_BUTTON;
       //ESC === 27
+      //ENTER === 13
       //P === 80
       //I === 73
       default:
@@ -79,12 +79,16 @@
   }
 
   timerFunction = (user)=> {
+    user.userLose();
     if(!PAUSE && !INFO){
       switch (user.direction) {
         case UP:
+          console.log("UP!")
           if (user.oldDirection === oppositeDir(user.direction)) {
+            console.log("It shrinks");
             user.shrink();
           } else if(!user.checkBoundaries()) {
+            console.log("else");
             user.grow(0,-size); //growUp
           }
           break;
@@ -131,7 +135,6 @@
       board.badGuys.forEach((badGuy,i) => {
         badGuy.nextPosBadGuys();
       });
-      board.area.html(board.area.html());
     }
   }
 
@@ -163,6 +166,8 @@
         }
         INFO = !INFO;
       } else {
+        console.log("user.shrin " + user.shrinking);
+        console.log("direction: " + direction);
         if (user.shrinking !== direction) {
           user.direction = direction;
           user.directionsLog.push(user.direction);
@@ -173,6 +178,7 @@
     // timer = setInterval(()=>{timerFunction(user)}, RHYTHM);
     timer = requestInterval(()=>{timerFunction(user)}, RHYTHM);
     timerScene = requestInterval(()=>{timerFunctionScene()}, RHYTHM);
+    timerfps= requestInterval(()=>{board.render()}, 1000/FPS);
   }
 
 

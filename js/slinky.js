@@ -31,9 +31,6 @@ User.prototype.drawUserBody = function (clas) {
               //<rect class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   board.area.append(this.path);
   board.grid[this.y][this.x] = SLINKY;
-
-  //REFRESH SVG IN DOM to paint the forms created from jQuery
-  board.area.html(board.area.html());
 }
 
 User.prototype.addStroke = function () {
@@ -74,11 +71,9 @@ User.prototype.checkBoundaries = function () {
   let nextX = this.x + dx;
   let nextY = this.y + dy;
   let nextPos = board.grid[nextY][nextX];
-  //console.log(isBoundary, nextPos, this.x, this.y, dx, dy);
-  //console.log(board.grid);
+
   nextPos = isBoundary ? BOUNDARY : nextPos;
   let isWall = false;
-  this.userLose();
   switch(nextPos) {
     case GOAL:
       this.shrinkFromWall();
@@ -93,6 +88,7 @@ User.prototype.checkBoundaries = function () {
       isWall = true;
       break;
     case SLINKY:
+    console.log("CHOCA");
       let last = this.getLast();
       let lastX = parseInt(last.attr('x'));
       let lastY = parseInt(last.attr('y'));
@@ -123,19 +119,21 @@ User.prototype.checkBoundaries = function () {
   }
 }
 
+
 User.prototype.userLose = function () {
   if(this.strength === 0) {
-    setTimeout(()=>{openModal(modalLose);}, 500);
-    setTimeout(()=>{clearRequestInterval(timer);}, 2000);
+    openModal(modalLose);
+    clearRequestInterval(timer);
+    clearRequestInterval(timerScene);
   }
 }
 
 User.prototype.userWin = function () {
   //if(this.bones.length === 2) {
-    openModal(modalWin);
-  //}
-  //setTimeout(()=>{openModal(modalLose);}, 500);
+  setTimeout(()=>{openModal(modalWin);}, 500);
   setTimeout(()=>{clearRequestInterval(timer);}, 2000);
+  setTimeout(()=>{clearRequestInterval(timerScene);}, 2000);
+  //}
 }
 
 User.prototype.updatePosition = function () {
@@ -166,6 +164,7 @@ User.prototype.cleanGridPositions = function () {
 }
 
 User.prototype.grow = function (x,y) {
+  console.log("SHRINGIN FALSE");
   this.shrinking = false;
   this.x = parseInt($('.user.head').attr('x')) + x;
   this.y = parseInt($('.user.head').attr('y')) + y;
@@ -182,6 +181,12 @@ User.prototype.getLast = function () {
   this.bones = $('.user.bone');
   let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
   return last;
+}
+
+User.prototype.getPrevLast = function () {
+  this.bones = $('.user.bone');
+  console.log(this.bones);
+  return $(this.bones[this.bones.length-2]);
 }
 
 User.prototype.shrink = function () {
@@ -207,6 +212,8 @@ User.prototype.shrink = function () {
   if(this.bones.length === 0) {
     if(this.shrinkingFromWall) {
       this.shrinkingFromWall = false;
+      console.log("SHRINGIN FALSE22");
+
       this.shrinking = false;
       this.oldDirection = this.direction;
       this.direction = oppositeDir(this.oldDirection);
@@ -219,9 +226,14 @@ User.prototype.shrink = function () {
 
 User.prototype.shrinkDir = function () {
   let last = this.getLast();
-  let nextLast = this.shrinkingFromWall ? last : last.prev();
+  console.log("LAST: ", last);
+  let nextLast = this.shrinkingFromWall ? last : this.getPrevLast();
   let nextLastX = parseInt(nextLast.attr('x'));
   let nextLastY = parseInt(nextLast.attr('y'));
+  console.log("NEXTLAST: ", nextLast);
+  console.log("SHRINGIN direction");
+  console.log("Esy: " + this.y)
+  console.log("Esny: " + nextLastY)
 
   if (this.x > nextLastX) {
     this.shrinking = LEFT;
@@ -234,8 +246,11 @@ User.prototype.shrinkDir = function () {
   }
 
   if (this.shrinkingFromWall) {
+    console.log("SHRINGIN opposite");
+
     this.shrinking = oppositeDir(this.shrinking);
   }
+  console.log("Es: " + this.shrinking)
 }
 
 User.prototype.shrinkFromWall = function () {
@@ -252,6 +267,8 @@ User.prototype.shrinkFromWall = function () {
 
 User.prototype.shrinkAnimation = function (clas) {
   if (this.bones.length === 0) {
+    //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
+    //board.area.append(this.path);
     $('.user.back').addClass(clas);
     setTimeout(()=>{$('.user.back').removeClass(clas)}, 500);
   }

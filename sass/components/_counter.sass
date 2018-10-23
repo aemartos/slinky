@@ -1,3 +1,14 @@
+.loseLife
+  opacity: 0
+  position: absolute
+  top: 50%
+  left: 50%
+  font-size: 3em
+  font-weight: bold
+  +prefix(transform, scale(1) translate(-45%, -45%))
+  pointer-events: none
+  &.appear
+    +prefix(animation, appear 1000ms 2 alternate)
 .counter
   position: absolute
   top: 1em

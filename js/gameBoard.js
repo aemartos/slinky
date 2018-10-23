@@ -25,7 +25,7 @@ GameBoard.prototype.initScene = function () {
   this.initBadGuys();
   this.initBonuses();
   //REFRESH SVG IN DOM to paint the forms created from jQuery
-  this.area.html(this.area.html());
+  //this.area.html(this.area.html());
 }
 
 GameBoard.prototype.initWalls = function () {
@@ -48,4 +48,9 @@ GameBoard.prototype.initBonuses = function () {
     let bonus = new Bonus();
     bonus.drawBonus();
   }
+}
+
+GameBoard.prototype.render = function(){
+  //REFRESH SVG IN DOM to paint the forms created from jQuery
+  this.area.html(this.area.html());
 }

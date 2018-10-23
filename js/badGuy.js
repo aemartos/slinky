@@ -64,12 +64,17 @@ BadGuys.prototype.drawBadGuy = function (positionFunctionOptional) {
   let pos = positionFunction(2);
   this.x = pos.x;
   this.y = pos.y;
-  //transform="rotate(108 69 19)" selfRotation
   let x = pos.x + ',' + pos.y + ' ';
   let y = (pos.x + 1) + ',' + pos.y + ' ';
   let z = (pos.x + 1) + ',' + (pos.y + 1);
   this.path = '<g class="badguyy"><polygon class="form badGuy" transform="rotate(' + this.rotate + ' ' + (pos.x + .5) + ' ' + (pos.y + .5) + ')" points="' + x + y + z + '"id="badGuy_' + this.index +'"/></g>';
   board.area.append(this.path);
-  this.rotate += 5;
+  this.rotate += 20;
   board.grid[this.y][this.x] = BADGUY;
+}
+
+BadGuys.prototype.attack = function () {
+  user.health = user.health - this.strength;
+  user.shrink();
+
 }

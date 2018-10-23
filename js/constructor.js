@@ -56,3 +56,7 @@ Form.prototype.randomObj = function (obj) {
   var keys = Object.keys(obj);
   return obj[keys[keys.length * Math.random() << 0]];
 }
+
+Form.prototype.attack = function () {
+  user.health = user.health - this.strength;
+}

@@ -1,6 +1,6 @@
 
 // GLOBAL VARIABLES ----------------------------
-var user, startedGame, timer, board, timerFunction, oppositeDir, codeToDirection = undefined;
+var user, startedGame, timer, board, timerFunction, timerfps, oppositeDir, codeToDirection = undefined;
 const UP = 'UP';
 const DOWN = 'DOWN';
 const LEFT = 'LEFT';
@@ -20,6 +20,7 @@ const BADGUY = 'bg';
 const GOAL = 'g'
 
 const RHYTHM = 75;
+const FPS = 25;
 const size = 1;
 const enemy_size = 8;
 const cols = 76; //76
