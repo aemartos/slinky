@@ -31,7 +31,7 @@ BadGuys.prototype.generateNextPos = function (occupied = false) {
       try { nextPos = board.grid[y - 1][x];} catch(e) { return this.generateNextPos(true); }
       if (nextPos === 0 || nextPos === SLINKY) {
         y =  y - 1;
-        this.attack(nextPos);
+        this.attack(nextPos, SLINKY);
         return {x, y};
       }
       return this.generateNextPos(true);
@@ -39,7 +39,7 @@ BadGuys.prototype.generateNextPos = function (occupied = false) {
       try { nextPos = board.grid[y + 1][x];} catch(e) { return this.generateNextPos(true); }
       if (nextPos === 0 || nextPos === SLINKY) {
         y = y + 1;
-        this.attack(nextPos);
+        this.attack(nextPos, SLINKY);
         return {x, y};
       }
       return this.generateNextPos(true);
@@ -47,7 +47,7 @@ BadGuys.prototype.generateNextPos = function (occupied = false) {
       try { nextPos = board.grid[y][x - 1];} catch(e) { return this.generateNextPos(true); }
       if (nextPos === 0 || nextPos === SLINKY) {
         x = x - 1;
-        this.attack(nextPos);
+        this.attack(nextPos, SLINKY);
         return {x, y};
       }
       return this.generateNextPos(true);
@@ -55,7 +55,7 @@ BadGuys.prototype.generateNextPos = function (occupied = false) {
       try { nextPos = board.grid[y][x + 1];} catch(e) { return this.generateNextPos(true); }
       if (nextPos === 0 || nextPos === SLINKY) {
         x = x + 1;
-        this.attack(nextPos);
+        this.attack(nextPos, SLINKY);
         return {x, y};
       }
       return this.generateNextPos(true);
@@ -74,14 +74,4 @@ BadGuys.prototype.drawBadGuy = function (positionFunctionOptional) {
   board.area.append(this.path);
   this.rotate += 20;
   board.grid[this.y][this.x] = BADGUY;
-}
-
-BadGuys.prototype.attack = function (nextPos) {
-  if(nextPos === SLINKY && !user.shrinkingFromEnemy && !user.shrinkingFromWall) {
-    user.health = user.health - this.strength;
-    user.shrinkFromEnemy();
-    board.alert();
-    let lives = $('.life.fill');
-    lives.last().removeClass('fill');
-  }
 }

@@ -84,6 +84,7 @@ User.prototype.checkBoundaries = function () {
     case (WALL + 'wa'):
     case (WALL + 'bl'):
     case (WALL + 'te'):
+      this.attack(nextPos, nextPos);
     case (WALL + 'no'):
     case BOUNDARY:
       isWall = true;
@@ -259,6 +260,9 @@ User.prototype.shrinkFromWall = function () {
 }
 
 User.prototype.shrinkFromEnemy = function () {
+  if(!this.direction) {
+    return;
+  }
   this.shrinkingFromEnemy = true;
   this.oldDirection = this.direction;
   this.direction = oppositeDir(this.oldDirection);

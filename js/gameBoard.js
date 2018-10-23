@@ -49,7 +49,8 @@ GameBoard.prototype.initBonuses = function () {
   }
 }
 
-GameBoard.prototype.alert = function(){
+GameBoard.prototype.lifeLess = function(){
+  $('.life.fill').last().removeClass('fill');
   $('.loseLife').addClass('appear');
   setTimeout(()=>{$('.loseLife').removeClass('appear');}, 500);
 }

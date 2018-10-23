@@ -57,6 +57,10 @@ Form.prototype.randomObj = function (obj) {
   return obj[keys[keys.length * Math.random() << 0]];
 }
 
-Form.prototype.attack = function () {
-  user.health = user.health - this.strength;
+Form.prototype.attack = function (nextPos, obstacle) {
+  if(nextPos === obstacle && !user.shrinkingFromEnemy && !user.shrinkingFromWall) {
+    user.health = user.health - this.strength;
+    user.shrinkFromEnemy();
+    board.lifeLess();
+  }
 }
