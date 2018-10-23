@@ -2,10 +2,12 @@
 // User
 function User(name, health, strength) {
   this.name = name;
+  this.points = 10000;
   this.direction = '';
   this.oldDirection = '';
   this.directionsLog = [];
   this.bones = [];
+  this.win = false;
   this.shrinking = false;
   this.shrinkingFromWall = false;
   this.shrinkingFromEnemy = false;
@@ -78,19 +80,20 @@ User.prototype.checkBoundaries = function () {
   switch(nextPos) {
     case GOAL:
       this.shrinkFromWall();
-      this.userWin();
+      openModal(modalWin);
+      this.win = true;
+      break;
     case (WALL + 'ic'):
     case (WALL + 'el'):
     case (WALL + 'wa'):
     case (WALL + 'bl'):
     case (WALL + 'te'):
-      this.attack(nextPos, nextPos);
+      board.walls[0].attack(nextPos, nextPos);
     case (WALL + 'no'):
     case BOUNDARY:
       isWall = true;
       break;
     case SLINKY:
-    console.log("CHOCA");
       let last = this.getLast();
       let lastX = parseInt(last.attr('x'));
       let lastY = parseInt(last.attr('y'));
@@ -121,7 +124,6 @@ User.prototype.checkBoundaries = function () {
   }
 }
 
-
 User.prototype.userLose = function () {
   if(this.health === 0) {
     openModal(modalLose);
@@ -131,14 +133,11 @@ User.prototype.userLose = function () {
 }
 
 User.prototype.userWin = function () {
-  setTimeout(()=>{openModal(modalWin);}, 500);
-  console.log(this.bones);
-  console.log(this.bones.length);
-  //if(this.bones.length < 1) {
-    console.log(this.bones);
-    setTimeout(()=>{clearRequestInterval(timer);}, 100);
-    setTimeout(()=>{clearRequestInterval(timerScene);}, 100);
-  //}
+  this.bones = $('.user.bone');
+  if(this.win && this.bones.length < 1) {
+    clearRequestInterval(timer);
+    clearRequestInterval(timerScene);
+  }
 }
 
 User.prototype.updatePosition = function () {

@@ -1,4 +1,4 @@
-function Walls(health, strength) {
+function Walls(health, strength, index) {
   this.z = undefined;
   Form.call(this, health, strength);
 }

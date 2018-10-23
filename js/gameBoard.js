@@ -6,6 +6,7 @@ function GameBoard() {
   this.grid = [];
   this.users = [];
   this.badGuys = [];
+  this.walls = [];
 }
 
 GameBoard.prototype.createGrid = function () {
@@ -29,7 +30,8 @@ GameBoard.prototype.initScene = function () {
 
 GameBoard.prototype.initWalls = function () {
   for (let i = 0; i < walls_limit; i++) {
-    let wall = new Walls(3,1);
+    let wall = new Walls(3,1,i);
+    this.walls.push(wall);
     wall.drawWalls();
   }
 }
@@ -52,10 +54,24 @@ GameBoard.prototype.initBonuses = function () {
 GameBoard.prototype.lifeLess = function(){
   $('.life.fill').last().removeClass('fill');
   $('.loseLife').addClass('appear');
-  setTimeout(()=>{$('.loseLife').removeClass('appear');}, 500);
+  setTimeout(()=>{$('.loseLife').removeClass('appear');}, 3000);
 }
 
 GameBoard.prototype.render = function(){
   //REFRESH SVG IN DOM to paint the forms created from jQuery
+  this.time();
   this.area.html(this.area.html());
+}
+
+GameBoard.prototype.time = function(){
+  if (countdown_fps === FPS) {
+    countdown_fps = 0;
+    counter++;
+    let date = new Date(null);
+    date.setSeconds(counter);
+    let trimmedDate = date.toISOString().substr(14,5);
+    $('.time').text(trimmedDate);
+  } else {
+  countdown_fps++;
+  }
 }

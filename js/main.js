@@ -80,6 +80,7 @@
 
   timerFunction = (user)=> {
     user.userLose();
+    user.userWin();
     if(!PAUSE && !INFO){
       switch (user.direction) {
         case UP:
