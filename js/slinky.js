@@ -8,6 +8,7 @@ function User(name, health, strength) {
   this.bones = [];
   this.shrinking = false;
   this.shrinkingFromWall = false;
+  this.shrinkingFromEnemy = false;
   Form.call(this, health, strength);
 }
 
@@ -121,7 +122,7 @@ User.prototype.checkBoundaries = function () {
 
 
 User.prototype.userLose = function () {
-  if(this.strength === 0) {
+  if(this.health === 0) {
     openModal(modalLose);
     clearRequestInterval(timer);
     clearRequestInterval(timerScene);
@@ -129,10 +130,13 @@ User.prototype.userLose = function () {
 }
 
 User.prototype.userWin = function () {
-  //if(this.bones.length === 2) {
   setTimeout(()=>{openModal(modalWin);}, 500);
-  setTimeout(()=>{clearRequestInterval(timer);}, 2000);
-  setTimeout(()=>{clearRequestInterval(timerScene);}, 2000);
+  console.log(this.bones);
+  console.log(this.bones.length);
+  //if(this.bones.length < 1) {
+    console.log(this.bones);
+    setTimeout(()=>{clearRequestInterval(timer);}, 100);
+    setTimeout(()=>{clearRequestInterval(timerScene);}, 100);
   //}
 }
 
@@ -164,7 +168,6 @@ User.prototype.cleanGridPositions = function () {
 }
 
 User.prototype.grow = function (x,y) {
-  console.log("SHRINGIN FALSE");
   this.shrinking = false;
   this.x = parseInt($('.user.head').attr('x')) + x;
   this.y = parseInt($('.user.head').attr('y')) + y;
@@ -185,7 +188,6 @@ User.prototype.getLast = function () {
 
 User.prototype.getPrevLast = function () {
   this.bones = $('.user.bone');
-  console.log(this.bones);
   return $(this.bones[this.bones.length-2]);
 }
 
@@ -210,10 +212,9 @@ User.prototype.shrink = function () {
   const sd = this.shrinking.toString()[0].toLowerCase();
   this.shrinkAnimation('shrink_' + sd);
   if(this.bones.length === 0) {
-    if(this.shrinkingFromWall) {
+    if(this.shrinkingFromWall || this.shrinkingFromEnemy) {
       this.shrinkingFromWall = false;
-      console.log("SHRINGIN FALSE22");
-
+      this.shrinkingFromEnemy = false;
       this.shrinking = false;
       this.oldDirection = this.direction;
       this.direction = oppositeDir(this.oldDirection);
@@ -226,14 +227,9 @@ User.prototype.shrink = function () {
 
 User.prototype.shrinkDir = function () {
   let last = this.getLast();
-  console.log("LAST: ", last);
   let nextLast = this.shrinkingFromWall ? last : this.getPrevLast();
   let nextLastX = parseInt(nextLast.attr('x'));
   let nextLastY = parseInt(nextLast.attr('y'));
-  console.log("NEXTLAST: ", nextLast);
-  console.log("SHRINGIN direction");
-  console.log("Esy: " + this.y)
-  console.log("Esny: " + nextLastY)
 
   if (this.x > nextLastX) {
     this.shrinking = LEFT;
@@ -245,12 +241,9 @@ User.prototype.shrinkDir = function () {
     this.shrinking = DOWN;
   }
 
-  if (this.shrinkingFromWall) {
-    console.log("SHRINGIN opposite");
-
+  if (this.shrinkingFromWall || this.shrinkingFromEnemy) {
     this.shrinking = oppositeDir(this.shrinking);
   }
-  console.log("Es: " + this.shrinking)
 }
 
 User.prototype.shrinkFromWall = function () {
@@ -259,6 +252,14 @@ User.prototype.shrinkFromWall = function () {
   let back = $('.user.back');
   back.addClass('head bone').removeClass('back');
   head.addClass('back').removeClass('head bone');
+  this.oldDirection = this.direction;
+  this.direction = oppositeDir(this.oldDirection);
+  this.shrinking = this.direction;
+  this.changeSpeed(5);
+}
+
+User.prototype.shrinkFromEnemy = function () {
+  this.shrinkingFromEnemy = true;
   this.oldDirection = this.direction;
   this.direction = oppositeDir(this.oldDirection);
   this.shrinking = this.direction;
@@ -280,9 +281,7 @@ User.prototype.shake = function () {
 }
 
 User.prototype.changeSpeed = function (num) {
-  // clearInterval(timer);
   clearRequestInterval(timer);
   let t = (num && !isNaN(num)) ? num : 1;
-  // timer = setInterval(()=>{timerFunction(this)}, RHYTHM/t);
   timer = requestInterval(()=>{timerFunction(this)}, RHYTHM/t);
 }

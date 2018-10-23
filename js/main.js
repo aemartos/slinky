@@ -83,12 +83,9 @@
     if(!PAUSE && !INFO){
       switch (user.direction) {
         case UP:
-          console.log("UP!")
           if (user.oldDirection === oppositeDir(user.direction)) {
-            console.log("It shrinks");
             user.shrink();
           } else if(!user.checkBoundaries()) {
-            console.log("else");
             user.grow(0,-size); //growUp
           }
           break;
@@ -166,8 +163,6 @@
         }
         INFO = !INFO;
       } else {
-        console.log("user.shrin " + user.shrinking);
-        console.log("direction: " + direction);
         if (user.shrinking !== direction) {
           user.direction = direction;
           user.directionsLog.push(user.direction);
@@ -175,7 +170,6 @@
         }
       }
     });
-    // timer = setInterval(()=>{timerFunction(user)}, RHYTHM);
     timer = requestInterval(()=>{timerFunction(user)}, RHYTHM);
     timerScene = requestInterval(()=>{timerFunctionScene()}, RHYTHM);
     timerfps= requestInterval(()=>{board.render()}, 1000/FPS);

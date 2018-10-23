@@ -16,6 +16,7 @@ GameBoard.prototype.createGrid = function () {
 
 GameBoard.prototype.cleanBoard = function () {
   clearRequestInterval(timer);
+  user.health = 3;
   this.createGrid();
   this.area.html('<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>');
 }
@@ -24,8 +25,6 @@ GameBoard.prototype.initScene = function () {
   this.initWalls();
   this.initBadGuys();
   this.initBonuses();
-  //REFRESH SVG IN DOM to paint the forms created from jQuery
-  //this.area.html(this.area.html());
 }
 
 GameBoard.prototype.initWalls = function () {
@@ -48,6 +47,11 @@ GameBoard.prototype.initBonuses = function () {
     let bonus = new Bonus();
     bonus.drawBonus();
   }
+}
+
+GameBoard.prototype.alert = function(){
+  $('.loseLife').addClass('appear');
+  setTimeout(()=>{$('.loseLife').removeClass('appear');}, 500);
 }
 
 GameBoard.prototype.render = function(){
