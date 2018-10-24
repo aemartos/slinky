@@ -190,7 +190,7 @@
     user = new User('scully', 3, 2);
     user.initUser();
     initListeners(user);
-    //board.initScene();
+    board.initScene();
 
   };
 
