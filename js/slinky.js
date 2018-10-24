@@ -279,12 +279,12 @@ User.prototype.shrinkAnimation = function (clas) {
   if (this.bones.length === 0) {
     //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
     //board.area.append(this.path);
-    //$('.user.back').attr('width', '0.6');
-    //$('.user.back').attr('width', '1.2');
-    //$('.user.back').attr('width', '0.7');
-    //$('.user.back').attr('width', '1.1');
-    //$('.user.back').attr('width', '0.9');
-    //$('.user.back').attr('width', '1');
+    //setTimeout(()=>{$('.user.back').attr('width', '0.6');}, 100);
+    //setTimeout(()=>{$('.user.back').attr('width', '1.2');}, 200);
+    //setTimeout(()=>{$('.user.back').attr('width', '0.7');}, 300);
+    //setTimeout(()=>{$('.user.back').attr('width', '1.1');}, 400);
+    //setTimeout(()=>{$('.user.back').attr('width', '0.9');}, 500);
+    //setTimeout(()=>{$('.user.back').attr('width', '1');}, 600);
     $('.user.back').addClass(clas);
     setTimeout(()=>{$('.user.back').removeClass(clas)}, 500);
   }

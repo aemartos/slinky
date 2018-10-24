@@ -19,6 +19,7 @@ GameBoard.prototype.cleanBoard = function () {
   clearRequestInterval(timer);
   user.health = 3;
   this.createGrid();
+  $('.life').addClass('fill');
   this.area.html('<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>');
 }
 

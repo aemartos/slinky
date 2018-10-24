@@ -22,7 +22,7 @@ const BADGUY = 'bg';
 const GOAL = 'g'
 
 const RHYTHM = 75;
-const FPS = 25;
+const FPS = 15;
 const size = 1;
 var counter =0;
 var countdown_fps = 0;
@@ -32,6 +32,6 @@ const rows = cols/2;
 
 const walls_limit = 10;
 const bonus_limit = 2;
-const badGuys_limit = 10;
+const badGuys_limit = 7;
 var bonus_count = 200;
 var badGuys_count = 150;
