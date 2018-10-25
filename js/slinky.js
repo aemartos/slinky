@@ -40,6 +40,7 @@ User.prototype.drawUserBody = function (clas) {
               //<rect class="form user head ' + clas + ' ' + this.addStroke() + '"' + x + y + 'width="2" height="2"/>';
   board.area.append(this.path);
   board.grid[this.y][this.x] = SLINKY;
+  //board.area.html(board.area.html())
 }
 
 User.prototype.addStroke = function () {

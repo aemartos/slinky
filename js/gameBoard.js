@@ -50,6 +50,7 @@ GameBoard.prototype.initBadGuys = function () {
     let badGuy = new BadGuys(3,1,i);
     this.badGuys.push(badGuy);
     badGuy.drawBadGuy();
+    console.log('badGuy');
   }
 }
 
@@ -82,9 +83,10 @@ GameBoard.prototype.winPoints = function(){
 }
 
 GameBoard.prototype.render = function(){
-  //REFRESH SVG IN DOM to paint the forms created from jQuery
   this.time();
-  this.area.html(this.area.html());
+  //REFRESH SVG IN DOM to paint the forms created from jQuery
+  // console.log(this.area.children());
+  // this.area.html(this.area.html());
 }
 
 GameBoard.prototype.time = function(){
