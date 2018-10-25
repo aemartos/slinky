@@ -17,7 +17,15 @@ GameBoard.prototype.createGrid = function () {
 
 GameBoard.prototype.cleanBoard = function () {
   clearRequestInterval(timer);
-  user.health = 3;
+  $('.time').text('00:00');
+  this.grid = [];
+  this.users = [];
+  this.badGuys = [];
+  this.walls = [];
+  WIN = false;
+  LOSE = false;
+  countdown_fps = 0;
+  counter = 0;
   this.createGrid();
   $('.life').addClass('fill');
   this.area.html('<rect x="0" y="0" id="background" class="background" width="100%" height="100%"/>');
@@ -80,6 +88,7 @@ GameBoard.prototype.render = function(){
 }
 
 GameBoard.prototype.time = function(){
+  console.log(countdown_fps, counter);
   if(!PAUSE && !INFO && !WIN && !LOSE) {
     if (countdown_fps === FPS) {
       user.points = user.points - 20;

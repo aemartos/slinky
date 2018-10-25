@@ -141,7 +141,7 @@
     $(document).keydown((e)=> {
       startedGame = true;
       direction = codeToDirection(e.keyCode);
-      if (!direction || user.shrinkingFromWall)  {
+      if (!direction || user.shrinkingFromWall || user.shrinkingFromEnemy)  {
         return;
       } else if (direction === SHOOT) {
         //user.shoot();
@@ -173,22 +173,21 @@
       }
     });
     initTimers();
+    timerfps = requestInterval(()=>{board.render()}, 1000/FPS);
   }
 
   function initTimers() {
     timer = requestInterval(()=>{timerFunction(user)}, RHYTHM);
     timerScene = requestInterval(()=>{timerFunctionScene()}, RHYTHM);
-    timerfps= requestInterval(()=>{board.render()}, 1000/FPS);
   }
 
 
   // START GAME ----------------------------------
-  board = new GameBoard();
-  board.createGrid();
 
   function startGame() {
-
-    let goal = new Goal();
+    board = new GameBoard();
+    board.createGrid();
+    goal = new Goal();
     goal.drawGoal();
     user = new User('scully', 3, 2);
     user.initUser();
@@ -198,13 +197,12 @@
   };
 
   function reStartGame() {
-
-    let goal = new Goal();
+    counter = 0;
+    board.cleanBoard();
     goal.drawGoal();
     user.initUser();
     initTimers();
     board.initScene();
-
   };
 
   const initGame = () => {

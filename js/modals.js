@@ -82,8 +82,8 @@ const cancelModal = () => {
 const replayModal = () => {
   //setTimeout(()=>{
     //location.reload();
-    board.cleanBoard();
-    initGame();
+    // board.cleanBoard();
+    // initGame();
     reStartGame();
   //}, 500);
   okModal();

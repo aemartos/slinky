@@ -19,6 +19,8 @@ User.prototype.constructor = User;
 
 User.prototype.initUser = function () {
   this.points = 10000;
+  this.win = false;
+  this.health = 3;
   let pos = this.getFreePosition({x:40, y:25},100);
   this.x = pos.x;
   this.y = pos.y;
@@ -83,6 +85,7 @@ User.prototype.checkBoundaries = function () {
       this.shrinkFromWall();
       openModal(modalWin);
       this.win = true;
+      isWall = true;
       break;
     case (WALL + 'el'):
     case (WALL + 'wa'):
