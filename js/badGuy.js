@@ -63,15 +63,17 @@ BadGuys.prototype.generateNextPos = function (occupied = false) {
   }
 }
 
-BadGuys.prototype.drawBadGuy = function (positionFunctionOptional) {
+BadGuys.prototype.drawBadGuy = function () {
   console.log('hola');
-  let positionFunction = positionFunctionOptional ? positionFunctionOptional.bind(this) : this.getFreePosition.bind(this);
-  let pos = positionFunction(2);
-  this.x = pos.x;
-  this.y = pos.y;
+  //let positionFunction = positionFunctionOptional ? positionFunctionOptional.bind(this) : this.getFreePosition.bind(this);
+  //let pos = positionFunction(2);
+  let pos = this.getFreePosition(2);
   let x = pos.x + ',' + pos.y + ' ';
   let y = (pos.x + 1) + ',' + pos.y + ' ';
   let z = (pos.x + 1) + ',' + (pos.y + 1);
+  this.x = pos.x;
+  this.y = pos.y;
+  this.z = z;
   this.path = '<polygon class="form badGuy" transform="rotate(' + this.rotate + ' ' + (pos.x + .5) + ' ' + (pos.y + .5) + ')" points="' + x + y + z + '" id="badGuy_' + this.index +'"/>';
   board.area.append(this.path);
   this.rotate += 20;
@@ -80,16 +82,15 @@ BadGuys.prototype.drawBadGuy = function (positionFunctionOptional) {
 
 BadGuys.prototype.nextPosBadGuys = function (i) {
   this.badGuy = $('#badGuy_' + i);
-  let pos = this.generateNextPos();
+  let pos = this.generateNextPos(true);
   board.grid[this.y][this.x] = 0;
-
-  this.x = pos.x;
-  this.y = pos.y;
   this.rotate += 20;
   let x = pos.x + ',' + pos.y + ' ';
   let y = (pos.x + 1) + ',' + pos.y + ' ';
   let z = (pos.x + 1) + ',' + (pos.y + 1);
-
+  this.x = pos.x;
+  this.y = pos.y;
+  this.z = z;
   let rotate = 'rotate(' + this.rotate + ' ' + (pos.x + .5) + ' ' + (pos.y + .5) + ')';
   this.badGuy.attr('points', x + y + z);
   this.badGuy.attr('transform', rotate);
