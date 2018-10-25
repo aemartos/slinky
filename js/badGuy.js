@@ -64,9 +64,6 @@ BadGuys.prototype.generateNextPos = function (occupied = false) {
 }
 
 BadGuys.prototype.drawBadGuy = function () {
-  console.log('hola');
-  //let positionFunction = positionFunctionOptional ? positionFunctionOptional.bind(this) : this.getFreePosition.bind(this);
-  //let pos = positionFunction(2);
   let pos = this.getFreePosition(2);
   let x = pos.x + ',' + pos.y + ' ';
   let y = (pos.x + 1) + ',' + pos.y + ' ';

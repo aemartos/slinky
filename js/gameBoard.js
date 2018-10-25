@@ -51,7 +51,6 @@ GameBoard.prototype.initBadGuys = function () {
     let badGuy = new BadGuys(3,1,i);
     this.badGuys.push(badGuy);
     badGuy.drawBadGuy();
-    console.log('badGuy');
   }
 }
 
