@@ -18,9 +18,12 @@ User.prototype = Object.create(Form.prototype);
 User.prototype.constructor = User;
 
 User.prototype.initUser = function () {
+  this.health = 3;
   this.points = 10000;
   this.win = false;
-  this.health = 3;
+  this.shrinking = false;
+  this.shrinkingFromWall = false;
+  this.shrinkingFromEnemy = false;
   let pos = this.getFreePosition({x:40, y:25},100);
   this.x = pos.x;
   this.y = pos.y;
