@@ -58,7 +58,7 @@ GameBoard.prototype.lifeLess = function(){
   $('.loseLife').addClass('appear');
   setTimeout(()=>{
     $('.loseWinPoints').addClass('appear');
-    $('.loseWinPoints .winlose').text('Lost');
+    $('.loseWinPoints .winlose').text('lost');
     $('.loseWinPoints .points').text('1000');
   }, 1500);
   setTimeout(()=>{$('.loseLife').removeClass('appear');}, 3000);
@@ -68,7 +68,7 @@ GameBoard.prototype.lifeLess = function(){
 GameBoard.prototype.winPoints = function(){
   user.points = user.points + 2000;
   $('.loseWinPoints').addClass('appear');
-  $('.loseWinPoints .winlose').text('Won');
+  $('.loseWinPoints .winlose').text('won');
   $('.loseWinPoints .points').text('2000');
   setTimeout(()=>{$('.loseWinPoints').removeClass('appear');}, 4000);
 }

@@ -22,7 +22,7 @@ const BADGUY = 'bg';
 const GOAL = 'g'
 
 const RHYTHM = 75;
-const FPS = 15;
+const FPS = 27;
 const size = 1;
 var counter =0;
 var countdown_fps = 0;
