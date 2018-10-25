@@ -35,6 +35,7 @@ GameBoard.prototype.initScene = function () {
   this.initWalls();
   this.initBadGuys();
   this.initBonuses();
+  this.area.html(this.area.html());
 }
 
 GameBoard.prototype.initWalls = function () {
@@ -85,12 +86,17 @@ GameBoard.prototype.winPoints = function(){
 GameBoard.prototype.render = function(){
   this.time();
   //REFRESH SVG IN DOM to paint the forms created from jQuery
-  // console.log(this.area.children());
-  // this.area.html(this.area.html());
+  // var areaChildren = [];
+  // [].forEach.call(this.area[0].children, function(child) {
+  //   if(!child.classList.contains('back')) {
+  //     areaChildren.push(child);
+  //   }
+  // });
+  // console.log(areaChildren);
+  //this.area.html(this.area.html());
 }
 
 GameBoard.prototype.time = function(){
-  console.log(countdown_fps, counter);
   if(!PAUSE && !INFO && !WIN && !LOSE) {
     if (countdown_fps === FPS) {
       user.points = user.points - 20;

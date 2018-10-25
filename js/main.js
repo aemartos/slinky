@@ -9,6 +9,7 @@
     } else {
       guidesOff();
     }
+    board.area.html(board.area.html());
   });
 
   const guidesOn = () => {
@@ -131,8 +132,8 @@
       } else {
         bonus_count--;
       }
-      board.badGuys.forEach((badGuy,i) => {
-        badGuy.nextPosBadGuys();
+      board.badGuys.map((badGuy, i) => {
+        badGuy.nextPosBadGuys(i);
       });
     }
   }
@@ -150,18 +151,22 @@
         if(PAUSE) {
           guidesOff();
           cancelModal();
+          board.area.html(board.area.html());
         } else {
           guidesOn();
           openModal(modalPause);
+          board.area.html(board.area.html());
         }
         PAUSE = !PAUSE;
       } else if (direction === INFO_BUTTON && !PAUSE) {
         if(INFO) {
           guidesOff();
           cancelModal();
+          board.area.html(board.area.html());
         } else {
           guidesOn();
           openModal(modalInfo);
+          board.area.html(board.area.html());
         }
         INFO = !INFO;
       } else {
@@ -191,9 +196,8 @@
     goal.drawGoal();
     user = new User('scully', 3, 2);
     user.initUser();
-    initListeners(user);
     board.initScene();
-
+    initListeners(user);
   };
 
   function reStartGame() {
@@ -201,8 +205,8 @@
     board.cleanBoard();
     goal.drawGoal();
     user.initUser();
-    initTimers();
     board.initScene();
+    initTimers();
   };
 
   const initGame = () => {

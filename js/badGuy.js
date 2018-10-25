@@ -1,6 +1,7 @@
 function BadGuys(health, strength, index) {
+  this.badGuy = undefined;
   this.z = undefined;
-  this.index = undefined;
+  this.index = index;
   this.rotate = this.random(360);
   Form.call(this, health, strength);
 }
@@ -8,12 +9,12 @@ function BadGuys(health, strength, index) {
 BadGuys.prototype = Object.create(Form.prototype);
 BadGuys.prototype.constructor = BadGuys;
 
-BadGuys.prototype.nextPosBadGuys = function () {
-  board.grid[this.y][this.x] = 0;
-  $('#badGuy_' + this.index).remove();
-  this.drawBadGuy(this.generateNextPos);
-}
 
+// BadGuys.prototype.nextPosBadGuys = function () {
+//   board.grid[this.y][this.x] = 0;
+//   $('#badGuy_' + this.index).remove();
+//   this.drawBadGuy(this.generateNextPos);
+// }
 
 BadGuys.prototype.generateNextPos = function (occupied = false) {
   const dir = [UP, DOWN, LEFT, RIGHT];
@@ -74,5 +75,23 @@ BadGuys.prototype.drawBadGuy = function (positionFunctionOptional) {
   this.path = '<polygon class="form badGuy" transform="rotate(' + this.rotate + ' ' + (pos.x + .5) + ' ' + (pos.y + .5) + ')" points="' + x + y + z + '" id="badGuy_' + this.index +'"/>';
   board.area.append(this.path);
   this.rotate += 20;
+  board.grid[this.y][this.x] = BADGUY;
+}
+
+BadGuys.prototype.nextPosBadGuys = function (i) {
+  this.badGuy = $('#badGuy_' + i);
+  let pos = this.generateNextPos();
+  board.grid[this.y][this.x] = 0;
+
+  this.x = pos.x;
+  this.y = pos.y;
+  this.rotate += 20;
+  let x = pos.x + ',' + pos.y + ' ';
+  let y = (pos.x + 1) + ',' + pos.y + ' ';
+  let z = (pos.x + 1) + ',' + (pos.y + 1);
+
+  let rotate = 'rotate(' + this.rotate + ' ' + (pos.x + .5) + ' ' + (pos.y + .5) + ')';
+  this.badGuy.attr('points', x + y + z);
+  this.badGuy.attr('transform', rotate);
   board.grid[this.y][this.x] = BADGUY;
 }
