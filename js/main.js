@@ -201,7 +201,6 @@
 
     let goal = new Goal();
     goal.drawGoal();
-    user = new User('scully', 3, 2);
     user.initUser();
     initTimers();
     board.initScene();
