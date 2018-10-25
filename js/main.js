@@ -172,11 +172,14 @@
         }
       }
     });
+    initTimers();
+  }
+
+  function initTimers() {
     timer = requestInterval(()=>{timerFunction(user)}, RHYTHM);
     timerScene = requestInterval(()=>{timerFunctionScene()}, RHYTHM);
     timerfps= requestInterval(()=>{board.render()}, 1000/FPS);
   }
-
 
 
   // START GAME ----------------------------------
@@ -190,6 +193,17 @@
     user = new User('scully', 3, 2);
     user.initUser();
     initListeners(user);
+    board.initScene();
+
+  };
+
+  function reStartGame() {
+
+    let goal = new Goal();
+    goal.drawGoal();
+    user = new User('scully', 3, 2);
+    user.initUser();
+    initTimers();
     board.initScene();
 
   };

@@ -84,7 +84,7 @@ const replayModal = () => {
     //location.reload();
     board.cleanBoard();
     initGame();
-    startGame();
+    reStartGame();
   //}, 500);
   okModal();
 }
