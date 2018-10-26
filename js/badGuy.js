@@ -9,13 +9,6 @@ function BadGuys(health, strength, index) {
 BadGuys.prototype = Object.create(Form.prototype);
 BadGuys.prototype.constructor = BadGuys;
 
-
-// BadGuys.prototype.nextPosBadGuys = function () {
-//   board.grid[this.y][this.x] = 0;
-//   $('#badGuy_' + this.index).remove();
-//   this.drawBadGuy(this.generateNextPos);
-// }
-
 BadGuys.prototype.generateNextPos = function (occupied = false) {
   const dir = [UP, DOWN, LEFT, RIGHT];
   let direction = this.direction;
@@ -29,6 +22,8 @@ BadGuys.prototype.generateNextPos = function (occupied = false) {
   let nextPos = 0;
   switch(direction) {
     case UP:
+    /*--try to get new position through the random direction that i got, if the new position is outside the grid
+    then i try to generate a new random direction using the function recursively--*/
       try { nextPos = board.grid[y - 1][x];} catch(e) { return this.generateNextPos(true); }
       if (nextPos === 0 || nextPos === SLINKY) {
         y =  y - 1;
