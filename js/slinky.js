@@ -54,11 +54,17 @@ User.prototype.addStroke = function () {
   }
 }
 
+/* Check what's in the next position if slinky follows its current direction */
 User.prototype.checkBoundaries = function () {
   let dx = 0;
   let dy = 0;
   let isBoundary = false;
 
+  //this.direction is given by the keydown event
+  //Regarding the direction I check the next position the user is going to take
+  //isBoundary is used to check the limits of the board
+  //the x and y deltas(increments) are used to calculated the new x and y
+  //if there is a boundary slinky won't grow, otherwise it grows 1 position
   switch(this.direction) {
     case UP:
       isBoundary = this.y === 0;
@@ -77,11 +83,14 @@ User.prototype.checkBoundaries = function () {
       dx = isBoundary ? 0 : 1;
       break;
   }
-
+  //set new position
   let nextX = this.x + dx;
   let nextY = this.y + dy;
+
+  //get the content in the grid of the new position, nesPos will have that value
   let nextPos = board.grid[nextY][nextX];
 
+  //nesPos will have the value BOUNDARY if slinky is in the limits of the board
   nextPos = isBoundary ? BOUNDARY : nextPos;
   let isWall = false;
   switch(nextPos) {
@@ -106,9 +115,11 @@ User.prototype.checkBoundaries = function () {
       let last = this.getLast();
       let lastX = parseInt(last.attr('x'));
       let lastY = parseInt(last.attr('y'));
+      //Check if slinky is shrinking, if it is, let him do it
       if (((this.y + dy) === lastY) && ((this.x + dx) === lastX)) {
         return SHRINK;
       }
+      ////Otherwise slinky crashes into itself and shake
       this.shake();
       return SLINKY;
     case (BONUS + 're'):
@@ -126,12 +137,14 @@ User.prototype.checkBoundaries = function () {
     default:
       return nextPos;
   }
+  //If slinky crashes into a wall and he is not shrinking then do it
   if (isWall) {
     //crash.play();
     if (!this.shrinking) {
       this.shrinkFromWall();
       return BOUNDARY;
     }
+    //If it's shrinking, keep doing it
     return SHRINK;
   }
 }
@@ -163,7 +176,9 @@ User.prototype.updatePosition = function () {
   this.y = parseInt($('.user.head').attr('y'));
 }
 
+//Get old direction to check shrink and other things
 User.prototype.prevDirection = function () {
+  //Avoid double keydown
   if(this.direction !== this.oldDirection) {
     let last = this.directionsLog.length - 2;
     this.oldDirection = this.directionsLog[last];
@@ -198,28 +213,35 @@ User.prototype.grow = function (x,y) {
   this.drawUserBody('bone');
 }
 
+/*Get last bone in slinkys body, I need either lasts (first/last) in the case we are shrinking from wall or enemy,
+because I turn the position*/
 User.prototype.getLast = function () {
   this.bones = $('.user.bone');
   let last = this.shrinkingFromWall ? this.bones.first() : this.bones.last();
   return last;
 }
 
+/*Get the second to last bone */
 User.prototype.getPrevLast = function () {
   this.bones = $('.user.bone');
-  return $(this.bones[this.bones.length-2]);
+  return $(this.bones[this.bones.length - 2]);
 }
 
 User.prototype.shrink = function () {
   let last = this.getLast();
+  //Using the previous function I take the position of the last bone,
+  //If there is at least 1 bone I'm removing all the bones and clenaning their positions in the grid
   if(this.bones.length > 0) {
     let lastX = parseInt(last.attr('x'));
     let lastY = parseInt(last.attr('y'));
+    //Change directions to trigger shrinking
     this.shrinkDir();
     this.cleanGridPosition(lastX, lastY);
     last.remove();
 
     //Need to capture last again when we remove it
     last = this.getLast();
+    //Get new head while I am removing bones
     if (this.bones.length === 1) {
       rebound.play();
       $('.user.back').addClass('head');
@@ -227,9 +249,15 @@ User.prototype.shrink = function () {
       last.addClass('head');
     }
   }
+  //I need the new position of slinky head
   this.updatePosition();
+
+  //Class initials to css
   const sd = this.shrinking.toString()[0].toLowerCase();
   this.shrinkAnimation('shrink_' + sd);
+
+  //If there are no bones and slinky is shrinking and has been attack,
+  //then change speed and reset the values because it has finish shrinking
   if(this.bones.length === 0) {
     if(this.shrinkingFromWall || this.shrinkingFromEnemy) {
       this.shrinkingFromWall = false;
@@ -250,6 +278,7 @@ User.prototype.shrinkDir = function () {
   let nextLastX = parseInt(nextLast.attr('x'));
   let nextLastY = parseInt(nextLast.attr('y'));
 
+  //Return shrinking direction to get the css class initials
   if (this.x > nextLastX) {
     this.shrinking = LEFT;
   } else if (this.x < nextLastX) {
@@ -260,6 +289,7 @@ User.prototype.shrinkDir = function () {
     this.shrinking = DOWN;
   }
 
+  //Change direction in case slinky is shrinking backwards
   if (this.shrinkingFromWall || this.shrinkingFromEnemy) {
     this.shrinking = oppositeDir(this.shrinking);
   }
@@ -267,6 +297,7 @@ User.prototype.shrinkDir = function () {
 
 User.prototype.shrinkFromWall = function () {
   this.shrinkingFromWall = true;
+  //Change direction to do shrinking from the other side
   let head = $('.user.head');
   let back = $('.user.back');
   back.addClass('head bone').removeClass('back');
@@ -281,9 +312,11 @@ User.prototype.shrinkFromWall = function () {
 }
 
 User.prototype.shrinkFromEnemy = function () {
+  //Avoid get hurt when slinky is shrinking from enemy
   if(!this.direction) {
     return;
   }
+  //Change direction to do shrinking from the other side
   this.shrinkingFromEnemy = true;
   this.oldDirection = this.direction;
   this.direction = oppositeDir(this.oldDirection);
@@ -294,6 +327,7 @@ User.prototype.shrinkFromEnemy = function () {
   }
 }
 
+//Do animation when there is only one bone in slinkys body
 User.prototype.shrinkAnimation = function (clas) {
   if (this.bones.length === 0) {
     $('.user.back').addClass(clas);
@@ -311,8 +345,10 @@ User.prototype.shake = function () {
   }, 1000);
 }
 
+//Stop the timer and init a new one to change the slinky speed
 User.prototype.changeSpeed = function (num) {
   clearRequestInterval(timer);
+  //Check if it's a number and if it's not, use 1
   let t = (num && !isNaN(num)) ? num : 1;
   timer = requestInterval(()=>{timerFunction(this)}, RHYTHM/t);
 }

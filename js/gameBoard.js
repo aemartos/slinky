@@ -87,6 +87,11 @@ GameBoard.prototype.render = function(){
   this.time();
 }
 
+/* I have a countdown_fps incremented each 1/FPSsecs,
+when the counter reaches FPS (1secs), it subtracts 20 points to the user,
+restart the countdown_fps and get the current time translate to the format I want to paint in the DOM
+the counter is set to have the count in seconds
+*/
 GameBoard.prototype.time = function(){
   if(!PAUSE && !INFO && !WIN && !LOSE) {
     if (countdown_fps === FPS) {

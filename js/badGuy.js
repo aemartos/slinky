@@ -9,53 +9,66 @@ function BadGuys(health, strength, index) {
 BadGuys.prototype = Object.create(Form.prototype);
 BadGuys.prototype.constructor = BadGuys;
 
-BadGuys.prototype.generateNextPos = function (occupied = false) {
+BadGuys.prototype.generateNextPos = function () {
   const dir = [UP, DOWN, LEFT, RIGHT];
-  let direction = this.direction;
-  if (badGuys_count === 0 || occupied) {
-    direction = this.randomArr(dir);
-  } else {
-    badGuys_count--;
-  }
+  let direction = this.randomArr(dir);
   let x = this.x;
   let y = this.y;
   let nextPos = 0;
+
+  /* Check next position in the random direction */
   switch(direction) {
     case UP:
-    /*--try to get new position through the random direction that i got, if the new position is outside the grid
-    then i try to generate a new random direction using the function recursively--*/
-      try { nextPos = board.grid[y - 1][x];} catch(e) { return this.generateNextPos(true); }
+      //Check top limit and if it's outside it recursively calls itself again
+      if (y <= 1) {
+        break;
+      }
+      //If it's not outside, check the content of the grid,
+      //if there's nothing (0) or if it's the slinky, it can go there and attack
+      // it returns the new position to move the badGuy
+      //if the position is occupied, it recursively calls itself again
+      nextPos = board.grid[y - 1][x];
       if (nextPos === 0 || nextPos === SLINKY) {
         y =  y - 1;
         this.attack(nextPos, SLINKY);
         return {x, y};
       }
-      return this.generateNextPos(true);
+      break;
     case DOWN:
-      try { nextPos = board.grid[y + 1][x];} catch(e) { return this.generateNextPos(true); }
+      if (y >= rows - 1) {
+        break;
+      }
+      nextPos = board.grid[y + 1][x];
       if (nextPos === 0 || nextPos === SLINKY) {
         y = y + 1;
         this.attack(nextPos, SLINKY);
         return {x, y};
       }
-      return this.generateNextPos(true);
+      break;
     case LEFT:
-      try { nextPos = board.grid[y][x - 1];} catch(e) { return this.generateNextPos(true); }
+      if (x <= 1) {
+        break;
+      }
+      nextPos = board.grid[y][x - 1];
       if (nextPos === 0 || nextPos === SLINKY) {
         x = x - 1;
         this.attack(nextPos, SLINKY);
         return {x, y};
       }
-      return this.generateNextPos(true);
+      break;
     case RIGHT:
-      try { nextPos = board.grid[y][x + 1];} catch(e) { return this.generateNextPos(true); }
+    if (x >= cols - 1) {
+      break;
+    }
+      nextPos = board.grid[y][x + 1];
       if (nextPos === 0 || nextPos === SLINKY) {
         x = x + 1;
         this.attack(nextPos, SLINKY);
         return {x, y};
       }
-      return this.generateNextPos(true);
+      break;
   }
+  return this.generateNextPos();
 }
 
 BadGuys.prototype.drawBadGuy = function () {
@@ -74,7 +87,7 @@ BadGuys.prototype.drawBadGuy = function () {
 
 BadGuys.prototype.nextPosBadGuys = function (i) {
   this.badGuy = $('#badGuy_' + i);
-  let pos = this.generateNextPos(true);
+  let pos = this.generateNextPos();
   board.grid[this.y][this.x] = 0;
   this.rotate += 20;
   let x = pos.x + ',' + pos.y + ' ';

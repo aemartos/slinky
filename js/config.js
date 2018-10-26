@@ -44,8 +44,7 @@ var bonus_count = 200;
 var badGuys_count = 150;
 
 
-// ------ SOUNDS
-
+// ------ SOUNDS --------
 var rebound = new Audio('sounds/rebound.mp3');
 var shake = new Audio('sounds/shake.mp3');
 var bonus = new Audio('sounds/mario-coin.mp3');
@@ -56,5 +55,3 @@ var win = new Audio('sounds/mario-win.mp3');
 var applause = new Audio('sounds/applause.mp3');
 var thugLife = new Audio('sounds/thug-life.mp3');
 var music = new Audio('sounds/MikeNoise-Low EarthOrbit.mp3');
-
-//https://soundcloud.com/odysseus_bsp/sets/cybercity

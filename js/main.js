@@ -79,6 +79,8 @@
     }
   }
 
+  /*Taking the user direction I check with old direction, if they are opposites slinky shrinks,
+  if they're not and there are not obstacles slinky grows the size*/
   timerFunction = (user)=> {
     user.userLose();
     user.userWin();
@@ -117,6 +119,9 @@
     }
   }
 
+  /* Set the scene in a timer to move the bad guys and bonus
+  if the scene is not paused (whatever the reason is) I set the random bonus each 20secs
+  and move the badGuys*/
   timerFunctionScene = ()=> {
     if (!PAUSE && !INFO) {
       if(bonus_count === 0) {
@@ -138,10 +143,13 @@
     }
   }
 
+  /* Get the direction through the keycode,
+  then in every different case do stuff, also handling other events like modals*/
   function initListeners(user) {
     $(document).keydown((e)=> {
       startedGame = true;
       direction = codeToDirection(e.keyCode);
+      //If there is no direction or slinky is shrinking, don't allow changes in the action
       if (!direction || user.shrinkingFromWall || user.shrinkingFromEnemy)  {
         return;
       } else if (direction === SHOOT) {
@@ -162,9 +170,13 @@
         }
         INFO = !INFO;
       } else {
+        //Assign direction to user in case it's different from shrinking direction
         if (user.shrinking !== direction) {
+          //Assign direction
           user.direction = direction;
+          //Log of all directions
           user.directionsLog.push(user.direction);
+          //Get old direction
           user.prevDirection();
         }
       }
@@ -236,31 +248,11 @@
 
 
   $('.volume-button').click(()=> {
-    if (MUSIC) {
-      rebound.muted = true;
-      shake.muted = true;
-      bonus.muted = true;
-      crash.muted = true;
-      hurt.muted = true;
-      lose.muted = true;
-      win.muted = true;
-      applause.muted = true;
-      thugLife.muted = true;
-      music.muted = true;
-      MUSIC = false;
-    } else {
-      rebound.muted = false;
-      shake.muted = false;
-      bonus.muted = false;
-      crash.muted = false;
-      hurt.muted = false;
-      lose.muted = false;
-      win.muted = false;
-      applause.muted = false;
-      thugLife.muted = false;
-      music.muted = false;
-      MUSIC = true;
-    }
+    let sounds = [rebound, shake, bonus, crash, hurt, lose, win, applause, thugLife, music];
+    sounds.map(sound=>{
+      return sound.muted = MUSIC;
+    })
+    MUSIC = !MUSIC;
     $('.volume-button').toggleClass('disable');
   });
 
