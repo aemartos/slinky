@@ -214,6 +214,7 @@
     $('.counter').css('display', 'flex');
     $('#guides').css('display', 'block');
     $('#gameBoard').css('display', 'block');
+    $('.settings-button').css('display', 'block');
   }
 
   $("#startButton").click(function() {
@@ -224,6 +225,18 @@
     initGame();
     startGame();
   });
+
+  saveModalButton.click(function() {
+    cols = parseInt($("input[name='cols']").val());
+    if(cols%2 !==0) {cols+=1}
+    rows = cols/2;
+    walls_limit = parseInt($("input[name='walls']").val());
+    bonus_limit = parseInt($("input[name='bonus']").val());
+    badGuys_limit = parseInt($("input[name='badGuys']").val());
+    console.log(cols,walls_limit,bonus_limit, badGuys_limit)
+    replayModal();
+  });
+
 
 
 // });

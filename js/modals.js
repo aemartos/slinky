@@ -1,6 +1,8 @@
 // PEN https://codepen.io/popmotion/pen/aEoqEG?editors=0010
 
-const openModalButton = $('.open-modal');
+const settingsModalButton = $('.settings-button');
+const modalButtonCross = $('.cross-close');
+const saveModalButton = $('.modal-save');
 const playModalButton = $('.modal-play');
 const cancelModalButton = $('.modal-cancel');
 const replayModalButton = $('.modal-replay');
@@ -8,6 +10,7 @@ const replayModalButton = $('.modal-replay');
 const modalShade = styler(document.querySelector('.modal-shade'));
 
 const modalStart = document.querySelector('.modalStart');
+const modalSettings = document.querySelector('.modalSettings');
 const modalLose = document.querySelector('.modalLose');
 const modalWin = document.querySelector('.modalWin');
 const modalInfo = document.querySelector('.modalInfo');
@@ -106,10 +109,17 @@ const okModal = () => {
   });
 }
 
-//listen(openModalButton, 'click').start(openModal);
 
 playModalButton.each((i,e)=> {
   listen(e, 'click').start(okModal);
+});
+
+settingsModalButton.click(function() {
+  openModal(modalSettings);
+});
+
+modalButtonCross.click(function() {
+  cancelModal();
 });
 
 cancelModalButton.each((i,e)=> {

@@ -69,7 +69,7 @@
         +transition_default
         &.modal-cancel
           background-color: $red
-        &.modal-replay, &.modal-play
+        &.modal-replay, &.modal-play, &.modal-save
           background-color: $green
         &:hover
           +hover_scale_opacity
@@ -125,3 +125,37 @@
         margin: 0 .2em
       .modal-actions
         justify-content: center
+  &.modalSettings
+    .modal
+      width: 30vw
+      position: relative
+      p
+        margin: .5em 0
+      .cross-close
+        position: absolute
+        top: 2em
+        right: 2em
+        cursor: pointer
+        &:hover
+          +hover_scale_opacity
+      .settings
+        margin-top: 1em
+        form
+          .options
+            margin-bottom: 1em
+            font-weight: bold
+            .option
+              min-width: 5.5em
+              display: inline-block
+            input
+              width: 4.5em
+              color: white
+              padding: .2em .6em
+              background: none
+              border: .09em solid white
+              border-radius: 5em
+              margin-right: .5em
+      .modal-actions
+        justify-content: flex-end
+        .modal-save
+          width: 10em
