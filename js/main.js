@@ -149,24 +149,16 @@
         console.log('shooting is not implemented yet :D');
       } else if (direction === PAUSE_BUTTON && !INFO) {
         if(PAUSE) {
-          guidesOff();
           cancelModal();
-          board.area.html(board.area.html());
         } else {
-          guidesOn();
           openModal(modalPause);
-          board.area.html(board.area.html());
         }
         PAUSE = !PAUSE;
       } else if (direction === INFO_BUTTON && !PAUSE) {
         if(INFO) {
-          guidesOff();
           cancelModal();
-          board.area.html(board.area.html());
         } else {
-          guidesOn();
           openModal(modalInfo);
-          board.area.html(board.area.html());
         }
         INFO = !INFO;
       } else {
@@ -227,6 +219,7 @@
   });
 
   saveModalButton.click(function() {
+    PAUSE = false;
     cols = parseInt($("input[name='cols']").val());
     if(cols%2 !==0) {cols+=1}
     rows = cols/2;

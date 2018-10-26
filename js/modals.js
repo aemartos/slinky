@@ -54,6 +54,10 @@ const hideContainers = () => {
 };
 
 const openModal = (modall) => {
+  if (board && board.area) {
+    guidesOn();
+    board.area.html(board.area.html());
+  }
   selectChildren(modall);
   showContainers(modall);
   timeline([
@@ -66,6 +70,10 @@ const openModal = (modall) => {
 }
 
 const cancelModal = () => {
+  if (board && board.area) {
+    guidesOff();
+    board.area.html(board.area.html());
+  }
   timeline([
     {
       track: 'modal',
@@ -93,6 +101,10 @@ const replayModal = () => {
 }
 
 const okModal = () => {
+  if (board && board.area) {
+    guidesOff();
+    board.area.html(board.area.html());
+  }
   timeline([
     {
       track: 'modal',
@@ -115,10 +127,12 @@ playModalButton.each((i,e)=> {
 });
 
 settingsModalButton.click(function() {
+  PAUSE = true;
   openModal(modalSettings);
 });
 
 modalButtonCross.click(function() {
+  PAUSE = false;
   cancelModal();
 });
 

@@ -84,15 +84,6 @@ GameBoard.prototype.winPoints = function(){
 
 GameBoard.prototype.render = function(){
   this.time();
-  //REFRESH SVG IN DOM to paint the forms created from jQuery
-  // var areaChildren = [];
-  // [].forEach.call(this.area[0].children, function(child) {
-  //   if(!child.classList.contains('back')) {
-  //     areaChildren.push(child);
-  //   }
-  // });
-  // console.log(areaChildren);
-  //this.area.html(this.area.html());
 }
 
 GameBoard.prototype.time = function(){
