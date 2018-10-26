@@ -41,3 +41,19 @@ var bonus_limit = 2;
 var badGuys_limit = 7;
 var bonus_count = 200;
 var badGuys_count = 150;
+
+
+// ------ SOUNDS
+
+var rebound = new Audio('sounds/rebound.mp3');
+var shake = new Audio('sounds/shake.mp3');
+var bonus = new Audio('sounds/mario-coin.mp3');
+var crash = new Audio('sounds/crash.mp3');
+var hurt = new Audio('sounds/hurt.wav');
+var lose = new Audio('sounds/mario-lose.mp3');
+var win = new Audio('sounds/mario-win.mp3');
+var applause = new Audio('sounds/applause.mp3');
+var thugLife = new Audio('sounds/thug-life.mp3');
+var music = new Audio('sounds/MikeNoise-Low EarthOrbit.mp3');
+
+//https://soundcloud.com/odysseus_bsp/sets/cybercity

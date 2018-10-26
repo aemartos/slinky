@@ -55,6 +55,7 @@ const hideContainers = () => {
 
 const openModal = (modall) => {
   if (board && board.area) {
+    music.pause();
     guidesOn();
     board.area.html(board.area.html());
   }
@@ -71,6 +72,7 @@ const openModal = (modall) => {
 
 const cancelModal = () => {
   if (board && board.area) {
+    music.play();
     guidesOff();
     board.area.html(board.area.html());
   }
@@ -96,6 +98,8 @@ const replayModal = () => {
     // board.cleanBoard();
     // initGame();
     reStartGame();
+    music.currentTime=0;
+    music.play();
   //}, 500);
   okModal();
 }

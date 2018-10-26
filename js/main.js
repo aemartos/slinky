@@ -193,6 +193,8 @@
   };
 
   function reStartGame() {
+    win.pause();
+    lose.pause();
     counter = 0;
     board.cleanBoard();
     goal.drawGoal();
@@ -214,6 +216,7 @@
   });
 
   playModalButton.click(function() {
+    music.play();
     initGame();
     startGame();
   });

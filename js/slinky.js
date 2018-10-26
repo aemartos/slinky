@@ -120,12 +120,14 @@ User.prototype.checkBoundaries = function () {
       let bon = $('[cx="' + nextX + '.5"][cy="' + nextY + '.5"]');
       Bonus.removeBonus(bon, (nextX), (nextY));
       board.winPoints();
+      bonus.play();
       //return BOUNDARY;
       return false;
     default:
       return nextPos;
   }
   if (isWall) {
+    //crash.play();
     if (!this.shrinking) {
       this.shrinkFromWall();
       return BOUNDARY;
@@ -138,6 +140,7 @@ User.prototype.userLose = function () {
   if(this.health === 0) {
     LOSE = true;
     WIN = false;
+    lose.play();
     openModal(modalLose);
     clearRequestInterval(timer);
     clearRequestInterval(timerScene);
@@ -149,6 +152,7 @@ User.prototype.userWin = function () {
   if(this.win && this.bones.length < 1) {
     WIN = true;
     LOSE = false;
+    win.play();
     clearRequestInterval(timer);
     clearRequestInterval(timerScene);
   }
@@ -217,6 +221,7 @@ User.prototype.shrink = function () {
     //Need to capture last again when we remove it
     last = this.getLast();
     if (this.bones.length === 1) {
+      rebound.play();
       $('.user.back').addClass('head');
     } else {
       last.addClass('head');
@@ -270,6 +275,9 @@ User.prototype.shrinkFromWall = function () {
   this.direction = oppositeDir(this.oldDirection);
   this.shrinking = this.direction;
   this.changeSpeed(5);
+  if (this.bones.length === 1) {
+    rebound.play();
+  }
 }
 
 User.prototype.shrinkFromEnemy = function () {
@@ -281,18 +289,13 @@ User.prototype.shrinkFromEnemy = function () {
   this.direction = oppositeDir(this.oldDirection);
   this.shrinking = this.direction;
   this.changeSpeed(5);
+  if (this.bones.length === 1) {
+    rebound.play();
+  }
 }
 
 User.prototype.shrinkAnimation = function (clas) {
   if (this.bones.length === 0) {
-    //this.path = '<rect class="form user head ' + clas + '"' + x + y + 'width="' + size + '" height="' + size + '"/>';
-    //board.area.append(this.path);
-    //setTimeout(()=>{$('.user.back').attr('width', '0.6');}, 100);
-    //setTimeout(()=>{$('.user.back').attr('width', '1.2');}, 200);
-    //setTimeout(()=>{$('.user.back').attr('width', '0.7');}, 300);
-    //setTimeout(()=>{$('.user.back').attr('width', '1.1');}, 400);
-    //setTimeout(()=>{$('.user.back').attr('width', '0.9');}, 500);
-    //setTimeout(()=>{$('.user.back').attr('width', '1');}, 600);
     $('.user.back').addClass(clas);
     setTimeout(()=>{$('.user.back').removeClass(clas)}, 500);
   }
@@ -301,6 +304,11 @@ User.prototype.shrinkAnimation = function (clas) {
 User.prototype.shake = function () {
   $('.user').addClass('shake');
   setTimeout(()=>{$('.user').removeClass('shake')}, 500);
+  shake.play();
+  setTimeout(()=>{
+    shake.pause();
+    shake.currentTime = 0;
+  }, 1000);
 }
 
 User.prototype.changeSpeed = function (num) {

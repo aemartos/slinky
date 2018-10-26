@@ -62,6 +62,7 @@ GameBoard.prototype.initBonuses = function () {
 }
 
 GameBoard.prototype.lifeLess = function(){
+  hurt.play();
   user.points = user.points - 1000;
   $('.life.fill').last().removeClass('fill');
   $('.loseLife').addClass('appear');
