@@ -209,6 +209,7 @@
     $('#guides').css('display', 'block');
     $('#gameBoard').css('display', 'block');
     $('.settings-button').css('display', 'block');
+    $('.volume-button').css('display', 'block');
   }
 
   $("#startButton").click(function() {
@@ -233,6 +234,35 @@
     replayModal();
   });
 
+
+  $('.volume-button').click(()=> {
+    if (MUSIC) {
+      rebound.muted = true;
+      shake.muted = true;
+      bonus.muted = true;
+      crash.muted = true;
+      hurt.muted = true;
+      lose.muted = true;
+      win.muted = true;
+      applause.muted = true;
+      thugLife.muted = true;
+      music.muted = true;
+      MUSIC = false;
+    } else {
+      rebound.muted = false;
+      shake.muted = false;
+      bonus.muted = false;
+      crash.muted = false;
+      hurt.muted = false;
+      lose.muted = false;
+      win.muted = false;
+      applause.muted = false;
+      thugLife.muted = false;
+      music.muted = false;
+      MUSIC = true;
+    }
+    $('.volume-button').toggleClass('disable');
+  });
 
 
 // });

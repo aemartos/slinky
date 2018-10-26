@@ -1,11 +1,17 @@
-.settings-button
+.settings-button, .volume-button
   position: absolute
-  top: 1em
-  left: 1em
   display: none
+  top: 1em
   cursor: pointer
   &:hover
     +hover_scale_opacity
+
+.settings-button
+  left: 1em
+.volume-button
+  left: 2.5em
+  &.disable
+    opacity: .5
 
 .loseLife, .loseWinPoints
   opacity: 0

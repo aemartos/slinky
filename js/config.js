@@ -18,6 +18,7 @@ const SHOOT = "SHOOT";
 const PAUSE_BUTTON = "PAUSE_BUTTON";
 const INFO_BUTTON = "INFO_BUTTON";
 
+var MUSIC = true;
 var PAUSE = false;
 var INFO = false;
 var WIN = false;
