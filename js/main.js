@@ -242,7 +242,6 @@
     walls_limit = parseInt($("input[name='walls']").val());
     bonus_limit = parseInt($("input[name='bonus']").val());
     badGuys_limit = parseInt($("input[name='badGuys']").val());
-    console.log(cols,walls_limit,bonus_limit, badGuys_limit)
     replayModal();
   });
 

@@ -230,7 +230,7 @@ User.prototype.getPrevLast = function () {
 User.prototype.shrink = function () {
   let last = this.getLast();
   //Using the previous function I take the position of the last bone,
-  //If there is at least 1 bone I'm removing all the bones and clenaning their positions in the grid
+  //If there is at least 1 bone I'm removing all the bones and cleaning their positions in the grid
   if(this.bones.length > 0) {
     let lastX = parseInt(last.attr('x'));
     let lastY = parseInt(last.attr('y'));
