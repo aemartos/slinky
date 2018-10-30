@@ -47,6 +47,9 @@
 //     }, false);
 // }
 
+
+//https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+
 function swipeDetect(el, callback){
   let element = el || document;
 
