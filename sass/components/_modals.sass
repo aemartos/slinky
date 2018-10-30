@@ -22,10 +22,10 @@
   color: black
   z-index: 100
   .modal
+    width: 60%
     opacity: 0
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3)
     padding: 3em 4em
-    width: 50vw
     +column-flex
     align-items: flex-start
     background-color: $background
@@ -127,7 +127,7 @@
         justify-content: center
   &.modalSettings
     .modal
-      width: 30vw
+      width: 30%
       position: relative
       p
         margin: .5em 0
@@ -159,3 +159,106 @@
         justify-content: flex-end
         .modal-save
           width: 10em
+
+
+// @media (max-width: $media1) and (orientation: landscape)
+
+//   .modal-container
+//     .modal
+//       width: 70%
+
+
+@media (max-width: $media4)
+
+  .modal-container
+    .modal
+      width: 80%
+    &.modalSettings
+      .modal
+        width: 50%
+
+
+@media (max-width: $media5)
+  @media (max-height: $media11)
+
+    .modal-container
+      .modal
+        width: 80%
+        font-size: .9em
+        p
+          margin: .5em 0
+        h1
+          font-size: 2em
+        .thanks
+          font-size: 1.3em !important
+
+
+@media (max-width: $media5)
+  @media (max-height: $media12)
+
+    .modal-container
+      .modal
+        width: 80%
+        font-size: .6em
+        padding: 0 1.5em
+        p
+          margin: .5em 0
+        h1
+          font-size: 1.6em
+        img.walls_inst
+          width: 20%
+        .thanks
+          margin-top: .3em !important
+          font-size: 1.3em !important
+        .instr
+          .scene
+            width: 100% !important
+          .controls
+            display: none
+        .modal-actions
+          margin-top: 0.3em
+          button
+            padding: .3em
+
+
+@media (max-width: $media6) and (orientation: landscape)
+
+  .modal-container
+    .modal
+      font-size: .8em
+
+
+@media (max-width: $media10)
+  .modal-container
+    &.modalSettings
+      .modal
+        width: 80%
+
+
+@media (max-width: $media11)
+  .modal-container
+    .modal
+      .instr
+        .scene
+          width: 100% !important
+        .controls
+          display: none
+
+
+@media (max-width: $media12)
+
+  .modal-container
+    .modal
+      font-size: .6em
+      padding: 1em 2em
+      h1
+        font-size: 2.2em
+      .thanks
+        font-size: 1.5em !important
+      img.walls_inst
+        width: 30% !important
+      p
+        margin-top: 1em !important
+    &.modalPause
+      .modal
+        padding: 2em
