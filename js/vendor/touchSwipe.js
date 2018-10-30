@@ -1,7 +1,7 @@
 // credit: http://www.javascriptkit.com/javatutors/touchevents2.shtml
 // PEN: https://codepen.io/ganmahmud/pen/RaoKZa
 
-// function swipedetect(el, callback){
+// function swipeDetect(el, callback){
 //     var touchsurface = el,
 //     swipedir,
 //     startX,
