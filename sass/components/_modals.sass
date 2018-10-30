@@ -127,7 +127,7 @@
         justify-content: center
   &.modalSettings
     .modal
-      width: 30%
+      width: 40%
       position: relative
       p
         margin: .5em 0
@@ -161,11 +161,12 @@
           width: 10em
 
 
-// @media (max-width: $media1) and (orientation: landscape)
+@media (max-width: $media2)
 
-//   .modal-container
-//     .modal
-//       width: 70%
+  .modal-container
+    &.modalSettings
+      .modal
+        width: 50%
 
 
 @media (max-width: $media4)
@@ -173,55 +174,69 @@
   .modal-container
     .modal
       width: 80%
-    &.modalSettings
-      .modal
-        width: 50%
 
 
 @media (max-width: $media5)
   @media (max-height: $media11)
 
     .modal-container
-      .modal
-        width: 80%
-        font-size: .9em
-        p
-          margin: .5em 0
-        h1
-          font-size: 2em
-        .thanks
-          font-size: 1.3em !important
+      &.modalPause, &.modalInfo, &.modalStart, &.modalSettings
+        .modal
+          width: 80%
+          font-size: .9em
+          p
+            margin: .5em 0
+          h1
+            font-size: 2em
+          .thanks
+            font-size: 1.3em
+      &.modalSettings
+        .modal
+          width: 50%
 
 
 @media (max-width: $media5)
   @media (max-height: $media12)
 
     .modal-container
-      .modal
-        width: 80%
-        font-size: .6em
-        padding: 0 1.5em
-        p
-          margin: .5em 0
-        h1
-          font-size: 1.6em
-        img.walls_inst
-          width: 20%
-        .thanks
-          margin-top: .3em !important
-          font-size: 1.3em !important
-        .instr
-          .scene
-            width: 100% !important
-          .controls
-            display: none
-        .modal-actions
-          margin-top: 0.3em
-          button
-            padding: .3em
+      &.modalPause, &.modalInfo, &.modalStart, &.modalSettings
+        .modal
+          width: 65%
+          font-size: .6em
+          padding: 0 1.5em
+          p
+            margin: .5em 0
+          h1
+            font-size: 1.6em
+          img.walls_inst
+            width: 20%
+          .thanks
+            margin-top: .3em
+            font-size: 1.3em
+          .instr
+            .scene
+              width: 100%
+            .controls
+              display: none
+          .modal-actions
+            margin-top: 0.3em
+            button
+              padding: .3em
       &.modalLose, &.modalWin
         .modal
           padding: 1em 2.7em
+      &.modalSettings
+        .modal
+          width: 50%
+
+
+@media (max-width: $media6)
+
+  .modal-container
+    &.modalSettings
+        .modal
+          width: 60%
+
 
 @media (max-width: $media6) and (orientation: landscape)
 
@@ -230,37 +245,46 @@
       font-size: .8em
 
 
-@media (max-width: $media10)
+@media (max-width: $media11)
+  .modal-container
+    &.modalPause, &.modalInfo, &.modalStart
+      .modal
+        width: 80%
+        .instr
+          .scene
+            width: 100%
+          .controls
+            display: none
+    &.modalSettings
+      .modal
+        width: 55%
+
+
+@media (max-width: $media11) and (orientation: portrait)
   .modal-container
     &.modalSettings
       .modal
-        width: 80%
-
-
-@media (max-width: $media11)
-  .modal-container
-    .modal
-      .instr
-        .scene
-          width: 100% !important
-        .controls
-          display: none
+        width: 75%
 
 
 @media (max-width: $media12)
 
   .modal-container
-    .modal
-      font-size: .6em
-      padding: 1em 2em
-      h1
-        font-size: 2.2em
-      .thanks
-        font-size: 1.5em !important
-      img.walls_inst
-        width: 30% !important
-      p
-        margin-top: 1em !important
+    &.modalPause, &.modalInfo, &.modalStart, &.modalSettings
+      .modal
+        font-size: .6em
+        padding: 1em 2em
+        h1
+          font-size: 2.2em
+        .thanks
+          font-size: 1.5em
+        img.walls_inst
+          width: 30%
+        p
+          margin-top: 1em
     &.modalPause
       .modal
         padding: 2em
+    &.modalSettings
+      .modal
+        width: 75%
