@@ -146,9 +146,7 @@
   /* Get the direction through the keycode,
   then in every different case do stuff, also handling other events like modals*/
   function initListeners(user) {
-    $(document).keydown((e)=> {
-      startedGame = true;
-      direction = codeToDirection(e.keyCode);
+    var dirFunction = (direction) => {
       //If there is no direction or slinky is shrinking, don't allow changes in the action
       if (!direction || user.shrinkingFromWall || user.shrinkingFromEnemy)  {
         return;
@@ -180,6 +178,16 @@
           user.prevDirection();
         }
       }
+    }
+    var gameBoard = document.getElementById('gameBoard');
+    swipedetect(gameBoard, function(direction){
+      dirFunction(direction);
+    });
+
+    $(document).keydown((e)=> {
+      startedGame = true;
+      direction = codeToDirection(e.keyCode);
+      dirFunction(direction);
     });
     initTimers();
     timerfps = requestInterval(()=>{board.render()}, 1000/FPS);
