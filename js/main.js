@@ -179,8 +179,8 @@
         }
       }
     }
-    var gameBoard = document.getElementById('gameBoard');
-    swipedetect(gameBoard, function(direction){
+    var screen = document.getElementById('screen');
+    swipeDetect(screen, function(direction){
       dirFunction(direction);
     });
 
