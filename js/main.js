@@ -180,6 +180,22 @@
       }
     }
     var screen = document.getElementById('screen');
+    var modalInfo = document.getElementById('modalInfo');
+
+    screen.addEventListener('touchstart', function() {
+      if(!INFO) {
+        openModal(modalInfo);
+        INFO = !INFO;
+      }
+    });
+
+    modalInfo.addEventListener('touchstart', function() {
+      if(INFO) {
+        cancelModal();
+        INFO = !INFO;
+      }
+    });
+
     swipeDetect(screen, function(direction){
       dirFunction(direction);
     });

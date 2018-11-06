@@ -70,6 +70,8 @@ function swipeDetect(el, callback){
   };
 
   function handleTouchMove(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
     if ( ! xDown || ! yDown ) {
       return;
     }
