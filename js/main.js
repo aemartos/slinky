@@ -182,24 +182,29 @@
     var screen = document.getElementById('screen');
     var modalInfo = document.getElementById('modalInfo');
 
-    screen.addEventListener('touchstart', function() {
-      if(!INFO) {
-        openModal(modalInfo);
-        INFO = !INFO;
-      }
-    });
+    /*Detect touch devices to handle touch events (pause modal)*/
+    if("ontouchstart" in document.documentElement) {
+      screen.addEventListener('click', function() {
+        if(!INFO) {
+          openModal(modalInfo);
+          INFO = !INFO;
+        }
+      });
 
-    modalInfo.addEventListener('touchstart', function() {
-      if(INFO) {
-        cancelModal();
-        INFO = !INFO;
-      }
-    });
+      modalInfo.addEventListener('click', function() {
+        if(INFO) {
+          cancelModal();
+          INFO = !INFO;
+        }
+      });
+    }
 
+    /* With touchSwipe.js detect swipe direction and use dirFunction to trigger stuff */
     swipeDetect(screen, function(direction){
       dirFunction(direction);
     });
 
+    /* With keydown event detect direction and use dirFunction to trigger stuff */
     $(document).keydown((e)=> {
       startedGame = true;
       direction = codeToDirection(e.keyCode);

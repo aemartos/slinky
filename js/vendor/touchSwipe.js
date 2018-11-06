@@ -85,16 +85,21 @@ function swipeDetect(el, callback){
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
       if ( xDiff > 0 ) {
           callback('LEFT');
+          return;
       } else {
           callback('RIGHT');
+          return;
       }
     } else {
       if ( yDiff > 0 ) {
           callback('UP');
+          return;
       } else {
           callback('DOWN');
+          return;
       }
     }
+
     /* reset values */
     xDown = null;
     yDown = null;
