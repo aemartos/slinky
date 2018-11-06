@@ -9,6 +9,7 @@
   left: 0
   bottom: 0
   will-change: opacity
+  z-index: 100
 
 .modal-container
   position: fixed
@@ -92,8 +93,14 @@
         align-items: flex-start
         .scene
           width: 55%
+          .touchControls
+            display: none
         .controls
           width: 35%
+      .iResume
+        display: block
+      .touchResume
+        display: none
       .thanks
         width: 100%
         font-size: 2em
@@ -185,7 +192,10 @@
           width: 80%
           font-size: .9em
           p
-            margin: .5em 0
+            margin: 1em 0
+            &.pauseText
+              margin: .5em auto
+              margin-top: 1.6em
           h1
             font-size: 2em
           .thanks
@@ -203,19 +213,26 @@
         .modal
           width: 65%
           font-size: .6em
-          padding: 0 1.5em
+          padding: 1em 3em
           p
             margin: .5em 0
+            &.pauseText
+              margin: .5em auto
           h1
             font-size: 1.6em
-          img.walls_inst
-            width: 20%
+          img
+            &.bonus_inst, &.bGuy_inst
+              width: 1.5em
+            &.walls_inst
+              width: 20%
           .thanks
             margin-top: .3em
             font-size: 1.3em
           .instr
             .scene
               width: 100%
+              .touchControls
+                display: block
             .controls
               display: none
           .modal-actions
@@ -234,8 +251,18 @@
 
   .modal-container
     &.modalSettings
-        .modal
-          width: 60%
+      .modal
+        width: 60%
+    &.modalInfo
+      .modal
+        .iResume
+          display: none
+        .touchResume
+          display: block
+    &.modalWin, &.modalLose
+      .modal
+        h1
+          margin-bottom: 0
 
 
 @media (max-width: $media6) and (orientation: landscape)
@@ -253,6 +280,8 @@
         .instr
           .scene
             width: 100%
+            .touchControls
+              display: block
           .controls
             display: none
     &.modalSettings
@@ -273,7 +302,7 @@
     &.modalPause, &.modalInfo, &.modalStart, &.modalSettings, &.modalLose, &.modalWin
       .modal
         font-size: .6em
-        padding: 1em 2em
+        padding: 1em 2.5em
         h1
           font-size: 2.2em
         .thanks
