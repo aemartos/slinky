@@ -179,25 +179,6 @@
         }
       }
     }
-    var screen = document.getElementById('screen');
-    var modalInfo = document.getElementById('modalInfo');
-
-    /*Detect touch devices to handle touch events (pause modal)*/
-    if("ontouchstart" in document.documentElement) {
-      screen.addEventListener('click', function() {
-        if(!INFO) {
-          openModal(modalInfo);
-          INFO = !INFO;
-        }
-      });
-
-      modalInfo.addEventListener('click', function() {
-        if(INFO) {
-          cancelModal();
-          INFO = !INFO;
-        }
-      });
-    }
 
     /* With touchSwipe.js detect swipe direction and use dirFunction to trigger stuff */
     swipeDetect(screen, function(direction){
@@ -212,6 +193,36 @@
     });
     initTimers();
     timerfps = requestInterval(()=>{board.render()}, 1000/FPS);
+  }
+
+  var screen = document.getElementById('screen');
+  //var modalInfo = document.getElementById('modalInfo');
+
+  /*Detect touch devices to handle touch events (pause modal)*/
+  if("ontouchstart" in document.documentElement) {
+    //Display control instructions
+    $('.touchControls').each(function( i, e ) {
+      $(e).css('display', 'block');
+    });
+    $('.touchResume').css('display', 'block');
+    $('.controls').each(function( i, e ) {
+      $(e).css('display', 'none');
+      console.log('hola');
+    });
+    $('.iResume').css('display', 'none');
+    screen.addEventListener('click', function() {
+      if(!INFO) {
+        openModal(modalInfo);
+        INFO = !INFO;
+      }
+    });
+
+    modalInfo.addEventListener('click', function() {
+      if(INFO) {
+        cancelModal();
+        INFO = !INFO;
+      }
+    });
   }
 
   function initTimers() {
