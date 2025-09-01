@@ -1,6 +1,6 @@
 # slinky game
 
-Ironhack first project. SVG, SASS and JS game.
+SVG, SASS and JS game.
 ### [https://aemartos.github.io/slinky/](https://aemartos.github.io/slinky/)
 
 ## Instructions
